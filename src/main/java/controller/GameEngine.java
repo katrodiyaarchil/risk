@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 import model.Continent;
 import model.Country;
@@ -11,6 +12,14 @@ import java.util.ArrayList;
 
 import model.Player;
 
+/**
+ * This class serves as the main controller in the MVC model.
+ * It manages the interactions between the view, models, and various child
+ * controllers.
+ * Acting as an intermediary, it facilitates communication between
+ * models/controllers and the view.
+ */
+
 public class GameEngine {
     private GameModel d_GameModel;
     private CommandPrompt d_CpView;
@@ -18,6 +27,13 @@ public class GameEngine {
     private ArrayList<Player> d_PlayerList;
     private PlayerController d_PlayerController;
 
+    /**
+     * Constructs a new GameEngine with the specified CommandPrompt view and
+     * GameModel.
+     * 
+     * @param p_CpView    The CommandPrompt view.
+     * @param p_GameModel The GameModel.
+     */
     public GameEngine(CommandPrompt p_CpView, GameModel p_GameModel) {
         d_GameModel = p_GameModel;
         d_CpView = p_CpView;
@@ -25,11 +41,34 @@ public class GameEngine {
         d_CpView.commandSendButtonListener(new CommandListener());
     }
 
+    /**
+     * This class extends the GameEngine class and listens to actions triggered by
+     * buttons in the view.
+     * It implements the ActionListener interface and overrides the actionPerformed
+     * method.
+     * Responsible for transferring data from the view to models/child controllers.
+     */
     public class CommandListener implements ActionListener {
         private boolean d_MapDone = false;
         private boolean d_StartUpDone = false;
         private boolean d_AssignCountriesDone = false;
 
+        /**
+         * On click of the button in view, this method gets the string which user
+         * entered.
+         * Based on the type of the command, it will call the method of specific
+         * controllers.
+         * <ul>
+         * <li>editcontinent, editcountry, editneighbor commands are handled by the map
+         * controller's editmap method.</li>
+         * <li>savemap, loadmap, editmap, validatemap commands are also handled by the
+         * map controller's respective methods.</li>
+         * <li>gameplayer, showmap commands are handled by the GameEngine's respective
+         * methods.</li>
+         * <li>For all the methods called from the various cases here, feedback is shown
+         * on the view.</li>
+         * </ul>
+         */
         @Override
         public void actionPerformed(ActionEvent l_E) {
             try {
@@ -45,7 +84,7 @@ public class GameEngine {
                                 d_CpView.setCommandAcknowledgement("\n");
                             }
                         } else {
-                            d_CpView.setCommandAcknowledgement("Cant Edit Map In This Phase" + "\n");
+                            d_CpView.setCommandAcknowledgement("Cannot Edit Map In This Phase.\n");
                         }
                         break;
 
@@ -59,7 +98,7 @@ public class GameEngine {
                                 d_CpView.setCommandAcknowledgement("\n");
                             }
                         } else {
-                            d_CpView.setCommandAcknowledgement("Cant Edit Map In This Phase" + "\n");
+                            d_CpView.setCommandAcknowledgement("Cannot Edit Map In This Phase.\n");
                         }
                     }
                         break;
@@ -74,7 +113,7 @@ public class GameEngine {
                                 d_CpView.setCommandAcknowledgement("\n");
                             }
                         } else {
-                            d_CpView.setCommandAcknowledgement("Cant Edit Map In This Phase" + "\n");
+                            d_CpView.setCommandAcknowledgement("Cannot Edit Map In This Phase.\n");
                         }
                     }
                         break;
@@ -93,7 +132,7 @@ public class GameEngine {
                                 d_CpView.setCommandAcknowledgement(p_Exception.getMessage() + "\n");
                             }
                         } else {
-                            d_CpView.setCommandAcknowledgement("Cant Save Map In This Phase" + "\n");
+                            d_CpView.setCommandAcknowledgement("Cannot Save Map In This Phase.\n");
                         }
                     }
                         break;
@@ -103,12 +142,12 @@ public class GameEngine {
                             try {
                                 String l_Result = d_MapController.loadMap(l_CommandStringFromInput);
                                 d_CpView.setCommandAcknowledgement(l_Result + "\n");
-                            } catch (Exception p_Exception) {
+                            } catch (FileNotFoundException p_Exception) {
                                 d_CpView.setCommandAcknowledgement(
                                         "The Mapfile Doesnt Exist. Please Create A New Map" + "\n");
                             }
                         } else {
-                            d_CpView.setCommandAcknowledgement("Cant Edit Another Map In This Phase" + "\n");
+                            d_CpView.setCommandAcknowledgement("Cannot Edit Another Map In This Phase.\n");
                         }
                     }
                         break;
@@ -121,7 +160,7 @@ public class GameEngine {
                                 d_CpView.setCommandAcknowledgement(p_Exception.getMessage() + "\n");
                             }
                         } else {
-                            d_CpView.setCommandAcknowledgement("Cant validate Map In This Phase" + "\n");
+                            d_CpView.setCommandAcknowledgement("Cannot validate Map In This Phase.\n");
                         }
                     }
                         break;
@@ -212,6 +251,15 @@ public class GameEngine {
         }
     }
 
+    /**
+     * this Method will take inputs from the user and will add or remove player
+     * according to the inputs provided by the user
+     * 
+     * @param p_Command The command.
+     * @param p_Str     The string.
+     * @return A string indicating the number of players added and removed.
+     * @throws Exception if an error occurs.
+     */
     public String editPlayer(String p_Command, String p_Str) throws Exception {
         String[] l_CommandArray = p_Str.split(" ");
         int l_Counter = 1;
@@ -219,14 +267,14 @@ public class GameEngine {
         int l_RemoveCounter = 0;
         String l_ReturnString = "";
         if (l_CommandArray.length < 3)
-            throw new Exception("Kindly provide valid Parameters for adding player");
+            throw new Exception("Please provide valid Parameters to add player");
         while (l_Counter < l_CommandArray.length) {
             if (l_CommandArray[l_Counter].equals("-add")) {
-                d_GameModel.addPlayer(l_CommandArray[l_Counter + 1]);
+                d_GameModelNew.addPlayer(l_CommandArray[l_Counter + 1]);
                 l_Counter += 2;
                 l_AddCounter += 1;
             } else if (l_CommandArray[l_Counter].equals("-remove")) {
-                d_GameModel.removePlayer(l_CommandArray[l_Counter + 1]);
+                d_GameModelNew.removePlayer(l_CommandArray[l_Counter + 1]);
                 l_Counter += 2;
                 l_RemoveCounter += 1;
             } else {
@@ -234,18 +282,29 @@ public class GameEngine {
             }
         }
         if (l_AddCounter > 0) {
-            l_ReturnString += "Number of Players Added: " + l_AddCounter + "\n";
+            l_ReturnString += "Number of Players Added : " + l_AddCounter + "\n";
         }
         if (l_RemoveCounter > 0) {
-            l_ReturnString += "Number of Players Removed: " + l_RemoveCounter + "\n";
+            l_ReturnString += "Number of Players Removed : " + l_RemoveCounter + "\n";
         }
         return l_ReturnString;
     }
 
+    /**
+     * This Method will take assign countries from command prompt and will do
+     * startup Phase as well as assigning reinforcements to the player.
+     * 
+     * @throws Exception this is user defined exception based on AssignCountries if
+     *                   there are no players assigned
+     *                   then it will throw an exception
+     */
     public void assignCountries() throws Exception {
         d_GameModel.startUpPhase();
     }
 
+    /**
+     * Shows all players with their assigned armies.
+     */
     public void showAllPlayerWithArmies() {
         d_PlayerList = d_GameModel.getAllPlayers();
         for (Player l_Player : d_PlayerList) {
@@ -258,10 +317,23 @@ public class GameEngine {
         }
     }
 
+    /**
+     * This is a method to show all countries and continents, armies on each
+     * country, ownership, and connectivity
+     * <ul>
+     * <li>Map Phase : For Each Continent in Continent List, For each country in
+     * that continent, For each neighbor in that country</li>
+     * <li>Game Phase : Apart from continent, country and neighbors, it also shows
+     * player, thier ownership and their number of armies.</li>
+     * </ul>
+     * 
+     * @param p_BooleanForGamePhaseStarted takes boolean value to show map for map
+     *                                     phase or game phase
+     */
     public void showMap(Boolean p_BooleanForGamePhaseStarted) {
         if (p_BooleanForGamePhaseStarted) {
-            d_PlayerList = d_GameModel.getAllPlayers();
-            ArrayList<Continent> l_ContinentList = d_GameModel.getMap().getContinentList();
+            d_PlayerList = d_GameModelNew.getAllPlayers();
+            ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
             if (l_ContinentList.size() > 0) {
                 d_CpView.setCommandAcknowledgement("\n");
                 for (Continent l_Continent : l_ContinentList) {
@@ -273,9 +345,9 @@ public class GameEngine {
                         if (this.d_PlayerList != null) {
                             for (Player l_Player : d_PlayerList) {
                                 if (l_Player.getCountryList().contains(l_Country)) {
-                                    d_CpView.setCommandAcknowledgement("\n" + "--> Owner: " + l_Player.getPlayerName());
+                                    d_CpView.setCommandAcknowledgement("\n" + "-->Owner: " + l_Player.getPlayerName());
                                     d_CpView.setCommandAcknowledgement(
-                                            "\n" + "--> Armies deployed: " + l_Country.getNoOfArmies());
+                                            "\n" + "-->Armies deployed: " + l_Country.getNoOfArmies());
                                 }
                             }
                         }
@@ -292,7 +364,7 @@ public class GameEngine {
                 }
             }
         } else {
-            ArrayList<Continent> l_ContinentList = d_GameModel.getMap().getContinentList();
+            ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
             if (l_ContinentList.size() > 0) {
                 d_CpView.setCommandAcknowledgement("\n");
                 for (Continent l_Continent : l_ContinentList) {
@@ -315,5 +387,4 @@ public class GameEngine {
             }
         }
     }
-
 }
