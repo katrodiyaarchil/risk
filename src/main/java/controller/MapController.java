@@ -3,16 +3,37 @@ package controller;
 import model.Map;
 
 
+/**
+ * This class update the MapModel. Also receives the acknowledgement for the
+ * update and pass it back to the parent GameEngine.
+ */
 public class MapController {
-    
+
+    /**
+     * Object of the Map class which is to be access from this controller
+     */
     private Map d_MapModel;
 
-    
+
+    /**
+     * This is a constructor which receives Map object as parameter which is used
+     * throughout the class
+     *
+     * @param p_Map This is a reference of Map object (within GameModel) passed from
+     *              parent GameEngine.
+     */
     public MapController(Map p_Map) {
         d_MapModel = p_Map;
     }
 
-    
+
+    /**
+     * This method calls the savemap method of the mapmodel to save the map in file.
+     *
+     * @param p_Str the command given by user to save map
+     * @return l_Result a feedback message on success or error of save function.
+     * @throws Exception throws exception when there is any error during savemap
+     */
     public String saveMap(String p_Str) throws Exception {
         String[] l_CommandArray = p_Str.split(" ");
         if (l_CommandArray.length < 2) {
@@ -22,7 +43,16 @@ public class MapController {
         return l_Result;
     }
 
-    
+
+    /**
+     * This method calls the loadmap method of mapmodel and passes the filename
+     * parameter to load a map which is in file
+     *
+     * @param p_Str It is the command from the CommandPrompt
+     * @return l_result a feedback message on success or error
+     * @throws Exception throws exception if there is any exception occured during
+     *                   loading the map
+     */
     public String loadMap(String p_Str) throws Exception {
         String[] l_CommandArray = p_Str.split(" ");
         if ("editmap".equals(l_CommandArray[0])) {
@@ -39,12 +69,22 @@ public class MapController {
         }
     }
 
-    
+
+    /**
+     * This method will call the reset method of mapmodel class
+     */
     public void reset() {
         d_MapModel.reset();
     }
 
-    
+
+    /**
+     * This method calls the Validate map method from the mapmodel class
+     *
+     * @return String which says if map is valid or not.
+     * @throws Exception if there is no map created
+     *
+     */
     public String validateMap() throws Exception {
         if (d_MapModel.getContinentList().size() > 0) {
             return d_MapModel.validateMap();
@@ -53,7 +93,30 @@ public class MapController {
         }
     }
 
-    
+
+    /**
+     * This method takes the keyword and entire command from the CommandPrompt and
+     * then checks it with all the cases.
+     * After checking it performs the specific functionality and returns the
+     * feedback accordingly
+     * <ul>
+     * <li>If the command is to add continent, country or neighbor, it goes into the
+     * first block and calls respective method of map model.</li>
+     * <li>If the command is to remove continent, country or neighbor, it goes into
+     * the second block and calls respective method of map model.</li>
+     * <li>Counters are used in order to send back feedback on number of
+     * country/continent/neighbor added or removed.</li>
+     * <li>In case of exception thrown by the model during add/remove functionality,
+     * this method receives it and delegate to the Game Engine to display on
+     * view.</li>
+     * </ul>
+     *
+     * @param p_Command The Keyword to access the specific case in the switchcase
+     * @param p_Str     The entire command from the CommandPrompt
+     * @return l_ReturnString returns feedback on every functionality performed
+     * @throws Exception throws exception if any error in performing a certain
+     *                   functionality
+     */
     public String editMap(String p_Command, String p_Str) throws Exception {
         String[] l_CommandArray = p_Str.split(" ");
         int l_Counter = 1;
