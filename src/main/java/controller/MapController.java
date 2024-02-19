@@ -39,8 +39,7 @@ public class MapController {
         if (l_CommandArray.length < 2) {
             throw new Exception("\nPlease Enter valid Filename to save the map");
         }
-        String l_Result = d_MapModel.saveMap(l_CommandArray[1]);
-        return l_Result;
+        return d_MapModel.saveMap(l_CommandArray[1]);
     }
 
 
@@ -86,7 +85,7 @@ public class MapController {
      *
      */
     public String validateMap() throws Exception {
-        if (d_MapModel.getContinentList().size() > 0) {
+        if (!d_MapModel.getContinentList().isEmpty()) {
             return d_MapModel.validateMap();
         } else {
             throw new Exception("\nNo map to Validate");
@@ -139,7 +138,7 @@ public class MapController {
                         if (l_CommandArray.length < 4) {
                             throw new Exception("Please add control value for the continent");
                         }
-                        d_MapModel.addContinent(l_CommandArray[l_Counter + 1], l_CommandArray[l_Counter + 2]);
+                        d_MapModel.addContinent(l_CommandArray[l_Counter + 2], l_CommandArray[l_Counter + 1]);
                         l_Counter += 3;
                         l_AddContinentCounter += 1;
                         break;
@@ -213,7 +212,7 @@ public class MapController {
             l_ReturnString += "Number of Borders Removed : " + l_RemoveBorderCounter + "\n";
         }
         d_MapModel.getContinents();
-        if (d_MapModel.getCountryList().size() > 0) {
+        if (!d_MapModel.getCountryList().isEmpty()) {
             d_MapModel.getCountries();
         }
         return l_ReturnString;

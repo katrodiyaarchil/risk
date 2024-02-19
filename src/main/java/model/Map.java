@@ -84,7 +84,7 @@ public class Map implements Serializable {
      * @return Map is loaded or not
      * @throws FileNotFoundException File not Found to Load
      */
-    public String loadMap(String p_FileName) throws FileNotFoundException {
+    public String loadMap(String p_FileName) throws Exception {
         reset();
         String l_Path = "resource/";
         String l_Result;

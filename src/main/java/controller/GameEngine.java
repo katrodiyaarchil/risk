@@ -75,7 +75,7 @@ public class GameEngine {
                 String l_CommandStringFromInput = d_CpView.getCommandInput().trim();
                 switch (l_CommandStringFromInput.split(" ")[0]) {
                     case "editcontinent":
-                        if (d_MapDone == false) {
+                        if (!d_MapDone) {
                             try {
                                 String l_AckMsg = d_MapController.editMap("editcontinent", l_CommandStringFromInput);
                                 d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
@@ -89,7 +89,7 @@ public class GameEngine {
                         break;
 
                     case "editcountry": {
-                        if (d_MapDone == false) {
+                        if (!d_MapDone) {
                             try {
                                 String l_AckMsg = d_MapController.editMap("editcountry", l_CommandStringFromInput);
                                 d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
@@ -104,7 +104,7 @@ public class GameEngine {
                         break;
 
                     case "editneighbor": {
-                        if (d_MapDone == false) {
+                        if (!d_MapDone) {
                             try {
                                 String l_AckMsg = d_MapController.editMap("editneighbor", l_CommandStringFromInput);
                                 d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
@@ -124,7 +124,7 @@ public class GameEngine {
                         break;
 
                     case "savemap": {
-                        if (d_MapDone == false) {
+                        if (!d_MapDone) {
                             try {
                                 String l_Result = d_MapController.saveMap(l_CommandStringFromInput);
                                 d_CpView.setCommandAcknowledgement(l_Result + "\n");
@@ -138,7 +138,7 @@ public class GameEngine {
                         break;
 
                     case "editmap": {
-                        if (d_MapDone == false) {
+                        if (!d_MapDone) {
                             try {
                                 String l_Result = d_MapController.loadMap(l_CommandStringFromInput);
                                 d_CpView.setCommandAcknowledgement(l_Result + "\n");
@@ -153,7 +153,7 @@ public class GameEngine {
                         break;
 
                     case "validatemap": {
-                        if (d_MapDone == false) {
+                        if (!d_MapDone) {
                             try {
                                 d_CpView.setCommandAcknowledgement(d_MapController.validateMap());
                             } catch (Exception p_Exception) {
@@ -177,7 +177,7 @@ public class GameEngine {
                         break;
 
                     case "gameplayer": {
-                        if (d_MapDone == true & d_StartUpDone == false) {
+                        if (d_MapDone & !d_StartUpDone) {
                             try {
                                 String l_AckMsg1 = editPlayer("GamePlayer", l_CommandStringFromInput);
                                 d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
@@ -186,10 +186,10 @@ public class GameEngine {
                                 d_CpView.setCommandAcknowledgement("\n");
                             }
                         } else {
-                            if (d_MapDone == false)
+                            if (!d_MapDone)
                                 d_CpView.setCommandAcknowledgement(
                                         "\n" + "The Map is Not Loaded Yet to Add Players " + "\n");
-                            if (d_StartUpDone == true)
+                            if (d_StartUpDone)
                                 d_CpView.setCommandAcknowledgement("\n"
                                         + "You are trying to remove or add players after the startup phase" + "\n");
                         }
@@ -197,7 +197,7 @@ public class GameEngine {
                         break;
 
                     case "assigncountries": {
-                        if (d_MapDone == true & d_AssignCountriesDone == false) {
+                        if (d_MapDone & !d_AssignCountriesDone) {
                             try {
                                 assignCountries();
                             } catch (Exception p_Exception) {
@@ -213,10 +213,10 @@ public class GameEngine {
                             d_PlayerController.playerIssueOrder();
                             d_PlayerController.playerNextOrder();
                         } else {
-                            if (d_MapDone == false)
+                            if (!d_MapDone)
                                 d_CpView.setCommandAcknowledgement(
                                         "\n" + "The Map is Not Loaded Yet to Add Assign Countries " + "\n");
-                            if (d_AssignCountriesDone == true)
+                            if (d_AssignCountriesDone)
                                 d_CpView.setCommandAcknowledgement("\n" + "StartUp Phase is already completed " + "\n");
                         }
                     }
@@ -225,7 +225,7 @@ public class GameEngine {
                         break;
 
                     case "show":
-                        if (d_MapDone == true) {
+                        if (d_MapDone) {
                             showAllPlayerWithArmies();
                             d_CpView.setCommandAcknowledgement("\n");
                         } else {
@@ -270,11 +270,11 @@ public class GameEngine {
             throw new Exception("Please provide valid Parameters to add player");
         while (l_Counter < l_CommandArray.length) {
             if (l_CommandArray[l_Counter].equals("-add")) {
-                d_GameModelNew.addPlayer(l_CommandArray[l_Counter + 1]);
+                d_GameModel.addPlayer(l_CommandArray[l_Counter + 1]);
                 l_Counter += 2;
                 l_AddCounter += 1;
             } else if (l_CommandArray[l_Counter].equals("-remove")) {
-                d_GameModelNew.removePlayer(l_CommandArray[l_Counter + 1]);
+                d_GameModel.removePlayer(l_CommandArray[l_Counter + 1]);
                 l_Counter += 2;
                 l_RemoveCounter += 1;
             } else {
@@ -332,9 +332,9 @@ public class GameEngine {
      */
     public void showMap(Boolean p_BooleanForGamePhaseStarted) {
         if (p_BooleanForGamePhaseStarted) {
-            d_PlayerList = d_GameModelNew.getAllPlayers();
-            ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
-            if (l_ContinentList.size() > 0) {
+            d_PlayerList = d_GameModel.getAllPlayers();
+            ArrayList<Continent> l_ContinentList = d_GameModel.getMap().getContinentList();
+            if (!l_ContinentList.isEmpty()) {
                 d_CpView.setCommandAcknowledgement("\n");
                 for (Continent l_Continent : l_ContinentList) {
                     d_CpView.setCommandAcknowledgement("Continent: " + l_Continent.getContinentName() + "\n");
@@ -352,7 +352,7 @@ public class GameEngine {
                             }
                         }
                         ArrayList<String> l_NeighborList = l_Country.getBorder();
-                        if (l_NeighborList.size() > 0) {
+                        if (!l_NeighborList.isEmpty()) {
                             d_CpView.setCommandAcknowledgement("\n" + "--> Borders : ");
                             for (String l_Str : l_NeighborList) {
                                 d_CpView.setCommandAcknowledgement(l_Str + ",");
@@ -364,8 +364,8 @@ public class GameEngine {
                 }
             }
         } else {
-            ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
-            if (l_ContinentList.size() > 0) {
+            ArrayList<Continent> l_ContinentList = d_GameModel.getMap().getContinentList();
+            if (!l_ContinentList.isEmpty()) {
                 d_CpView.setCommandAcknowledgement("\n");
                 for (Continent l_Continent : l_ContinentList) {
                     d_CpView.setCommandAcknowledgement("Continent: " + l_Continent.getContinentName() + "\n");
@@ -374,7 +374,7 @@ public class GameEngine {
                     for (Country l_Country : l_CountryList) {
                         d_CpView.setCommandAcknowledgement(l_Country.getCountryName());
                         ArrayList<String> l_NeighborList = l_Country.getBorder();
-                        if (l_NeighborList.size() > 0) {
+                        if (!l_NeighborList.isEmpty()) {
                             d_CpView.setCommandAcknowledgement("--> Borders : ");
                             for (String l_Str : l_NeighborList) {
                                 d_CpView.setCommandAcknowledgement(l_Str + " ");

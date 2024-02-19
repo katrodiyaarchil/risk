@@ -25,7 +25,7 @@ public class PlayerController {
     /**
 	 * Constructor of Player controller
 	 * 
-	 * @param p_Players list of players
+	 * @param p_GameModel object of Game model class
 	 * @param p_CpView  object of command prompt for communicating with player
 	 */
 	PlayerController(GameModel p_GameModel, CommandPrompt p_CpView) {
@@ -65,7 +65,7 @@ public class PlayerController {
 				} else {
 					Set<Entry<Player, Boolean>> l_Check = l_CheckArmies.entrySet();
 					for (Entry<Player, Boolean> l_E : l_Check) {
-						if (l_E.getKey().getPlayerArmies() == 0 && l_E.getValue() == false) {
+						if (l_E.getKey().getPlayerArmies() == 0 && !l_E.getValue()) {
 							--l_PlayerListSize;
 							l_E.setValue(true);
 						}
@@ -95,8 +95,7 @@ public class PlayerController {
 					Order l_Order = l_Player.next_order();
 					System.out.println(l_Order.getOrder());
 					l_Order.execute();
-					String l_Result = l_Order.getExecuteResult();
-					d_OrderAcknowledgment = l_Result;
+                    d_OrderAcknowledgment = l_Order.getExecuteResult();
 					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
 				} else {
 					l_Flag = 1;
