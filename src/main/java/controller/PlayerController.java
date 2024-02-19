@@ -13,18 +13,33 @@ import model.Order;
 import model.Player;
 import view.CommandPrompt;
 
+/**
+ * The Player Controller class controls the activities of all the players at once.
+ */
 public class PlayerController {
 	private ArrayList<Player> d_Players;
 	private String d_OrderAcknowledgment = "";
 	private CommandPrompt d_CpView;
 	private GameModel d_GameModel;
 
+    /**
+	 * Constructor of Player controller
+	 * 
+	 * @param p_Players list of players
+	 * @param p_CpView  object of command prompt for communicating with player
+	 */
 	PlayerController(GameModel p_GameModel, CommandPrompt p_CpView) {
 		d_GameModel = p_GameModel;
 		d_Players = d_GameModel.getAllPlayers();
 		d_CpView = p_CpView;
 	}
 
+    /**
+	 * The player_issue_order method asks each player to issue an order in a round
+	 * robin fashion.
+	 * The loop terminates when the armies of all the players are exhausted.
+	 * The acknowledgement are passed on to the view.
+	 */
 	public void playerIssueOrder() {
 		ArrayList<Player> l_Players = d_Players;
 		HashMap<Player, Boolean> l_CheckArmies = new HashMap<>();
@@ -60,6 +75,13 @@ public class PlayerController {
 		}
 	}
 
+    /**
+	 * This method iterates till the player list doesn't becomes empty. This means
+	 * all the orders of all the players are executed.
+	 * It works in a round robin fashion. All the players execute there orders one
+	 * by one.
+	 * The player who's all orders are executed is removed from the list.
+	 */
 	public void playerNextOrder() {
 		ArrayList<Player> l_Players = d_Players;
 		ArrayList<Player> l_PlayersClone = (ArrayList<Player>) d_Players.clone();
