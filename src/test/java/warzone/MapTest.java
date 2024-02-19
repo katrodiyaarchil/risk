@@ -251,7 +251,7 @@ public class MapTest {
      */
     @Test
     public void testAddContinentContinentControlValue() {
-        String l_ExpectedMessage = "Continent control value cannot be 0";
+        String l_ExpectedMessage = "Continent control must be a positive integer";
         String l_OutputMessage = "";
         try {
             d_Map.addContinent("europe", "0");
