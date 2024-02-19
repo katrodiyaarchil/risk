@@ -17,15 +17,15 @@ public class Player {
 	private ArrayList<Continent> d_Continents = new ArrayList<Continent>();
 	private String d_Result = "";
 	private String d_StringOrder = "";
-	private GameModelNew d_GameModelNew;
+	private GameModel d_GameModel;
 
 
 	public Player() {
 	}
 
-	public Player(String p_PlayerName, GameModelNew p_GameModelNew) {
+	public Player(String p_PlayerName, GameModel p_GameModel) {
 		this.d_PlayerName = p_PlayerName;
-		this.d_GameModelNew = p_GameModelNew;
+		this.d_GameModel = p_GameModel;
 	}
 
 	Player(String p_PlayerName, int p_PlayerId, String p_PlayerColor) {
@@ -72,7 +72,7 @@ public class Player {
 	}
 
 	public void setContinentsList() {
-		ArrayList<Continent> l_MapContinents = d_GameModelNew.getSelectedMap().getContinentList();
+		ArrayList<Continent> l_MapContinents = d_GameModel.getSelectedMap().getContinentList();
 		for (Continent l_MapContinent : l_MapContinents) {
 			int l_Flag = 0;
 			outerloop: for (Country l_CountryOfContinent : l_MapContinent.getCountryList()) {
@@ -137,7 +137,7 @@ public class Player {
 				}
 				if (l_Flag == 1) {
 					d_Armies -= Integer.parseInt(l_StringList[2]);
-					d_Order.add(new Order(d_StringOrder, d_GameModelNew));
+					d_Order.add(new Order(d_StringOrder, d_GameModel));
 					d_ResultInteger = 1;
 					setResult("\norder " + d_StringOrder + " added to list of " + d_PlayerName);
 					if (d_Armies == 0) {
