@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.GameModelNew;
+import model.GameModel;
 import model.Player;
 import model.Map;
 
@@ -16,7 +16,7 @@ import model.Map;
  * This class aims to test the methods in GameModel
  */
 public class GameModelTest {
-    GameModelNew d_Game = new GameModelNew();
+    GameModel d_Game = new GameModel();
     ArrayList<Player> d_Check;
     List<String> d_Names;
     ArrayList<Player> d_List;
@@ -40,7 +40,7 @@ public class GameModelTest {
         d_Map.addCountry("india", "asia");
         d_Map.addCountry("china", "asia");
         d_Map.addCountry("japan", "asia");
-        d_Game = new GameModelNew(d_Map);
+        d_Game = new GameModel(d_Map);
         d_Game.addPlayer("Lee");
         d_Game.addPlayer("Sam");
         d_C1 = new Player("Lee", d_Game);

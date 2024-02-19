@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import model.Order;
 import model.Country;
-import model.GameModelNew;
+import model.GameModel;
 import model.Map;
 
 /**
@@ -18,7 +18,7 @@ public class OrderTest {
     String d_OrderString = "deploy india 3";
     Order d_Order;
     Map d_Map;
-    private GameModelNew d_GameModelNew;
+    private GameModel d_GameModel;
 
     /**
      * To set up the context for test cases
@@ -29,8 +29,8 @@ public class OrderTest {
         d_Map = new Map();
         d_Map.addContinent("asia", "1");
         d_Map.addCountry("india","asia");
-        d_GameModelNew = new GameModelNew(d_Map);
-        d_Order =  new Order(d_OrderString,d_GameModelNew);
+        d_GameModel = new GameModel(d_Map);
+        d_Order =  new Order(d_OrderString,d_GameModel);
     }
 
     /**

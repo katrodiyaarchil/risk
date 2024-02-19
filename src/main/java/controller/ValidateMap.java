@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import model.Continent;
 import model.Country;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This class checks the validity of the map by converting into a graph object.
@@ -68,12 +69,12 @@ public class ValidateMap {
      * @return true if all continents have at least one country. false otherwise.
      */
     public boolean checkCountryAndContinent(ArrayList<Country> p_CountryObjects,
-                                            ArrayList<Continent> p_ContinentObjects) {
-        if (p_ContinentObjects.size() < 1) {
+                                            @NotNull ArrayList<Continent> p_ContinentObjects) {
+        if (p_ContinentObjects.isEmpty()) {
             return false;
         }
         for (Continent l_C1 : p_ContinentObjects) {
-            if (l_C1.getCountryList().size() < 1) {
+            if (l_C1.getCountryList().isEmpty()) {
                 return false;
             }
         }
@@ -94,19 +95,18 @@ public class ValidateMap {
         int l_Sequence = 0;
         int l_ID;
         ArrayList<String> l_UpdatedNeighbors = new ArrayList<String>();
-        ArrayList<Country> l_NCountryObjects = p_CountryObjects;
         HashMap<Integer, Integer> l_UpdatedIDCount = new HashMap<Integer, Integer>();
         HashMap<Integer, ArrayList<Integer>> l_UpdatedMap = new HashMap<Integer, ArrayList<Integer>>();
-        for (Country l_C : l_NCountryObjects) {
+        for (Country l_C : p_CountryObjects) {
             l_Sequence++;
             l_UpdatedIDCount.put(l_C.getCountryID(), l_Sequence);
         }
-        for (Country l_C : l_NCountryObjects) {
+        for (Country l_C : p_CountryObjects) {
             ArrayList<Integer> l_StoreNeighbors = new ArrayList<Integer>();
             l_ID = l_UpdatedIDCount.get(l_C.getCountryID());
             l_UpdatedNeighbors = l_C.getBorder();
             for (String l_S : l_UpdatedNeighbors) {
-                for (Country l_C2 : l_NCountryObjects) {
+                for (Country l_C2 : p_CountryObjects) {
                     if (l_C2.getCountryName().equals(l_S)) {
                         int l_NewNeighborID = l_UpdatedIDCount.get(l_C2.getCountryID());
                         l_StoreNeighbors.add(l_NewNeighborID);

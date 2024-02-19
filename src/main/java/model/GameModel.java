@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
 
@@ -197,7 +196,7 @@ public class GameModel {
 
             assignReinforcementArmies();
         } else {
-            if (getAllPlayers().size() == 0) {
+            if (getAllPlayers().isEmpty()) {
                 throw new Exception("Please enter players using gameplayer add command");
             } else {
                 throw new Exception("One Player Found. Please enter more players using gameplayer add command");
@@ -226,7 +225,7 @@ public class GameModel {
 
     public void assignReinforcementArmies() throws Exception {
         int l_ContinentValue = 0;
-        if (getAllPlayers().size() > 0) {
+        if (!getAllPlayers().isEmpty()) {
             for (Player l_Player : getAllPlayers()) {
                 int l_ArmyCount = ((l_Player.getCountriesSize()) / 3);
                 for (Continent l_Continent : l_Player.getContinentList()) {
