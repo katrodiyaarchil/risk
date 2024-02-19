@@ -1,0 +1,13 @@
+editmap World.map
+editcontinent -add 4 NorthAmerica
+editcountry -add USA NorthAmerica -add Canada NorthAmerica
+editneighbor -add Canada USA -add USA Canada -add UK Canada -add Canada UK
+showmap
+validatemap
+savemap World.map
+
+
+-----------
+loadmap World.map
+gameplayer -add Abhishek -add Karnik
+assigncountries 
