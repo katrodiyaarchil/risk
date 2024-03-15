@@ -36,7 +36,7 @@ public class CommandPrompt {
      * to display.
      */
     public CommandPrompt() {
-        d_CommandPromptWindow = new JFrame("RISK DOMINATION");
+        d_CommandPromptWindow = new JFrame("RISK - Warzone");
         d_CommandPromptPanel = new JPanel(new GridLayout(1, 2));
         d_CommandInput = new JTextField(100);
         d_CommandAcknowledgeArea = new JTextArea(30, 1);
@@ -107,7 +107,7 @@ public class CommandPrompt {
         d_CommandAcknowledgeArea.setForeground(Color.white);
         d_CommandAcknowledgeArea.setFont(d_Font);
         d_Caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-        d_CommandAcknowledgeArea.append("\n!!..........................Welcome to RISK DOMINATION...........................!!\n\n");
+        d_CommandAcknowledgeArea.append("\n!!..........................Welcome to RISK Warzone...........................!!\n\n");
         d_CommandAcknowledgeArea.append(" Below are the list of commands you can use in map edit phase : \n");
         d_CommandAcknowledgeArea.append(" -----------------------------------------------------------------------------------------\n");
         d_CommandAcknowledgeArea.append(" 1. editcontinent -add continentID continentvalue -remove continentID \n"
