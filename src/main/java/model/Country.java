@@ -1,10 +1,9 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 
 /**
- * Represents a country or territory in the game map.
+ * This is a class for all the countries/territories.
  */
 public class Country {
     private static int D_Count = 0;
@@ -13,13 +12,16 @@ public class Country {
     String d_ContinentName;
     ArrayList<String> d_Neighbors;
     int d_NoOfArmies;
+    private Player d_Owner;
 
     /**
-     * Constructs a country with the given name and continent name.
-     * Initializes an empty list to hold neighboring countries.
-     *
-     * @param p_Name          The name of the country.
-     * @param p_ContinentName The name of the continent.
+     * This is the constructor of the class with stores the name of country and its
+     * respective continent name
+     * The Id is generated Statically, also initializes an arraylist which will
+     * later hold all the neighboring countries
+     * 
+     * @param p_Name          Country Name
+     * @param p_ContinentName Continent Name
      */
     public Country(String p_Name, String p_ContinentName) {
         setCountryID(++D_Count);
@@ -29,63 +31,63 @@ public class Country {
     }
 
     /**
-     * Sets the static ID of the country.
-     *
-     * @param p_Count The ID to set.
+     * Method to set the static id of the country
+     * 
+     * @param p_Count Integer that is set for Id
      */
     public static void setCount(int p_Count) {
         D_Count = p_Count;
     }
 
     /**
-     * Gets the name of the continent to which the country belongs.
-     *
-     * @return The name of the continent.
+     * Method to return the name of the continent of the present country object
+     * 
+     * @return d_ContinentName ContinentName
      */
     public String getContinentName() {
         return this.d_ContinentName;
     }
 
     /**
-     * Adds a neighboring country to the list of borders.
-     *
-     * @param p_Border The name of the neighboring country.
+     * Method to set the borders of neighboring Countries
+     * 
+     * @param p_Border Name of neighboring country
      */
     public void setBorder(String p_Border) {
         this.d_Neighbors.add(p_Border);
     }
 
     /**
-     * Gets the list of neighboring countries.
-     *
-     * @return The list of neighboring countries.
+     * Method to get the list of neighboring Countries
+     * 
+     * @return d_Neighbors Arraylist of neighboring countries
      */
     public ArrayList<String> getBorder() {
         return this.d_Neighbors;
     }
 
     /**
-     * Gets the name of the country.
-     *
-     * @return The name of the country.
+     * Method to get Country Name
+     * 
+     * @return Country Name
      */
     public String getCountryName() {
         return d_Name;
     }
 
     /**
-     * Gets the ID of the country.
-     *
-     * @return The ID of the country.
+     * Method to get Country ID
+     * 
+     * @return COuntry ID
      */
     public int getCountryID() {
         return d_ID;
     }
 
     /**
-     * Sets the ID of the country.
-     *
-     * @param p_Id The ID to set.
+     * Method to set the id of the country
+     * 
+     * @param p_Id Country ID
      */
     public void setCountryID(int p_Id) {
         d_ID = p_Id;
@@ -93,10 +95,11 @@ public class Country {
 
     /**
      * {@inheritDoc}
-     * Compares the present Country object with another country object.
-     *
-     * @param p_Country The country object to compare.
-     * @return True if the objects are equal, false otherwise.
+     * Compares the present Country object with other country object and returns
+     * true
+     * If the Country object parameter is empty then it returns false
+     * 
+     * @param p_Country Country Object
      */
     @Override
     public boolean equals(Object p_Country) {
@@ -111,9 +114,9 @@ public class Country {
     }
 
     /**
-     * Removes a neighboring country from the list of borders.
-     *
-     * @param p_Border The name of the neighboring country to remove.
+     * Method to remove the Border
+     * 
+     * @param p_Border Neighbor name
      */
     public void removeBorder(String p_Border) {
         Iterator<String> l_Iterator = this.d_Neighbors.iterator();
@@ -125,20 +128,39 @@ public class Country {
     }
 
     /**
-     * Gets the number of armies deployed in the country.
-     *
-     * @return The number of armies deployed.
+     * Method to return the number of armies
+     * 
+     * @return NoOfArmies
      */
     public int getNoOfArmies() {
         return d_NoOfArmies;
     }
 
     /**
-     * Sets the number of armies deployed in the country.
-     *
-     * @param p_NoOfArmies The number of armies to set.
+     * Method to set number of armies
+     * 
+     * @param p_NoOfArmies pass the number of armies to set
      */
     public void setNoOfArmies(int p_NoOfArmies) {
         d_NoOfArmies = p_NoOfArmies;
+    }
+
+    /**
+     * Method to get the owner player of the country
+     * 
+     * @return Player object who owns the country
+     */
+    public Player getCountryOwnerPlayer() {
+        return this.d_Owner;
+    }
+
+    /**
+     * Method to set the owner player of the country
+     * 
+     * @param p_OwnerPlayer Player object to be assigned to the owner player of the
+     *                      country
+     */
+    public void setCountryOwnerPlayer(Player p_OwnerPlayer) {
+        this.d_Owner = p_OwnerPlayer;
     }
 }
