@@ -41,7 +41,7 @@ public class PlayerController {
 	 * @param p_Players      list of players
 	 * @param p_CpView  object of command prompt for communicating with player
 	 */
-	PlayerController(GameModel p_GameModel, CommandPrompt p_CpView) {
+	PlayerController(GameModel p_GameModel, CommandPrompt p_CpView, GameEngine p_GameEngine) {
 		d_GameModel = p_GameModel;
 		d_Players = d_GameModel.getAllPlayers();
 		d_CpView = p_CpView;
