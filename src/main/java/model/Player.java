@@ -5,6 +5,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Iterator;
 
+import model.orders.Advance;
+import model.orders.Airlift;
+import model.orders.Bomb;
+import model.orders.Blockade;
+import model.orders.Deploy;
+import model.orders.Negotiate;
 /**
  * The Player class represents a player in the game.
  * It contains information about the player's name, ID, color, armies, countries, continents,
@@ -23,6 +29,9 @@ public class Player {
 	private String d_Result = "";
 	private String d_StringOrder = "";
 	private GameModel d_GameModel;
+	private ArrayList<String> d_Cards = new ArrayList<String>();
+	private ArrayList<Player> d_NegotiatedPlayers = new ArrayList<Player>();
+	private boolean d_AtleastOneBattleWon = false;
 
 	/**
 	 * default constructor of Player class
@@ -111,24 +120,6 @@ public class Player {
 		this.d_PlayerId = p_PlayerId;
 	}
 
-	/**
-	 * set method for player color
-	 * 
-	 * @param p_PlayerColor Player Color of the player
-	 */
-	public void setPlayerColor(String p_PlayerColor) {
-		this.d_PlayerColor = p_PlayerColor;
-	}
-
-	/**
-	 * set method for allocating armies to player
-	 * 
-	 * @param p_Armies Armies off the player
-	 */
-	public void setPlayerArmies(int p_Armies) {
-		this.d_Armies = p_Armies;
-		
-	}
 
 	/**
 	 * get method for armies of player
@@ -139,6 +130,29 @@ public class Player {
 		return this.d_Armies;
 	}
 
+	public GameModel getGameModel() {
+		return this.d_GameModel;
+	}
+
+	/**
+	 * This method sets the flag value to true if the player won a battle and false
+	 * otherwise.
+	 * 
+	 * @param p_B a boolean value to determine if player has won a battle or not
+	 */
+	public void setAtleastOneBattleWon(boolean p_B) {
+		this.d_AtleastOneBattleWon = p_B;
+	}
+
+	/**
+	 * This method returns the battle won boolean
+	 * 
+	 * @return the boolean value indicating if the player had won a battle or not
+	 */
+	public boolean getAtleastOneBattleWon() {
+		return this.d_AtleastOneBattleWon;
+	}
+
 	/**
 	 * set Continent list for the player. It consists of only those continent
 	 * objects whose all countries belong to this player.
@@ -147,12 +161,9 @@ public class Player {
 		ArrayList<Continent> l_MapContinents = d_GameModel.getSelectedMap().getContinentList();
 		for (Continent l_MapContinent : l_MapContinents) {
 			int l_Flag = 0;
-			outerloop: for (Country l_CountryOfContinent : l_MapContinent.getCountryList()) {
-				for (Country l_CountryOfPlayer : d_Countries) {
-					if (!(l_CountryOfPlayer == l_CountryOfContinent)) {
-						l_Flag = 1;
-						break outerloop;
-					}
+			for (Country l_Country : l_MapContinent.getCountryList()) {
+				if (!d_Countries.contains(l_Country)) {
+					l_Flag = 1;
 				}
 			}
 			if (l_Flag == 0) {
@@ -223,6 +234,70 @@ public class Player {
 	public int getOrderSize() {
 		return this.d_Order.size();
 	}
+
+	/**
+	 * get method for the card if the player owns it or not.
+	 * 
+	 * @param p_TypeOfCard the string that indicates the type of card
+	 * @return true if the card type exists in the list of player.
+	 */
+	public boolean getCard(String p_TypeOfCard) {
+		return d_Cards.contains(p_TypeOfCard);
+	}
+
+	/**
+	 * set method for adding the card to the card list belonging to the player
+	 * 
+	 * @param p_Card the Card object that belongs to the player
+	 */
+	public void setCard(String p_Card) {
+		d_Cards.add(p_Card);
+	}
+
+	/**
+	 * This method removes given card name from player's card list
+	 * 
+	 * @param p_Card The card to be removed from player card list
+	 */
+	public void removeCard(String p_Card) {
+		d_Cards.remove(p_Card);
+	}
+
+	/**
+	 * This method returns the Player's class list
+	 * 
+	 * @return The player's card list
+	 */
+	public ArrayList<String> getCardList() {
+		return d_Cards;
+	}
+
+	/**
+	 * This method adds the player that has strike a deal with this player
+	 * 
+	 * @param p_NegotiatedPlayer Player to be added in Negotiated player list.
+	 */
+	public void addNegotiatedPlayer(Player p_NegotiatedPlayer) {
+		d_NegotiatedPlayers.add(p_NegotiatedPlayer);
+	}
+
+	/**
+	 * This method returns the list of negotiated players of this player
+	 * 
+	 * @return The list of negotiated players of this player
+	 */
+	public ArrayList<Player> getNegotiatedPlayerList() {
+		return d_NegotiatedPlayers;
+	}
+
+	/**
+	 * This method clears the negotiated players list
+	 */
+	public void removeNegotiatedPlayer() {
+		if (d_NegotiatedPlayers.size() > 0)
+			d_NegotiatedPlayers.clear();
+	}
+
 
 	/**
 	 * get method for the result Integer. It is a flag which defines the result of
