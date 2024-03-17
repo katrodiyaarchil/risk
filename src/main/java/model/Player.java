@@ -20,9 +20,7 @@ import model.orders.Negotiate;
 public class Player {
 	private String d_PlayerName = "";
 	private int d_PlayerId;
-	private String d_PlayerColor = "";
 	private int d_Armies;
-	private int d_ResultInteger;
 	private ArrayList<Country> d_Countries = new ArrayList<Country>();
 	private Queue<Order> d_Order = new LinkedList<Order>();
 	private ArrayList<Continent> d_Continents = new ArrayList<Continent>();
@@ -52,19 +50,6 @@ public class Player {
 		this.d_GameModel = p_GameModel;
 	}
 
-	/**
-     * Package-private constructor for Player class with name, ID, and color.
-     *
-     * @param p_PlayerName  The name of the player.
-     * @param p_PlayerId    The ID of the player.
-     * @param p_PlayerColor The color of the player.
-     */
-
-	Player(String p_PlayerName, int p_PlayerId, String p_PlayerColor) {
-		d_PlayerName = p_PlayerName;
-		d_PlayerId = p_PlayerId;
-		d_PlayerColor = p_PlayerColor;
-	}
 	/**
      * Adds a country to the player's list of countries.
      *
@@ -102,14 +87,6 @@ public class Player {
 		return this.d_PlayerId;
 	}
 
-	/**
-	 * get method for player color
-	 * 
-	 * @return returns player color
-	 */
-	public String getPlayerColor() {
-		return this.d_PlayerColor;
-	}
 
 	/**
 	 * set method for player id
@@ -120,6 +97,15 @@ public class Player {
 		this.d_PlayerId = p_PlayerId;
 	}
 
+	/**
+	 * set method for allocating armies to player
+	 * 
+	 * @param p_Armies Armies off the player
+	 */
+	public void setPlayerArmies(int p_Armies) {
+		this.d_Armies = p_Armies;
+		this.d_TempArmies = p_Armies;
+	}
 
 	/**
 	 * get method for armies of player
@@ -298,18 +284,7 @@ public class Player {
 			d_NegotiatedPlayers.clear();
 	}
 
-
 	/**
-	 * get method for the result Integer. It is a flag which defines the result of
-	 * the issue order method
-	 * 
-	 * @return integer set for determining the result of issue order method
-	 */
-	public int getResultInteger() {
-		return this.d_ResultInteger;
-	}
-
-		/**
 	 * The issue order method checks the order issued by the player.
 	 * There are 5 types of orders
 	 * <ul>
@@ -432,7 +407,6 @@ public class Player {
 		}
 
 	}
-
 	/**
 	 * This method removes the first order in the queue Order list
 	 * 
