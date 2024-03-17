@@ -110,10 +110,50 @@ public class PlayerController {
 				Player l_Player = (Player) l_It.next();
 				if (l_Player.getOrderSize() != 0) {
 					Order l_Order = l_Player.next_order();
-					System.out.println(l_Order.getOrder());
-					l_Order.execute();
-                    d_OrderAcknowledgment = l_Order.getExecuteResult();
-					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+					if (l_Order.getClass().getName().equals("model.orders.Deploy")) {
+						Deploy l_DeployOrder = (Deploy) l_Order;
+						l_DeployOrder.execute();
+						String l_Result = l_Player.getResult();
+						d_OrderAcknowledgment = l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						d_LEB.setResult(d_OrderAcknowledgment);
+					} else if (l_Order.getClass().getName().equals("model.orders.Advance")) {
+						Advance l_AdvanceOrder = (Advance) l_Order;
+						l_AdvanceOrder.execute();
+						String l_Result = l_Player.getResult();
+						d_OrderAcknowledgment = l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						d_LEB.setResult(d_OrderAcknowledgment);
+					} else if (l_Order.getClass().getName().equals("model.orders.Blockade")) {
+						Blockade l_BlockadeOrder = (Blockade) l_Order;
+						l_BlockadeOrder.execute();
+						String l_Result = l_Player.getResult();
+						d_OrderAcknowledgment = l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						d_LEB.setResult(d_OrderAcknowledgment);
+					} else if (l_Order.getClass().getName().equals("model.orders.Bomb")) {
+						Bomb l_BombOrder = (Bomb) l_Order;
+						l_BombOrder.execute();
+						String l_Result = l_Player.getResult();
+						d_OrderAcknowledgment = l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						d_LEB.setResult(d_OrderAcknowledgment);
+					} else if (l_Order.getClass().getName().equals("model.orders.Airlift")) {
+						Airlift l_AirliftOrder = (Airlift) l_Order;
+						l_AirliftOrder.execute();
+						String l_Result = l_Player.getResult();
+						d_OrderAcknowledgment = l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						d_LEB.setResult(d_OrderAcknowledgment);
+					} else if (l_Order.getClass().getName().equals("model.orders.Negotiate")) {
+						Negotiate l_NegotiateOrder = (Negotiate) l_Order;
+						l_NegotiateOrder.execute();
+						String l_Result = l_Player.getResult();
+						d_OrderAcknowledgment = l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						d_LEB.setResult(d_OrderAcknowledgment);
+					}
+
 				} else {
 					l_Flag = 1;
 					l_RemovePlayerList.add(l_Player);
@@ -125,6 +165,54 @@ public class PlayerController {
 				}
 			}
 		}
-		d_CpView.setCommandAcknowledgement("\nOrders are Succesfully Executed.....!!!");
+}
+/**
+ * This method is used to remove the player with no countries on its name.
+*/
+public void removePlayerWithNoCountry() {
+	Iterator<Player> l_PlayerIterator = d_Players.iterator();
+	while (l_PlayerIterator.hasNext()) {
+		Player l_TempPlayer = (Player) l_PlayerIterator.next();
+		if (l_TempPlayer.getCountriesSize() <= 0 && !l_TempPlayer.getPlayerName().equals("Neutral Player")) {
+			l_PlayerIterator.remove();
+		}
 	}
+}
+/**
+* This method is used to clear all the individual players' negotiated players
+* list after each round of issuing and execution of orders.
+*/
+public void clearNegotiatedPlayerList() {
+
+	for (Player l_TempPlayer : d_Players) {
+
+		l_TempPlayer.removeNegotiatedPlayer();
+
+	}
+
+}
+
+	/**
+	 * This method is used to check if one player owns all the countries of the map
+	 * and hence can be declared as the winner of the game.
+	 */
+	public void checkTheWinner() {
+		ArrayList<Country> l_CountryList = d_GameModelNew.getMap().getCountryList();
+		Iterator<Country> itr = l_CountryList.iterator();
+		Player l_CheckPlayer = (Player) ((Country) itr.next()).getCountryOwnerPlayer();
+		int l_flag = 0;
+		while (itr.hasNext()) {
+			if (!((Player) ((Country) itr.next()).getCountryOwnerPlayer() == l_CheckPlayer)) {
+				l_flag = 1;
+				break;
+			}
+		}
+		if (l_flag == 0) {
+
+			d_GameEngine.setPhase(new GameOver(d_GameEngine, d_CpView));
+			d_CpView.setCommandAcknowledgement("\n" + l_CheckPlayer.getPlayerName() + " is the winner of the game!");
+		}
+
+	}
+
 }
