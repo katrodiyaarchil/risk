@@ -14,8 +14,8 @@ public class IssueOrder extends Phase {
      * Constructs an IssueOrder object with a GameEngine and CommandPrompt object, initializing the log entry buffer
      * and proceeding to issue orders.
      *
-     * @param gameEngine The GameEngine object
-     * @param commandPrompt The CommandPrompt object
+     * @param p_Ge The GameEngine object
+     * @param p_Vw The CommandPrompt object
      */
 
     public IssueOrder(GameEngine p_Ge, CommandPrompt p_Vw) {
