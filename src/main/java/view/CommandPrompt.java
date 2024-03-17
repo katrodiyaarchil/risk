@@ -126,4 +126,7 @@ public class CommandPrompt {
         d_CommandPromptWindow.setVisible(true);
         d_CommandPromptWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+    public void clearTextArea() {
+        this.d_CommandAcknowledgeArea.setText("");
+    }
 }
