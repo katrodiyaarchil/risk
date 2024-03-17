@@ -34,6 +34,29 @@ public class Deploy implements Order {
     }
 
     public boolean isValid() {
-        return false;
+        int l_Flag = 0;
+        if (d_NumArmies <= getPlayer().getPlayerArmies()) {
+            Iterator<Country> l_It = getPlayer().getCountryList().iterator();
+            while (l_It.hasNext()) {
+                Country l_TempCountry = (Country) l_It.next();
+                if (d_Country == l_TempCountry) {
+                    l_Flag = 1;
+                    break;
+                }
+            }
+            if (l_Flag == 1) {
+                getPlayer().setResult("\norder deploy " + d_Country.getCountryName() + " " + d_NumArmies
+                        + " added to list of " + getPlayer().getPlayerName());
+                return true;
+            } else {
+                getPlayer().setResult("\nThis country " + d_Country.getCountryName() + " doesnot belongs to "
+                        + getPlayer().getPlayerName());
+                return false;
+            }
+        } else {
+            getPlayer().setResult("\n" + getPlayer().getPlayerName() + " ; you have only "
+                    + getPlayer().getPlayerArmies() + " number of armies! Please enter the next order accordingly");
+            return false;
+        }
     }
 }
