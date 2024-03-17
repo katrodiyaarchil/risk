@@ -78,7 +78,7 @@ public class GameEngine {
     /**
      * This method returns the reference of the game model new.
      * 
-     * @return the GameModelNew reference
+     * @return the GameModel reference
      */
     public GameModel getGameModel() {
         return this.d_GameModel;
