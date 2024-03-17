@@ -20,9 +20,7 @@ import model.orders.Negotiate;
 public class Player {
 	private String d_PlayerName = "";
 	private int d_PlayerId;
-	private String d_PlayerColor = "";
 	private int d_Armies;
-	private int d_ResultInteger;
 	private ArrayList<Country> d_Countries = new ArrayList<Country>();
 	private Queue<Order> d_Order = new LinkedList<Order>();
 	private ArrayList<Continent> d_Continents = new ArrayList<Continent>();
@@ -52,19 +50,6 @@ public class Player {
 		this.d_GameModel = p_GameModel;
 	}
 
-	/**
-     * Package-private constructor for Player class with name, ID, and color.
-     *
-     * @param p_PlayerName  The name of the player.
-     * @param p_PlayerId    The ID of the player.
-     * @param p_PlayerColor The color of the player.
-     */
-
-	Player(String p_PlayerName, int p_PlayerId, String p_PlayerColor) {
-		d_PlayerName = p_PlayerName;
-		d_PlayerId = p_PlayerId;
-		d_PlayerColor = p_PlayerColor;
-	}
 	/**
      * Adds a country to the player's list of countries.
      *
@@ -102,14 +87,6 @@ public class Player {
 		return this.d_PlayerId;
 	}
 
-	/**
-	 * get method for player color
-	 * 
-	 * @return returns player color
-	 */
-	public String getPlayerColor() {
-		return this.d_PlayerColor;
-	}
 
 	/**
 	 * set method for player id
@@ -120,6 +97,15 @@ public class Player {
 		this.d_PlayerId = p_PlayerId;
 	}
 
+	/**
+	 * set method for allocating armies to player
+	 * 
+	 * @param p_Armies Armies off the player
+	 */
+	public void setPlayerArmies(int p_Armies) {
+		this.d_Armies = p_Armies;
+		this.d_TempArmies = p_Armies;
+	}
 
 	/**
 	 * get method for armies of player
@@ -158,7 +144,7 @@ public class Player {
 	 * objects whose all countries belong to this player.
 	 */
 	public void setContinentsList() {
-		ArrayList<Continent> l_MapContinents = d_GameModel.getSelectedMap().getContinentList();
+		ArrayList<Continent> l_MapContinents = d_GameModelNew.getSelectedMap().getContinentList();
 		for (Continent l_MapContinent : l_MapContinents) {
 			int l_Flag = 0;
 			for (Country l_Country : l_MapContinent.getCountryList()) {
@@ -298,18 +284,7 @@ public class Player {
 			d_NegotiatedPlayers.clear();
 	}
 
-
 	/**
-	 * get method for the result Integer. It is a flag which defines the result of
-	 * the issue order method
-	 * 
-	 * @return integer set for determining the result of issue order method
-	 */
-	public int getResultInteger() {
-		return this.d_ResultInteger;
-	}
-
-		/**
 	 * The issue order method checks the order issued by the player.
 	 * There are 5 types of orders
 	 * <ul>
@@ -338,7 +313,7 @@ public class Player {
 					break;
 				}
 				int l_NumArmies = Integer.parseInt(l_StringList[2]);
-				for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
+				for (Country l_TempCountry : d_GameModelNew.getSelectedMap().getCountryList()) {
 					if (l_TempCountry.getCountryName().equals(l_StringList[1])) {
 						d_Order.add(new Deploy(this, l_TempCountry, l_NumArmies));
 						break;
@@ -352,13 +327,13 @@ public class Player {
 				}
 				int l_NumArmies1 = Integer.parseInt(l_StringList[3]);
 				Country l_SourceCountry = null, l_TargetCountry = null;
-				for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
+				for (Country l_TempCountry : d_GameModelNew.getSelectedMap().getCountryList()) {
 					if (l_TempCountry.getCountryName().equals(l_StringList[1])) {
 						l_SourceCountry = l_TempCountry;
 						break;
 					}
 				}
-				for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
+				for (Country l_TempCountry : d_GameModelNew.getSelectedMap().getCountryList()) {
 					if (l_TempCountry.getCountryName().equals(l_StringList[2])) {
 						l_TargetCountry = l_TempCountry;
 						break;
@@ -371,7 +346,7 @@ public class Player {
 					System.out.println("Please enter valid number of parameters");
 					break;
 				}
-				for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
+				for (Country l_TempCountry : d_GameModelNew.getSelectedMap().getCountryList()) {
 					if (l_TempCountry.getCountryName().equals(l_StringList[1])) {
 						d_Order.add(new Bomb(this, l_TempCountry));
 						break;
@@ -383,7 +358,7 @@ public class Player {
 					System.out.println("Please enter valid number of parameters");
 					break;
 				}
-				for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
+				for (Country l_TempCountry : d_GameModelNew.getSelectedMap().getCountryList()) {
 					if (l_TempCountry.getCountryName().equals(l_StringList[1])) {
 						d_Order.add(new Blockade(this, l_TempCountry));
 						break;
@@ -398,13 +373,13 @@ public class Player {
 				int l_NumArmies2 = Integer.parseInt(l_StringList[3]);
 				Country l_SourceCountry1 = null, l_TargetCountry1 = null;
 
-				for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
+				for (Country l_TempCountry : d_GameModelNew.getSelectedMap().getCountryList()) {
 					if (l_TempCountry.getCountryName().equals(l_StringList[1])) {
 						l_SourceCountry1 = l_TempCountry;
 						break;
 					}
 				}
-				for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
+				for (Country l_TempCountry : d_GameModelNew.getSelectedMap().getCountryList()) {
 					if (l_TempCountry.getCountryName().equals(l_StringList[2])) {
 						l_TargetCountry1 = l_TempCountry;
 						break;
@@ -417,7 +392,7 @@ public class Player {
 					System.out.println("Please enter valid number of parameters");
 					break;
 				}
-				for (Player l_TempPlayer : d_GameModel.getAllPlayers()) {
+				for (Player l_TempPlayer : d_GameModelNew.getAllPlayers()) {
 					if (l_TempPlayer.getPlayerName().equals(l_StringList[1])) {
 						d_Order.add(new Negotiate(this, l_TempPlayer));
 						break;
@@ -432,7 +407,6 @@ public class Player {
 		}
 
 	}
-
 	/**
 	 * This method removes the first order in the queue Order list
 	 * 
