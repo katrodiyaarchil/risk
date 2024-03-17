@@ -85,8 +85,10 @@ public class Continent {
     }
 
     /**
+     * {@inheritDoc}
      * Compares the present Continent object with other Continent object and returns
-     * true if the Continent object parameter is empty then it returns false
+     * true
+     * If the Continent object parameter is empty then it returns false
      * 
      * @param p_Continent Continent Object
      * 
@@ -104,9 +106,9 @@ public class Continent {
     }
 
     /**
-     * Method to return the ArrayList of all the countries in the continent
+     * Method to return the arraylist of all the countries in the continent
      * 
-     * @return d_CountryList ArrayList of all countries
+     * @return d_CountryList Arraylist of all countries
      */
     public ArrayList<Country> getCountryList() {
         return this.d_CountryList;
