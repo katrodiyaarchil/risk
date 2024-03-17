@@ -99,4 +99,3 @@ public class Blockade implements Order {
 		this.d_Player = d_Player;
 	}
 }
-

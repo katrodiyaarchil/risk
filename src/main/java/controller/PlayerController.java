@@ -2,15 +2,23 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
+import java.util.Iterator;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
+import model.Country;
 import model.GameModel;
 import model.Order;
 import model.Player;
+import model.orders.Advance;
+import model.orders.Airlift;
+import model.orders.Blockade;
+import model.orders.Bomb;
+import model.orders.Deploy;
+import model.orders.Negotiate;
+import observerpattern.LogEntryBuffer;
+import utility.state.GameOver;
 import view.CommandPrompt;
 
 /**
@@ -21,6 +29,10 @@ public class PlayerController {
 	private String d_OrderAcknowledgment = "";
 	private CommandPrompt d_CpView;
 	private GameModel d_GameModel;
+	private LogEntryBuffer d_LEB;
+	private HashMap<Integer, String> d_AllCards;
+	private Random d_Rand;
+	private GameEngine d_GameEngine;
 
     /**
 	 * Constructor of Player controller
@@ -32,6 +44,15 @@ public class PlayerController {
 		d_GameModel = p_GameModel;
 		d_Players = d_GameModel.getAllPlayers();
 		d_CpView = p_CpView;
+		d_LEB = new LogEntryBuffer();
+		d_AllCards = new HashMap<>();
+		d_GameEngine = p_GameEngine;
+		int i = 0;
+		d_AllCards.put(i++, "Bomb");
+		d_AllCards.put(i++, "Blockade");
+		d_AllCards.put(i++, "Negotiate");
+		d_AllCards.put(i++, "Airlift");
+		d_Rand = new Random();
 	}
 
     /**
@@ -47,27 +68,23 @@ public class PlayerController {
 			l_CheckArmies.put(l_TempPlayer, false);
 		}
 		int l_PlayerListSize = l_Players.size();
-		while (l_PlayerListSize > 0) {
+		while (l_PlayerListSize > 1) {
 			Iterator<Player> l_It = l_Players.iterator();
 			while (l_It.hasNext()) {
 				Player l_Player = (Player) l_It.next();
-				if (l_Player.getPlayerArmies() > 0) {
-					d_OrderAcknowledgment = "\n" + l_Player.getPlayerName() + " Enter deploy order";
-					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-					String l_StringOrder = JOptionPane
-							.showInputDialog(l_Player.getPlayerName() + " : Please Enter Your Deploy Order");
-					l_Player.setOrder(l_StringOrder);
-					l_Player.issue_order();
-					String l_Result = l_Player.getResult();
-					int l_ResultInteger = l_Player.getResultInteger();
-					d_OrderAcknowledgment = l_Result;
-					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-				} else {
-					Set<Entry<Player, Boolean>> l_Check = l_CheckArmies.entrySet();
-					for (Entry<Player, Boolean> l_E : l_Check) {
-						if (l_E.getKey().getPlayerArmies() == 0 && !l_E.getValue()) {
+				if (!l_Player.getPlayerName().equals("Neutral Player")) {
+					if (l_CheckArmies.get(l_Player) == false) {
+
+						String l_StringOrder = JOptionPane
+								.showInputDialog(l_Player.getPlayerName() + " : Please Enter Your Order");
+						d_LEB.setResult(l_StringOrder);
+						if (l_StringOrder.equalsIgnoreCase("quit")) {
+							l_CheckArmies.put(l_Player, true);
 							--l_PlayerListSize;
-							l_E.setValue(true);
+						} else {
+							l_Player.setOrder(l_StringOrder);
+							l_Player.issue_order();
+
 						}
 					}
 				}
