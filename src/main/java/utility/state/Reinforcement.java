@@ -14,8 +14,8 @@ public class Reinforcement extends Phase {
      * Constructs a Reinforcement object with a GameEngine and CommandPrompt object, initializing the log entry buffer
      * and proceeding to assign reinforcement armies and display them.
      *
-     * @param gameEngine The GameEngine object
-     * @param commandPrompt The CommandPrompt object
+     * @param p_Ge The GameEngine object
+     * @param p_Vw The CommandPrompt object
      */
 
     public Reinforcement(GameEngine p_Ge, CommandPrompt p_Vw) {
