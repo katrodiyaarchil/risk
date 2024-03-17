@@ -5,18 +5,32 @@ import model.Country;
 import model.Order;
 import model.Player;
 
+/**
+ * Represents a Deploy order, where a player deploys armies to a specific
+ * country.
+ */
 public class Deploy implements Order {
 
     private Player d_Player;
     private Country d_Country;
     private int d_NumArmies;
 
+    /**
+     * Constructor for Deploy order.
+     * 
+     * @param p_Player    The player executing the deploy order.
+     * @param p_Country   The country to deploy armies to.
+     * @param p_NumArmies The number of armies to deploy.
+     */
     public Deploy(Player p_Player, Country p_Country, int p_NumArmies) {
         setPlayer(p_Player);
         d_Country = p_Country;
         d_NumArmies = p_NumArmies;
     }
 
+    /**
+     * Executes the Deploy order.
+     */
     @Override
     public void execute() {
         if (isValid()) {
@@ -25,14 +39,29 @@ public class Deploy implements Order {
         }
     }
 
+    /**
+     * Gets the player executing the deploy order.
+     * 
+     * @return The player.
+     */
     public Player getPlayer() {
         return d_Player;
     }
 
+    /**
+     * Sets the player executing the deploy order.
+     * 
+     * @param d_Player The player.
+     */
     public void setPlayer(Player d_Player) {
         this.d_Player = d_Player;
     }
 
+    /**
+     * Checks if the Deploy order is valid.
+     * 
+     * @return True if valid, false otherwise.
+     */
     public boolean isValid() {
         int l_Flag = 0;
         if (d_NumArmies <= getPlayer().getPlayerArmies()) {
@@ -49,7 +78,7 @@ public class Deploy implements Order {
                         + " added to list of " + getPlayer().getPlayerName());
                 return true;
             } else {
-                getPlayer().setResult("\nThis country " + d_Country.getCountryName() + " doesnot belongs to "
+                getPlayer().setResult("\nThis country " + d_Country.getCountryName() + " does not belong to "
                         + getPlayer().getPlayerName());
                 return false;
             }
