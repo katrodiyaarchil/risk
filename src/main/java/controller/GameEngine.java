@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import model.Continent;
 import model.Country;
-import model.GameModelNew;
+import model.GameModel;
 import model.Player;
 import observerpattern.LogEntryBuffer;
 import utility.state.Edit;
@@ -78,10 +78,10 @@ public class GameEngine {
     /**
      * This method returns the reference of the game model new.
      * 
-     * @return the GameModelNew reference
+     * @return the GameModel reference
      */
-    public GameModelNew getGameModel() {
-        return this.d_GameModelNew;
+    public GameModel getGameModel() {
+        return this.d_GameModel;
     }
 
     /**
@@ -244,7 +244,7 @@ public class GameEngine {
     public void showAllPlayerWithArmies() {
         d_LEB.setResult(
                 ":::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::");
-        d_PlayerList = d_GameModelNew.getAllPlayers();
+        d_PlayerList = d_GameModel.getAllPlayers();
         for (Player l_Player : d_PlayerList) {
             d_LEB.setResult("\n" + l_Player.getPlayerName() + "-->" + "armies assigned:" + l_Player.getPlayerArmies());
             d_CpView.setCommandAcknowledgement(
@@ -285,8 +285,8 @@ public class GameEngine {
     public void showMap(Phase p_GamePhase) {
         if (!p_GamePhase.getClass().getSimpleName().equals("Edit")) {
             d_LEB.setResult(":::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::");
-            d_PlayerList = d_GameModelNew.getAllPlayers();
-            ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
+            d_PlayerList = d_GameModel.getAllPlayers();
+            ArrayList<Continent> l_ContinentList = d_GameModel.getMap().getContinentList();
             if (l_ContinentList.size() > 0) {
                 d_LEB.setResult("\n");
                 d_CpView.setCommandAcknowledgement("\n");
@@ -325,7 +325,7 @@ public class GameEngine {
                 }
             }
         } else {
-            ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
+            ArrayList<Continent> l_ContinentList = d_GameModel.getMap().getContinentList();
             if (l_ContinentList.size() > 0) {
                 d_LEB.setResult("\n");
                 d_CpView.setCommandAcknowledgement("\n");
