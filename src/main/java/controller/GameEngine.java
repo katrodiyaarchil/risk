@@ -1,16 +1,18 @@
 package controller;
 
+import java.util.ArrayList;
+import view.CommandPrompt;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-
 import model.Continent;
 import model.Country;
-import model.GameModel;
-import view.CommandPrompt;
-import java.util.ArrayList;
-
+import model.GameModelNew;
 import model.Player;
+import observerpattern.LogEntryBuffer;
+import utility.state.Edit;
+import utility.state.Phase;
 
 /**
  * This class serves as the main controller in the MVC model.
@@ -26,6 +28,8 @@ public class GameEngine {
     private MapController d_MapController;
     private ArrayList<Player> d_PlayerList;
     private PlayerController d_PlayerController;
+    private Phase d_GamePhase;
+    private LogEntryBuffer d_LEB;
 
     /**
      * Constructs a new GameEngine with the specified CommandPrompt view and
@@ -38,7 +42,66 @@ public class GameEngine {
         d_GameModel = p_GameModel;
         d_CpView = p_CpView;
         d_MapController = new MapController(this.d_GameModel.getMap());
+        d_PlayerController = new PlayerController(d_GameModel, d_CpView, this);
         d_CpView.commandSendButtonListener(new CommandListener());
+        setPhase(new Edit(this, getViewObject()));
+        d_LEB = new LogEntryBuffer();
+    }
+
+    /**
+     * This method returns the reference of the MapController
+     * 
+     * @return Mapcontroller reference
+     */
+    public MapController getMapController() {
+        return this.d_MapController;
+    }
+
+    /**
+     * This method returns the reference of the command prompt view
+     * 
+     * @return Command prompt reference
+     */
+    public CommandPrompt getViewObject() {
+        return this.d_CpView;
+    }
+
+    /**
+     * This method returns the reference of player controller
+     * 
+     * @return the player controller reference
+     */
+    public PlayerController getPlayerController() {
+        return this.d_PlayerController;
+    }
+
+    /**
+     * This method returns the reference of the game model new.
+     * 
+     * @return the GameModelNew reference
+     */
+    public GameModelNew getGameModel() {
+        return this.d_GameModelNew;
+    }
+
+    /**
+     * This method sets the phase in game engine
+     * 
+     * @param p_phase object of phase to set
+     */
+    public void setPhase(Phase p_phase) {
+        d_GamePhase = p_phase;
+
+    }
+
+    /**
+     * This method returns the current phase
+     * 
+     * @return object of current phase
+     */
+    public Phase getPhase() {
+        return this.d_GamePhase;
+
     }
 
     /**
@@ -49,10 +112,6 @@ public class GameEngine {
      * Responsible for transferring data from the view to models/child controllers.
      */
     public class CommandListener implements ActionListener {
-        private boolean d_MapDone = false;
-        private boolean d_StartUpDone = false;
-        private boolean d_AssignCountriesDone = false;
-
         /**
          * On click of the button in view, this method gets the string which user
          * entered.
@@ -75,178 +134,92 @@ public class GameEngine {
                 String l_CommandStringFromInput = d_CpView.getCommandInput().trim();
                 switch (l_CommandStringFromInput.split(" ")[0]) {
                     case "editcontinent":
-                        if (!d_MapDone) {
-                            try {
-                                String l_AckMsg = d_MapController.editMap("editcontinent", l_CommandStringFromInput);
-                                d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
-                            } catch (Exception p_Exception) {
-                                d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
-                                d_CpView.setCommandAcknowledgement("\n");
-                            }
-                        } else {
-                            d_CpView.setCommandAcknowledgement("Cannot Edit Map In This Phase.\n");
-                        }
+
+                        d_LEB.setResult(l_CommandStringFromInput);
+                        d_CpView.setCommandAcknowledgement(
+                                d_GamePhase.editContinent("editcontinent", l_CommandStringFromInput));
+
                         break;
 
-                    case "editcountry": {
-                        if (!d_MapDone) {
-                            try {
-                                String l_AckMsg = d_MapController.editMap("editcountry", l_CommandStringFromInput);
-                                d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
-                            } catch (Exception p_Exception) {
-                                d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
-                                d_CpView.setCommandAcknowledgement("\n");
-                            }
-                        } else {
-                            d_CpView.setCommandAcknowledgement("Cannot Edit Map In This Phase.\n");
-                        }
-                    }
+                    case "editcountry":
+
+                        d_LEB.setResult(l_CommandStringFromInput);
+                        d_CpView.setCommandAcknowledgement(
+                                d_GamePhase.editCountry("editcountry", l_CommandStringFromInput));
+
                         break;
 
-                    case "editneighbor": {
-                        if (!d_MapDone) {
-                            try {
-                                String l_AckMsg = d_MapController.editMap("editneighbor", l_CommandStringFromInput);
-                                d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
-                            } catch (Exception p_Exception) {
-                                d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
-                                d_CpView.setCommandAcknowledgement("\n");
-                            }
-                        } else {
-                            d_CpView.setCommandAcknowledgement("Cannot Edit Map In This Phase.\n");
-                        }
-                    }
+                    case "editneighbor":
+
+                        d_LEB.setResult(l_CommandStringFromInput);
+                        d_CpView.setCommandAcknowledgement(
+                                d_GamePhase.editCountry("editneighbor", l_CommandStringFromInput));
+
                         break;
 
-                    case "showmap": {
-                        showMap(d_MapDone);
-                    }
+                    case "showmap":
+
+                        d_LEB.setResult(l_CommandStringFromInput);
+                        d_GamePhase.showMap();
+
                         break;
 
-                    case "savemap": {
-                        if (!d_MapDone) {
-                            try {
-                                String l_Result = d_MapController.saveMap(l_CommandStringFromInput);
-                                d_CpView.setCommandAcknowledgement(l_Result + "\n");
-                            } catch (Exception p_Exception) {
-                                d_CpView.setCommandAcknowledgement(p_Exception.getMessage() + "\n");
-                            }
-                        } else {
-                            d_CpView.setCommandAcknowledgement("Cannot Save Map In This Phase.\n");
-                        }
-                    }
+                    case "savemap":
+
+                        d_LEB.setResult(l_CommandStringFromInput);
+                        d_CpView.setCommandAcknowledgement(d_GamePhase.saveMap(l_CommandStringFromInput));
+
                         break;
 
-                    case "editmap": {
-                        if (!d_MapDone) {
-                            try {
-                                String l_Result = d_MapController.loadMap(l_CommandStringFromInput);
-                                d_CpView.setCommandAcknowledgement(l_Result + "\n");
-                            } catch (FileNotFoundException p_Exception) {
-                                d_CpView.setCommandAcknowledgement(
-                                        "The Mapfile Doesnt Exist. Please Create A New Map" + "\n");
-                            }
-                        } else {
-                            d_CpView.setCommandAcknowledgement("Cannot Edit Another Map In This Phase.\n");
-                        }
-                    }
+                    case "editmap":
+
+                        d_LEB.setResult(l_CommandStringFromInput);
+                        d_CpView.setCommandAcknowledgement(d_GamePhase.editMap(l_CommandStringFromInput));
+
                         break;
 
-                    case "validatemap": {
-                        if (!d_MapDone) {
-                            try {
-                                d_CpView.setCommandAcknowledgement(d_MapController.validateMap());
-                            } catch (Exception p_Exception) {
-                                d_CpView.setCommandAcknowledgement(p_Exception.getMessage() + "\n");
-                            }
-                        } else {
-                            d_CpView.setCommandAcknowledgement("Cannot validate Map In This Phase.\n");
-                        }
-                    }
+                    case "validatemap":
+
+                        d_LEB.setResult(l_CommandStringFromInput);
+                        d_CpView.setCommandAcknowledgement(d_GamePhase.validateMap());
+
                         break;
 
-                    case "loadmap": {
-                        try {
-                            String l_Result = d_MapController.loadMap(l_CommandStringFromInput);
-                            this.d_MapDone = true;
-                            d_CpView.setCommandAcknowledgement(l_Result + "\n");
-                        } catch (Exception p_Exception) {
-                            d_CpView.setCommandAcknowledgement(p_Exception.getMessage() + "\n");
-                        }
-                    }
+                    case "loadmap":
+                        d_LEB.setResult(l_CommandStringFromInput);
+                        d_CpView.setCommandAcknowledgement(d_GamePhase.loadMap(l_CommandStringFromInput));
+
                         break;
 
-                    case "gameplayer": {
-                        if (d_MapDone & !d_StartUpDone) {
-                            try {
-                                String l_AckMsg1 = editPlayer("GamePlayer", l_CommandStringFromInput);
-                                d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
-                            } catch (Exception p_Exception) {
-                                d_CpView.setCommandAcknowledgement(p_Exception.getMessage() + "\n");
-                                d_CpView.setCommandAcknowledgement("\n");
-                            }
-                        } else {
-                            if (!d_MapDone)
-                                d_CpView.setCommandAcknowledgement(
-                                        "\n" + "The Map is Not Loaded Yet to Add Players " + "\n");
-                            if (d_StartUpDone)
-                                d_CpView.setCommandAcknowledgement("\n"
-                                        + "You are trying to remove or add players after the startup phase" + "\n");
-                        }
-                    }
+                    case "gameplayer":
+                        d_LEB.setResult(l_CommandStringFromInput);
+                        d_CpView.setCommandAcknowledgement(
+                                d_GamePhase.addPlayers("GamePlayer", l_CommandStringFromInput));
+
                         break;
 
-                    case "assigncountries": {
-                        if (d_MapDone & !d_AssignCountriesDone) {
-                            try {
-                                assignCountries();
-                            } catch (Exception p_Exception) {
-                                d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
-                                d_CpView.setCommandAcknowledgement("\n");
-                                break;
-                            }
-                            d_AssignCountriesDone = true;
-                            d_StartUpDone = true;
-                            showAllPlayerWithArmies();
-                            d_CpView.setCommandAcknowledgement("\n");
-                            d_PlayerController = new PlayerController(d_GameModel, d_CpView);
-                            d_PlayerController.playerIssueOrder();
-                            d_PlayerController.playerNextOrder();
-                        } else {
-                            if (!d_MapDone)
-                                d_CpView.setCommandAcknowledgement(
-                                        "\n" + "The Map is Not Loaded Yet to Add Assign Countries " + "\n");
-                            if (d_AssignCountriesDone)
-                                d_CpView.setCommandAcknowledgement("\n" + "StartUp Phase is already completed " + "\n");
-                        }
-                    }
-                        break;
-                    case "deploy":
-                        break;
+                    case "assigncountries":
+                        d_LEB.setResult(l_CommandStringFromInput);
+                        d_GamePhase.assignCountries();
 
-                    case "show":
-                        if (d_MapDone) {
-                            showAllPlayerWithArmies();
-                            d_CpView.setCommandAcknowledgement("\n");
-                        } else {
-                            d_CpView.setCommandAcknowledgement(
-                                    "The Map is not loaded yet to perform show operation" + "\n");
-                        }
                         break;
 
                     case "reset":
+                        d_LEB.setResult(l_CommandStringFromInput);
                         d_MapController.reset();
-                        d_CpView.setCommandAcknowledgement("The Map is Reset." + "\n");
+                        d_CpView.setCommandAcknowledgement("The Map is Reset" + "\n");
                         break;
 
                     default:
-                        d_CpView.setCommandAcknowledgement("Invalid Command. Please Re-try .\n");
+                        d_LEB.setResult(l_CommandStringFromInput);
+                        d_CpView.setCommandAcknowledgement("Invalid Command. Please try again.\n");
+                        d_LEB.setResult("Invalid Command. Please try again.\n");
                         break;
                 }
                 d_CpView.setCommandInput("");
             } catch (Exception p_Exception) {
                 System.out
-                        .println("Exception in ActionPerformed Method in ActionListener: " + p_Exception.getMessage());
+                        .println("Exception in ActionPerformed Method in ActionListener : " + p_Exception.getMessage());
             }
         }
     }
