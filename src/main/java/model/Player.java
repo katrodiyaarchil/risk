@@ -313,7 +313,7 @@ public class Player {
 					break;
 				}
 				int l_NumArmies = Integer.parseInt(l_StringList[2]);
-				for (Country l_TempCountry : d_GameModelNew.getSelectedMap().getCountryList()) {
+				for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
 					if (l_TempCountry.getCountryName().equals(l_StringList[1])) {
 						d_Order.add(new Deploy(this, l_TempCountry, l_NumArmies));
 						break;
@@ -327,13 +327,13 @@ public class Player {
 				}
 				int l_NumArmies1 = Integer.parseInt(l_StringList[3]);
 				Country l_SourceCountry = null, l_TargetCountry = null;
-				for (Country l_TempCountry : d_GameModelNew.getSelectedMap().getCountryList()) {
+				for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
 					if (l_TempCountry.getCountryName().equals(l_StringList[1])) {
 						l_SourceCountry = l_TempCountry;
 						break;
 					}
 				}
-				for (Country l_TempCountry : d_GameModelNew.getSelectedMap().getCountryList()) {
+				for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
 					if (l_TempCountry.getCountryName().equals(l_StringList[2])) {
 						l_TargetCountry = l_TempCountry;
 						break;
@@ -346,7 +346,7 @@ public class Player {
 					System.out.println("Please enter valid number of parameters");
 					break;
 				}
-				for (Country l_TempCountry : d_GameModelNew.getSelectedMap().getCountryList()) {
+				for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
 					if (l_TempCountry.getCountryName().equals(l_StringList[1])) {
 						d_Order.add(new Bomb(this, l_TempCountry));
 						break;
@@ -358,7 +358,7 @@ public class Player {
 					System.out.println("Please enter valid number of parameters");
 					break;
 				}
-				for (Country l_TempCountry : d_GameModelNew.getSelectedMap().getCountryList()) {
+				for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
 					if (l_TempCountry.getCountryName().equals(l_StringList[1])) {
 						d_Order.add(new Blockade(this, l_TempCountry));
 						break;
@@ -373,13 +373,13 @@ public class Player {
 				int l_NumArmies2 = Integer.parseInt(l_StringList[3]);
 				Country l_SourceCountry1 = null, l_TargetCountry1 = null;
 
-				for (Country l_TempCountry : d_GameModelNew.getSelectedMap().getCountryList()) {
+				for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
 					if (l_TempCountry.getCountryName().equals(l_StringList[1])) {
 						l_SourceCountry1 = l_TempCountry;
 						break;
 					}
 				}
-				for (Country l_TempCountry : d_GameModelNew.getSelectedMap().getCountryList()) {
+				for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
 					if (l_TempCountry.getCountryName().equals(l_StringList[2])) {
 						l_TargetCountry1 = l_TempCountry;
 						break;
@@ -392,7 +392,7 @@ public class Player {
 					System.out.println("Please enter valid number of parameters");
 					break;
 				}
-				for (Player l_TempPlayer : d_GameModelNew.getAllPlayers()) {
+				for (Player l_TempPlayer : d_GameModel.getAllPlayers()) {
 					if (l_TempPlayer.getPlayerName().equals(l_StringList[1])) {
 						d_Order.add(new Negotiate(this, l_TempPlayer));
 						break;
