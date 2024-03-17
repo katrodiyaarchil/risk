@@ -225,45 +225,6 @@ public class GameEngine {
     }
 
     /**
-     * this Method will take inputs from the user and will add or remove player
-     * according to the inputs provided by the user
-     * 
-     * @param p_Command The command.
-     * @param p_Str     The string.
-     * @return A string indicating the number of players added and removed.
-     * @throws Exception if an error occurs.
-     */
-    public String editPlayer(String p_Command, String p_Str) throws Exception {
-        String[] l_CommandArray = p_Str.split(" ");
-        int l_Counter = 1;
-        int l_AddCounter = 0;
-        int l_RemoveCounter = 0;
-        String l_ReturnString = "";
-        if (l_CommandArray.length < 3)
-            throw new Exception("Please provide valid Parameters to add player");
-        while (l_Counter < l_CommandArray.length) {
-            if (l_CommandArray[l_Counter].equals("-add")) {
-                d_GameModel.addPlayer(l_CommandArray[l_Counter + 1]);
-                l_Counter += 2;
-                l_AddCounter += 1;
-            } else if (l_CommandArray[l_Counter].equals("-remove")) {
-                d_GameModel.removePlayer(l_CommandArray[l_Counter + 1]);
-                l_Counter += 2;
-                l_RemoveCounter += 1;
-            } else {
-                break;
-            }
-        }
-        if (l_AddCounter > 0) {
-            l_ReturnString += "Number of Players Added : " + l_AddCounter + "\n";
-        }
-        if (l_RemoveCounter > 0) {
-            l_ReturnString += "Number of Players Removed : " + l_RemoveCounter + "\n";
-        }
-        return l_ReturnString;
-    }
-
-    /**
      * This Method will take assign countries from command prompt and will do
      * startup Phase as well as assigning reinforcements to the player.
      * 
@@ -276,18 +237,37 @@ public class GameEngine {
     }
 
     /**
-     * Shows all players with their assigned armies.
+     * This is a method to show all player details like PlayerNames,armies,Countries
+     * owned
+     * 
      */
     public void showAllPlayerWithArmies() {
-        d_PlayerList = d_GameModel.getAllPlayers();
+        d_LEB.setResult(
+                ":::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::");
+        d_PlayerList = d_GameModelNew.getAllPlayers();
         for (Player l_Player : d_PlayerList) {
+            d_LEB.setResult("\n" + l_Player.getPlayerName() + "-->" + "armies assigned:" + l_Player.getPlayerArmies());
             d_CpView.setCommandAcknowledgement(
-                    "\n" + l_Player.getPlayerName() + "--> " + "armies assigned: " + l_Player.getPlayerArmies());
+                    "\n" + l_Player.getPlayerName() + "-->" + "armies assigned:" + l_Player.getPlayerArmies());
+            d_LEB.setResult("\n" + "Countries Assigned: ");
             d_CpView.setCommandAcknowledgement("\n" + "Countries Assigned: ");
+
             for (Country l_Country : l_Player.getCountryList()) {
+                d_LEB.setResult(l_Country.getCountryName() + ",");
                 d_CpView.setCommandAcknowledgement(l_Country.getCountryName() + ",");
             }
+            if (l_Player.getCardList().size() > 0) {
+                d_LEB.setResult("\n" + "Cards Assigned: ");
+                d_CpView.setCommandAcknowledgement("\n" + "Cards Assigned: ");
+                ArrayList<String> l_CardList = l_Player.getCardList();
+                for (String l_Str : l_CardList) {
+                    d_LEB.setResult(l_Str + ",");
+                    d_CpView.setCommandAcknowledgement(l_Str + ",");
+                }
+            }
         }
+        d_LEB.setResult(
+                ":::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::");
     }
 
     /**
