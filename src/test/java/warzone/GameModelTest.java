@@ -68,7 +68,7 @@ public class GameModelTest {
      */
     @Test
     public void testAddPlayerAlreadyExist() {
-        String l_ExpectedMessage = "Please enter a differnt Player name as this name already exists";
+        String l_ExpectedMessage = "Player name already exists.\nPlease add another name.";
         String l_OutputMessage = "";
         try {
             d_Game.addPlayer("Lee");
@@ -83,7 +83,7 @@ public class GameModelTest {
      */
     @Test
     public void testAddPlayerReachedMax() {
-        String l_ExpectedMessage = "Reached Max Number of Players can be added to the game";
+        String l_ExpectedMessage = "Reached Max Number of Players.";
         String l_OutputMessage = "";
         try {
             d_Game.addPlayer("Eliot");
@@ -117,7 +117,7 @@ public class GameModelTest {
      */
     @Test
     public void testRemovePlayerNotExists() {
-        String l_ExpectedMessage = "This Player does not exists";
+        String l_ExpectedMessage = "This Player does not exist";
         String l_OutputMessage = "";
         try {
             d_Game.removePlayer("jane");
