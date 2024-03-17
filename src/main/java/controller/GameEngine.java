@@ -280,64 +280,81 @@ public class GameEngine {
      * player, thier ownership and their number of armies.</li>
      * </ul>
      * 
-     * @param p_BooleanForGamePhaseStarted takes boolean value to show map for map
-     *                                     phase or game phase
+     * @param p_GamePhase takes the phase object and shows the map accordingly
      */
-    public void showMap(Boolean p_BooleanForGamePhaseStarted) {
-        if (p_BooleanForGamePhaseStarted) {
-            d_PlayerList = d_GameModel.getAllPlayers();
-            ArrayList<Continent> l_ContinentList = d_GameModel.getMap().getContinentList();
-            if (!l_ContinentList.isEmpty()) {
+    public void showMap(Phase p_GamePhase) {
+        if (!p_GamePhase.getClass().getSimpleName().equals("Edit")) {
+            d_LEB.setResult(":::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::");
+            d_PlayerList = d_GameModelNew.getAllPlayers();
+            ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
+            if (l_ContinentList.size() > 0) {
+                d_LEB.setResult("\n");
                 d_CpView.setCommandAcknowledgement("\n");
                 for (Continent l_Continent : l_ContinentList) {
+                    d_LEB.setResult("Continent: " + l_Continent.getContinentName() + "\n");
                     d_CpView.setCommandAcknowledgement("Continent: " + l_Continent.getContinentName() + "\n");
                     ArrayList<Country> l_CountryList = l_Continent.getCountryList();
+                    d_LEB.setResult("\n");
                     d_CpView.setCommandAcknowledgement("\n");
                     for (Country l_Country : l_CountryList) {
+                        d_LEB.setResult("Country: " + l_Country.getCountryName());
                         d_CpView.setCommandAcknowledgement("Country: " + l_Country.getCountryName());
-                        if (this.d_PlayerList != null) {
-                            for (Player l_Player : d_PlayerList) {
-                                if (l_Player.getCountryList().contains(l_Country)) {
-                                    d_CpView.setCommandAcknowledgement("\n" + "-->Owner: " + l_Player.getPlayerName());
-                                    d_CpView.setCommandAcknowledgement(
-                                            "\n" + "-->Armies deployed: " + l_Country.getNoOfArmies());
-                                }
-                            }
+
+                        if (l_Country.getCountryOwnerPlayer() != null) {
+                            d_LEB.setResult("-->Owner: " + l_Country.getCountryOwnerPlayer().getPlayerName());
+                            d_CpView.setCommandAcknowledgement(
+                                    "-->Owner: " + l_Country.getCountryOwnerPlayer().getPlayerName());
+                            d_LEB.setResult("-->Armies deployed: " + l_Country.getNoOfArmies());
+                            d_CpView.setCommandAcknowledgement("-->Armies deployed: " + l_Country.getNoOfArmies());
                         }
+
                         ArrayList<String> l_NeighborList = l_Country.getBorder();
-                        if (!l_NeighborList.isEmpty()) {
+                        if (l_NeighborList.size() > 0) {
+                            d_LEB.setResult("\n" + "--> Borders : ");
                             d_CpView.setCommandAcknowledgement("\n" + "--> Borders : ");
                             for (String l_Str : l_NeighborList) {
+                                d_LEB.setResult(l_Str + ",");
                                 d_CpView.setCommandAcknowledgement(l_Str + ",");
                             }
                         }
+                        d_LEB.setResult("\n");
                         d_CpView.setCommandAcknowledgement("\n");
                     }
+                    d_LEB.setResult("\n");
                     d_CpView.setCommandAcknowledgement("\n");
                 }
             }
         } else {
-            ArrayList<Continent> l_ContinentList = d_GameModel.getMap().getContinentList();
-            if (!l_ContinentList.isEmpty()) {
+            ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
+            if (l_ContinentList.size() > 0) {
+                d_LEB.setResult("\n");
                 d_CpView.setCommandAcknowledgement("\n");
                 for (Continent l_Continent : l_ContinentList) {
+                    d_LEB.setResult("Continent: " + l_Continent.getContinentName() + "\n");
                     d_CpView.setCommandAcknowledgement("Continent: " + l_Continent.getContinentName() + "\n");
                     ArrayList<Country> l_CountryList = l_Continent.getCountryList();
+                    d_LEB.setResult("Countries:" + "\n");
                     d_CpView.setCommandAcknowledgement("Countries:" + "\n");
                     for (Country l_Country : l_CountryList) {
+                        d_LEB.setResult(l_Country.getCountryName());
                         d_CpView.setCommandAcknowledgement(l_Country.getCountryName());
                         ArrayList<String> l_NeighborList = l_Country.getBorder();
-                        if (!l_NeighborList.isEmpty()) {
+                        if (l_NeighborList.size() > 0) {
+                            d_LEB.setResult("--> Borders : ");
                             d_CpView.setCommandAcknowledgement("--> Borders : ");
                             for (String l_Str : l_NeighborList) {
+                                d_LEB.setResult(l_Str + " ");
                                 d_CpView.setCommandAcknowledgement(l_Str + " ");
                             }
                         }
+                        d_LEB.setResult("\n");
                         d_CpView.setCommandAcknowledgement("\n");
                     }
+                    d_LEB.setResult("\n");
                     d_CpView.setCommandAcknowledgement("\n");
                 }
             }
         }
+        d_LEB.setResult(":::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::");
     }
 }
