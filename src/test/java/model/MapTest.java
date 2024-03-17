@@ -1,20 +1,15 @@
-package warzone;
+package model;
 
 import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-
-import model.Continent;
-import model.Country;
-import model.Map;
 
 /**
  * To test the methods of Map.java
  */
 public class MapTest {
-    Continent d_C1, d_C2;
+    Continent d_C0,d_C1;
     Country d_Country1,d_Country2,d_Country3,d_Country4,d_Country5;
     ArrayList<Country> d_Check;
     ArrayList<Continent> d_CheckContinent;
@@ -26,8 +21,8 @@ public class MapTest {
      */
     @Before
     public void setTestContext() throws Exception {
-        d_C1 = new Continent("asia",0);
-        d_C2 =  new Continent("africa",0);
+        d_C0 = new Continent("asia",0);
+        d_C1 =  new Continent("africa",0);
         d_Country1 = new Country("india","asia");
         d_Country2 = new Country("china","asia");
         d_Country3 = new Country("japan","asia");
@@ -36,15 +31,15 @@ public class MapTest {
         d_Check =  new ArrayList<Country>();
         d_CheckContinent = new ArrayList<Continent>();
         d_Map = new Map();
+        d_CheckContinent.add(d_C0);
         d_CheckContinent.add(d_C1);
-        d_CheckContinent.add(d_C2);
         d_Check.add(d_Country1);
         d_Check.add(d_Country2);
         d_Check.add(d_Country3);
         d_Check.add(d_Country4);
         d_Check.add(d_Country5);
+        d_Map.addContinent(d_C0.getContinentName(), "1");
         d_Map.addContinent(d_C1.getContinentName(), "1");
-        d_Map.addContinent(d_C2.getContinentName(), "1");
         d_Map.addCountry("india","asia");
         d_Map.addCountry("china","asia");
         d_Map.addCountry("japan","asia");
@@ -57,7 +52,8 @@ public class MapTest {
     }
 
     /**
-     * This case checks the functionality of addCountry()
+     * This test checks the functionality of addCountry()
+     *
      */
     @Test
     public void testAddCountry() {
@@ -65,7 +61,7 @@ public class MapTest {
     }
 
     /**
-     * This case checks the functionality of addCountry() to see if it adds a country to the continent that does not exists
+     * This test checks the functionality of addCountry() to see if it adds a country to the continent that does not exists
      */
     @Test
     public void testAddCountryContinentNotExists() {
@@ -80,23 +76,22 @@ public class MapTest {
     }
 
     /**
-     * This case checks the functionality of addCountry() to see if it catches exception thrown
-     * if the country already exists
+     * This test checks the functionality of addCountry() to see if it catches exception thrown for country already exists
      */
     @Test
     public void testAddCountryCountryExists() {
         String l_ExpectedMessage = "Country Already Exist";
-        String l_OutputMessage = "";
+        String l_ActualMessage = "";
         try {
             d_Map.addCountry("egypt", "africa");
         } catch (Exception p_Exception) {
-            l_OutputMessage = p_Exception.getMessage();
+            l_ActualMessage = p_Exception.getMessage();
         }
-        assertEquals(l_ExpectedMessage, l_OutputMessage);
+        assertEquals(l_ExpectedMessage, l_ActualMessage);
     }
 
     /**
-     * This case checks the functionality of removeCountry()
+     * This test checks the functionality of removeCountry()
      * @throws Exception If country does not exists
      */
     @Test
@@ -106,23 +101,22 @@ public class MapTest {
     }
 
     /**
-     * This test checks the functionality of removeCountry() to see if the exception is thrown
-     * for country does not exists
+     * This test checks the functionality of removeCountry() to see if the exception is thrown for country does not exists
      */
     @Test
     public void testRemoveCountryThatDoesNotExists() {
         String l_ExpectedMessage = "Country does not exist !!";
-        String l_OutputMessage = "";
+        String l_ActualMessage = "";
         try {
             d_Map.removeCountry("congo", true);
         }  catch (Exception p_Exception) {
-            l_OutputMessage = p_Exception.getMessage();
+            l_ActualMessage = p_Exception.getMessage();
         }
-        assertEquals(l_ExpectedMessage, l_OutputMessage);
+        assertEquals(l_ExpectedMessage, l_ActualMessage);
     }
 
     /**
-     * This case checks the functionality of addBorder()
+     * This test checks the functionality of addBorder()
      */
     @Test
     public void testAddBorder() {
@@ -141,57 +135,54 @@ public class MapTest {
     }
 
     /**
-     * Test addBorder() to check if exception is thrown and caught
-     * for adding a neighbouring country that does not exist
+     * To test addBorder() to check if exception is thrown and caught on adding neighbouring country that does not exists
      */
     @Test
     public void testAddBorderNeighborDoesNotExist() {
         String l_ExpectedMessage = "Neighbour Country does not exists!";
-        String l_OutputMessage = "";
+        String l_ActualMessage = "";
         try {
             d_Map.addBorder("india", "congo");
         } catch (Exception p_Exception) {
-            l_OutputMessage = p_Exception.getMessage();
+            l_ActualMessage = p_Exception.getMessage();
         }
 
-        assertEquals(l_ExpectedMessage, l_OutputMessage);
+        assertEquals(l_ExpectedMessage, l_ActualMessage);
     }
 
     /**
-     * Test addBorder() to check if exception is thrown and caught
-     * for adding a country that does not exist
+     * To test addBorder() to check if exception is thrown and caught on adding country that does not exists
      */
     @Test
     public void testAddBorderCountryDoesNotExist() {
         String l_ExpectedMessage = "Country does not exists!";
-        String l_OutputMessage = "";
+        String l_ActualMessage = "";
         try {
             d_Map.addBorder("congo", "india");
         } catch (Exception p_Exception) {
-            l_OutputMessage = p_Exception.getMessage();
+            l_ActualMessage = p_Exception.getMessage();
         }
-        assertEquals(l_ExpectedMessage, l_OutputMessage);
+        assertEquals(l_ExpectedMessage, l_ActualMessage);
     }
 
     /**
-     * Test addBorder() to check if exception is thrown and caught
-     * for adding existed border
+     * To test addBorder() to check if exception is thrown and caught on adding border that already exists
      */
     @Test
     public void testAddBorderNeighborExist() {
         String l_ExpectedMessage = "Neighbor Already Exist";
-        String l_OutputMessage = "";
+        String l_ActualMessage = "";
         try {
             d_Map.addBorder("japan", "china");
         } catch (Exception p_Exception) {
-            l_OutputMessage = p_Exception.getMessage();
+            l_ActualMessage = p_Exception.getMessage();
         }
-        assertEquals(l_ExpectedMessage, l_OutputMessage);
+        assertEquals(l_ExpectedMessage, l_ActualMessage);
     }
 
     /**
-     * Test the functionality of removeBorder()
-     * @throws Exception If border or Country does not exist
+     * to test the functionality of removeBorder()
+     * @throws Exception If border does not exists, or country does not exists
      */
     @Test
     public void testRemoveBorder() throws Exception {
@@ -205,45 +196,43 @@ public class MapTest {
     }
 
     /**
-     * Test removeBorder() to check if exception is thrown and caught
-     * for adding country that does not exist
+     * To test removeBorder() to check if exception is thrown and caught on adding country that does not exists
      */
     @Test
     public void testRemoveBorderCountryDoesNotExist() {
         String l_ExpectedMessage = "Country does not exists!";
-        String l_OutputMessage = "";
+        String l_ActualMessage = "";
         try {
             d_Map.removeBorder("congo", "india");
         } catch (Exception p_Exception) {
-            l_OutputMessage = p_Exception.getMessage();
+            l_ActualMessage = p_Exception.getMessage();
         }
 
-        assertEquals(l_ExpectedMessage, l_OutputMessage);
+        assertEquals(l_ExpectedMessage, l_ActualMessage);
     }
 
     /**
-     * Test removeBorder() to check if exception is thrown and caught
-     * for adding neighboring country that does not exist
+     * To test removeBorder() to check if exception is thrown and caught on adding neighboring country that does not exists
      */
     @Test
     public void testRemoveBorderNeighborDoesNotExist() {
         String l_ExpectedMessage = "Neighbour Country does not exists!";
-        String l_OutputMessage = "";
+        String l_ActualMessage = "";
         try {
             d_Map.removeBorder("india", "congo");
         } catch (Exception p_Exception) {
-            l_OutputMessage = p_Exception.getMessage();
+            l_ActualMessage = p_Exception.getMessage();
         }
-        assertEquals(l_ExpectedMessage, l_OutputMessage);
+        assertEquals(l_ExpectedMessage, l_ActualMessage);
     }
 
     /**
-     * To d_Check the functionality of addContinent()
+     * To d_Check the functionality of addContinent
      *
      */
     @Test
     public void testAddContinent() {
-        assertTrue(d_Map.getContinentList().contains(d_C1));
+        assertTrue(d_Map.getContinentList().contains(d_C0));
     }
 
     /**
@@ -251,49 +240,49 @@ public class MapTest {
      */
     @Test
     public void testAddContinentContinentControlValue() {
-        String l_ExpectedMessage = "Continent control must be a positive integer";
-        String l_OutputMessage = "";
+        String l_ExpectedMessage = "Continent control value cannot be 0";
+        String l_ActualMessage = "";
         try {
             d_Map.addContinent("europe", "0");
         } catch (Exception p_Exception) {
-            l_OutputMessage = p_Exception.getMessage();
+            l_ActualMessage = p_Exception.getMessage();
         }
-        assertEquals(l_ExpectedMessage,l_OutputMessage);
+        assertEquals(l_ExpectedMessage,l_ActualMessage);
     }
 
     /**
-     * To test addContinent() and d_Check if the Continent already exists or not
+     * To test addContinent() and d_Check if the Continent already Exists or not
      */
     @Test
     public void testAddContinentContinentExists() {
         String l_ExpectedMessage = "Continent Already Exists";
-        String l_OutputMessage = "";
+        String l_ActualMessage = "";
         try {
             d_Map.addContinent("asia", "1");
         } catch (Exception p_Exception) {
-            l_OutputMessage = p_Exception.getMessage();
+            l_ActualMessage = p_Exception.getMessage();
         }
-        assertEquals(l_ExpectedMessage,l_OutputMessage);
+        assertEquals(l_ExpectedMessage,l_ActualMessage);
     }
 
     /**
-     * Test removeContinent()
+     * To test removeContinent() for its functionality
      */
     @Test
     public void testRemoveContinent(){
         String l_ExpectedMessage = "Continent does not exist !!";
-        String l_OutputMessage = "";
+        String l_ActualMessage = "";
         try {
-            d_Map.removeContinent(d_C1.getContinentName());
-            d_Map.removeContinent(d_C1.getContinentName());
+            d_Map.removeContinent(d_C0.getContinentName());
+            d_Map.removeContinent(d_C0.getContinentName());
         } catch (Exception p_Exception) {
-            l_OutputMessage = p_Exception.getMessage();
+            l_ActualMessage = p_Exception.getMessage();
         }
-        assertEquals(l_ExpectedMessage,l_OutputMessage);
+        assertEquals(l_ExpectedMessage,l_ActualMessage);
     }
 
     /**
-     * Test Continent and check if country already exits or not
+     * To test Continent and check if country already exits or not
      */
     @Test
     public void testContinentForCountryExists() {
@@ -309,26 +298,26 @@ public class MapTest {
     }
 
     /**
-     * Test functionality removeCountry() from the continent
+     * To test functionality removeCountry() from the continent
      */
     @Test
     public void testRemoveCountryFromContinent() {
-        d_Map.removeCountryFromContinent(d_Country1.getCountryName(), d_C1.getCountryList());
-        assertFalse(d_C1.getCountryList().contains(d_Country1));
+        d_Map.removeCountryFromContinent(d_Country1.getCountryName(), d_C0.getCountryList());
+        assertFalse(d_C0.getCountryList().contains(d_Country1));
     }
 
     /**
-     * Test removeAllCountryFromContinent() in Map.java
+     * To test removeAllCountryFromContinent() method of Map.java
      */
     @Test
     public void testRemoveAllCountryFromContinent() {
         try {
-            d_Map.removeAllCountryInContinent(d_C2);
+            d_Map.removeAllCountryInContinent(d_C1);
         } catch (Exception p_Exception) {
             p_Exception.printStackTrace();
         }
         int l_Flag=0;
-        for(Country l_Country : d_C2.getCountryList()) {
+        for(Country l_Country : d_C1.getCountryList()) {
             if(d_Map.getCountryList().contains(l_Country)) {
                 l_Flag =1;break;
             }
@@ -336,6 +325,51 @@ public class MapTest {
         assertEquals(0,l_Flag);
     }
 
+    /**
+     * To test the Validation of Map and Check whether it is a connected graph or not
+     * @throws Exception for Add borders and if continent is not a connected subgraph
+     */
+    @Test
+    public void testValidateMap() throws Exception {
+        String l_Actual="", l_Expected="Map is Valid";
+        d_Map.addBorder("india", "kenya");
+        d_Map.addBorder("kenya", "egypt");
+        d_Map.addBorder("india", "japan");
+        l_Actual = d_Map.validateMap();
+        assertEquals(l_Expected,l_Actual);
+    }
 
 
+    /**
+     * To test the Validation of Map and Check whether it is not a connected graph (Here continent is a connnected subgraph but the two continents are not)
+     * @throws Exception for Add borders and if continent is not a connected subgraph
+     */
+    @Test
+    public void testValidateMapFalse() throws Exception {
+        String l_Actual="", l_Expected="Map is not Valid";
+        d_Map.addBorder("kenya", "egypt");
+        d_Map.addBorder("india", "japan");
+        l_Actual = d_Map.validateMap();
+        assertEquals(l_Expected,l_Actual);
+    }
+
+
+    /**
+     * To test the Validation of Map and Check whether continent is a connected subgraph or not
+     * @throws Exception for Add borders and if continent is not a connected subgraph
+     */
+    @Test
+    public void testValidateMapForContinents() throws Exception {
+        String l_Result="", l_ResultExpected = "";
+        String  l_Actual="", l_Expected="The countries inside asia are not internally Connected";
+        d_Map.addBorder("india", "kenya");
+        d_Map.addBorder("kenya", "egypt");
+        try {
+            l_Result = d_Map.validateMap();
+        } catch (Exception p_Exception) {
+            l_Actual = p_Exception.getMessage();
+        }
+        assertEquals(l_Expected,l_Actual);
+        assertEquals(l_ResultExpected,l_Result);
+    }
 }
