@@ -38,6 +38,7 @@ public class PlayerController {
 	 * Constructor of Player controller
 	 * 
 	 * @param p_GameModel object of Game model class
+	 * @param p_Players      list of players
 	 * @param p_CpView  object of command prompt for communicating with player
 	 */
 	PlayerController(GameModel p_GameModel, CommandPrompt p_CpView) {
@@ -92,12 +93,60 @@ public class PlayerController {
 		}
 	}
 
-    /**
+	/**
+	 * <p>
+	 * this Method will take inputs from the user and will add or remove player
+	 * according
+	 * to the inputs provided by the user
+	 * 
+	 * @param p_Command this is command entered by the player
+	 * @param p_Str     this is name entered by the player in the command prompt
+	 * @return l_ReturnString returns string acknowledgement based on the added or
+	 *         removed players
+	 * @throws Exception this is user defined exception based on the add player or
+	 *                   remove player method
+	 */
+	public String editPlayer(String p_Command, String p_Str) throws Exception {
+		String[] l_CommandArray = p_Str.split(" ");
+		int l_Counter = 1;
+		int l_AddCounter = 0;
+		int l_RemoveCounter = 0;
+		String l_ReturnString = "";
+		if (l_CommandArray.length < 3)
+			throw new Exception("Please provide valid Parameters to add player");
+		while (l_Counter < l_CommandArray.length) {
+			if (l_CommandArray[l_Counter].equals("-add")) {
+				d_GameModel.addPlayer(l_CommandArray[l_Counter + 1]);
+				l_Counter += 2;
+				l_AddCounter += 1;
+			} else if (l_CommandArray[l_Counter].equals("-remove")) {
+				d_GameModel.removePlayer(l_CommandArray[l_Counter + 1]);
+
+				l_Counter += 2;
+				l_RemoveCounter += 1;
+			} else {
+				break;
+			}
+		}
+		if (l_AddCounter > 0) {
+			l_ReturnString += "Number of Players Added : " + l_AddCounter + "\n";
+		}
+		if (l_RemoveCounter > 0) {
+			l_ReturnString += "Number of Players Removed : " + l_RemoveCounter + "\n";
+		}
+		return l_ReturnString;
+	}
+
+
+	/**
 	 * This method iterates till the player list doesn't becomes empty. This means
 	 * all the orders of all the players are executed.
 	 * It works in a round robin fashion. All the players execute there orders one
 	 * by one.
 	 * The player who's all orders are executed is removed from the list.
+	 * The player who has won a battle in this round is assigned a card.
+	 * All the players' negotiated players list is made empty.
+	 * At the end of this round, we check if a player is declared as a winner.
 	 */
 	public void playerNextOrder() {
 		ArrayList<Player> l_Players = d_Players;
@@ -165,7 +214,21 @@ public class PlayerController {
 				}
 			}
 		}
-}
+		// Assigning cards to players that have won a battle in this round.
+		for (Player l_TempPlayer : d_Players) {
+			if (l_TempPlayer.getAtleastOneBattleWon()) {
+				int l_cardInteger = d_Rand.nextInt(4);
+				l_TempPlayer.setCard(d_AllCards.get(l_cardInteger));
+				l_TempPlayer.setAtleastOneBattleWon(false);
+			}
+		}
+		d_CpView.setCommandAcknowledgement("\nOrders are Succesfully Executed!!");
+		d_LEB.setResult("\nOrders are Succesfully Executed!!");
+		clearNegotiatedPlayerList();
+		removePlayerWithNoCountry();
+		checkTheWinner();
+
+	}
 /**
  * This method is used to remove the player with no countries on its name.
 */
@@ -197,7 +260,7 @@ public void clearNegotiatedPlayerList() {
 	 * and hence can be declared as the winner of the game.
 	 */
 	public void checkTheWinner() {
-		ArrayList<Country> l_CountryList = d_GameModelNew.getMap().getCountryList();
+		ArrayList<Country> l_CountryList = d_GameModel.getMap().getCountryList();
 		Iterator<Country> itr = l_CountryList.iterator();
 		Player l_CheckPlayer = (Player) ((Country) itr.next()).getCountryOwnerPlayer();
 		int l_flag = 0;
