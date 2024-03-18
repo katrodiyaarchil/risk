@@ -104,7 +104,6 @@ public class Player {
 	 */
 	public void setPlayerArmies(int p_Armies) {
 		this.d_Armies = p_Armies;
-		this.d_TempArmies = p_Armies;
 	}
 
 	/**
