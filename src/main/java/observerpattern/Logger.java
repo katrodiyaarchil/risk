@@ -2,9 +2,18 @@ package observerpattern;
 
 import java.io.*;
 
+/**
+ * This is a concrete class which implements observer interface.
+ * Object of this class is attached with the Observable LogEntryBuffer.
+ * On any change, the object of this class will be notified.
+ */
 public class Logger implements Observer {
     private static int d_count = 0;
 
+    /**
+     * This method will internally update the Log file on each notification from
+     * observable.
+     */
     @Override
     public void update(Observable p_observable){
         String l_update = ((LogEntryBuffer) p_observable).getResult();
