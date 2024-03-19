@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import controller.GameEngine;
-import model.GameModelNew;
+import model.GameModel;
 import view.CommandPrompt;
 
 /**
@@ -13,7 +13,7 @@ import view.CommandPrompt;
  */
 public class EditTest {
     CommandPrompt d_CpView;
-    GameModelNew d_GameModel;
+    GameModel d_GameModel;
     GameEngine d_Ge;
     Edit d_Ed;
     Phase d_P;
@@ -26,7 +26,7 @@ public class EditTest {
     @Before
     public void setTestContext() throws Exception {
         d_CpView = new CommandPrompt();
-        d_GameModel = new GameModelNew();
+        d_GameModel = new GameModel();
         d_Ge = new GameEngine(d_CpView, d_GameModel);
         d_Ed = new Edit(d_Ge, d_CpView);
 
@@ -39,7 +39,7 @@ public class EditTest {
     public void testLoadMap() {
         String l_ExpectedMessage = "Startup";
         String l_ActualMessage = "";
-        d_Ed.loadMap("map5");
+        d_Ed.loadMap("map2");
         d_P = d_Ge.getPhase();
         l_ActualMessage = d_P.getPhaseName();
         assertEquals(l_ExpectedMessage, l_ActualMessage);
@@ -50,7 +50,7 @@ public class EditTest {
      */
     @Test
     public void testIncorrectLoadMap() {
-        String l_ExpectedMessage = "resource/incorrectmap (No such file or directory)";
+        String l_ExpectedMessage = "resource\\incorrectmap (The system cannot find the file specified)";
         String l_ActualMessage = "";
         l_ActualMessage = d_Ed.loadMap("loadmap incorrectmap");
 

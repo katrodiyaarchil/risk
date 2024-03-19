@@ -7,7 +7,7 @@ import org.junit.Test;
 import controller.GameEngine;
 import model.Continent;
 import model.Country;
-import model.GameModelNew;
+import model.GameModel;
 import model.Map;
 import model.Player;
 import view.CommandPrompt;
@@ -17,7 +17,7 @@ import view.CommandPrompt;
  */
 public class BlockadeTest {
     CommandPrompt d_CpView;
-    GameModelNew d_GameModel;
+    GameModel d_GameModel;
     GameEngine d_Ge;
     Continent d_C0, d_C1;
     Country d_Country1, d_Country2, d_Country3, d_Country4, d_Country5;
@@ -63,7 +63,7 @@ public class BlockadeTest {
         d_Map.addBorder("india", "japan");
         d_Map.addBorder("kenya", "india");
         d_Map.addBorder("japan", "india");
-        d_GameModel = new GameModelNew(d_Map);
+        d_GameModel = new GameModel(d_Map);
         d_Ge = new GameEngine(d_CpView, d_GameModel);
         d_GameModel.addPlayer("raj");
         d_GameModel.addPlayer("kumar");
@@ -97,7 +97,7 @@ public class BlockadeTest {
      */
     @Test
     public void testCardCheck() {
-        String l_Actual="", l_Expected="Player does not have a blockade card";
+        String l_Actual="", l_Expected="Player doesn't have a blockade card";
         d_Block = new Blockade(d_P1,  d_Country1);
         d_Block.execute();
         l_Actual = d_Block.getPlayer().getResult();
@@ -110,7 +110,8 @@ public class BlockadeTest {
     @Test
     public void testCountryCheck() {
         d_P1.setCard("Blockade");
-        String l_Actual="", l_Expected="\nThis country egypt doesnot belongs to raj";
+        String l_Actual="", l_Expected="\n" +
+                "This country egypt doesn't belongs to raj";
         d_Block = new Blockade(d_P1,  d_Country5);
         d_Block.execute();
         l_Actual = d_Block.getPlayer().getResult();
@@ -124,7 +125,7 @@ public class BlockadeTest {
     @Test
     public void testBlockadeAgain() {
         d_P1.setCard("Blockade");
-        String l_Actual="", l_Expected="Player does not have a blockade card";
+        String l_Actual="", l_Expected="Player doesn't have a blockade card";
         d_Block = new Blockade(d_P1,  d_Country1);
         d_Block.execute();
         d_Block.execute();

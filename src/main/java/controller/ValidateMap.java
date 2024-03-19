@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import model.Continent;
 import model.Country;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * This class checks the validity of the map by converting into a graph object.
@@ -69,7 +68,7 @@ public class ValidateMap {
      * @return true if all continents have at least one country. false otherwise.
      */
     public boolean checkCountryAndContinent(ArrayList<Country> p_CountryObjects,
-                                            @NotNull ArrayList<Continent> p_ContinentObjects) {
+                                            ArrayList<Continent> p_ContinentObjects) {
         if (p_ContinentObjects.isEmpty()) {
             return false;
         }

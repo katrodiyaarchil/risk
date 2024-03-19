@@ -7,7 +7,7 @@ import org.junit.Test;
 import controller.GameEngine;
 import model.Continent;
 import model.Country;
-import model.GameModelNew;
+import model.GameModel;
 import model.Map;
 import model.Player;
 import view.CommandPrompt;
@@ -18,7 +18,7 @@ import view.CommandPrompt;
 public class NegotiateTest {
 
     CommandPrompt d_CpView;
-    GameModelNew d_GameModel;
+    GameModel d_GameModel;
     GameEngine d_Ge;
     Continent d_C0,d_C1;
     Country d_Country1,d_Country2,d_Country3,d_Country4,d_Country5;
@@ -63,7 +63,7 @@ public class NegotiateTest {
         d_Map.addBorder("india", "japan");
         d_Map.addBorder("kenya", "india");
         d_Map.addBorder("japan", "india");
-        d_GameModel = new GameModelNew(d_Map);
+        d_GameModel = new GameModel(d_Map);
         d_Ge= new GameEngine(d_CpView,d_GameModel);
         d_GameModel.addPlayer("raj");
         d_GameModel.addPlayer("kumar");
@@ -110,7 +110,7 @@ public class NegotiateTest {
     @Test
     public void testNegotiation() {
         d_P1.setCard("Negotiate");
-        String l_Actual="", l_Expected="Negotation with kumar successfull.";
+        String l_Actual="", l_Expected="Negotiation with kumar successful.";
         d_Nego = new Negotiate(d_P1,  d_P2);
         d_Nego.execute();
         l_Actual = d_Nego.getSourcePlayer().getResult();
