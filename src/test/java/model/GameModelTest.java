@@ -9,7 +9,7 @@ import org.junit.Test;
  * This class is to test the methods of GameModel class
  */
 public class GameModelTest {
-    GameModelNew d_Game = new GameModelNew();
+    GameModel d_Game = new GameModel();
     ArrayList<Player> d_Check;
     List<String> d_Names;
     ArrayList<Player> d_List;
@@ -31,7 +31,7 @@ public class GameModelTest {
         d_Map.addCountry("india","asia");
         d_Map.addCountry("china","asia");
         d_Map.addCountry("japan","asia");
-        d_Game = new GameModelNew(d_Map);
+        d_Game = new GameModel(d_Map);
         d_Game.addPlayer("raj");
         d_Game.addPlayer("kumar");
         d_C1 = new Player("raj",d_Game);
@@ -59,7 +59,8 @@ public class GameModelTest {
      */
     @Test
     public void testAddPlayerAlreadyExist() {
-        String l_ExpectedMessage="Please enter a differnt Player name as this name already exists";
+        String l_ExpectedMessage="Player name already exists.\n" +
+                "Please add another name.";
         String l_ActualMessage = "";
         try {
             d_Game.addPlayer("raj");
@@ -74,7 +75,7 @@ public class GameModelTest {
      */
     @Test
     public void testAddPlayerReachedMax() {
-        String l_ExpectedMessage="Reached Max Number of Players can be added to the game";
+        String l_ExpectedMessage="Reached Max Number of Players.";
         String l_ActualMessage = "";
         try {
             d_Game.addPlayer("zeal");
@@ -108,7 +109,7 @@ public class GameModelTest {
      */
     @Test
     public void testRemovePlayerNotExists() {
-        String l_ExpectedMessage="This Player does not exists";
+        String l_ExpectedMessage="This Player does not exist";
         String l_ActualMessage = "";
         try {
             d_Game.removePlayer("shilpa");

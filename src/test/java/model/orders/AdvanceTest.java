@@ -6,7 +6,7 @@ import org.junit.Test;
 import controller.GameEngine;
 import model.Continent;
 import model.Country;
-import model.GameModelNew;
+import model.GameModel;
 import model.Map;
 import model.Player;
 import view.CommandPrompt;
@@ -16,7 +16,7 @@ import view.CommandPrompt;
  */
 public class AdvanceTest {
     CommandPrompt d_CpView;
-    GameModelNew d_GameModel;
+    GameModel d_GameModel;
     GameEngine d_Ge;
     Continent d_C0, d_C1;
     Country d_Country1, d_Country2, d_Country3, d_Country4, d_Country5;
@@ -61,7 +61,7 @@ public class AdvanceTest {
         d_Map.addBorder("india", "japan");
         d_Map.addBorder("kenya", "india");
         d_Map.addBorder("japan", "india");
-        d_GameModel = new GameModelNew(d_Map);
+        d_GameModel = new GameModel(d_Map);
         d_Ge = new GameEngine(d_CpView, d_GameModel);
         d_GameModel.addPlayer("raj");
         d_GameModel.addPlayer("kumar");

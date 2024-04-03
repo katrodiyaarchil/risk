@@ -59,6 +59,10 @@ public class CommandPrompt {
         this.d_CommandAcknowledgeArea.append(p_Str);
     }
 
+    public String getCommandAcknowledgement() {
+        return this.d_CommandAcknowledgeArea.getText();
+    }
+
     /**
      * This method is to access text from the private input text field.
      *
@@ -107,22 +111,25 @@ public class CommandPrompt {
         d_CommandAcknowledgeArea.setForeground(Color.white);
         d_CommandAcknowledgeArea.setFont(d_Font);
         d_Caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-        d_CommandAcknowledgeArea.append("\n!!..........................Welcome to RISK Warzone...........................!!\n\n");
+        d_CommandAcknowledgeArea.append("\n Welcome to RISK DOMINATION !!\n\n");
         d_CommandAcknowledgeArea.append(" Below are the list of commands you can use in map edit phase : \n");
-        d_CommandAcknowledgeArea.append(" -----------------------------------------------------------------------------------------\n");
+        d_CommandAcknowledgeArea
+                .append(" -----------------------------------------------------------------------------------------\n");
         d_CommandAcknowledgeArea.append(" 1. editcontinent -add continentID continentvalue -remove continentID \n"
                 + " 2. editcountry -add countryID continentID -remove countryID \n"
                 + " 3. editneighbor -add countryID neighborcountryID -remove countryID neighborcountryID \n");
         d_CommandAcknowledgeArea.append(" 4. savemap filename \n 5. editmap filename \n 6. validatemap \n 7. showmap \n\n");
 
         d_CommandAcknowledgeArea.append(" Below are the list of commands you can use in game phase : \n");
-        d_CommandAcknowledgeArea.append(" ------------------------------------------------------------------------------------\n");
-        d_CommandAcknowledgeArea.append(" 1. loadmap filename \n 2. gameplayer -add playername -remove playername \n 3. assigncountries \n 4. showmap \n");
+        d_CommandAcknowledgeArea
+                .append(" ------------------------------------------------------------------------------------\n");
+        d_CommandAcknowledgeArea.append(
+                " 1. loadmap filename \n 2. gameplayer -add playername -remove playername \n 3. assigncountries \n 4. showmap \n");
         d_CommandPromptPanel.add(d_CommandInput);
         d_CommandPromptPanel.add(d_CommandSendButton);
         d_CommandPromptWindow.add(d_AckAreaScrollPane, BorderLayout.PAGE_START);
         d_CommandPromptWindow.add(d_CommandPromptPanel, BorderLayout.SOUTH);
-        d_CommandPromptWindow.setSize(600,550);
+        d_CommandPromptWindow.setSize(1000, 580);
         d_CommandPromptWindow.setVisible(true);
         d_CommandPromptWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
