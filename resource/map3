@@ -1,0 +1,15 @@
+continents
+Asia 3
+
+countries
+1 India 1
+2 Kenya 1
+3 Pakistan 1
+4 China 1
+
+
+borders
+1 2 3 4
+2 1 4
+3 1 4
+4 1 2 3

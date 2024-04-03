@@ -187,6 +187,7 @@ public class GameModel {
                 int l_Index = l_Random.nextInt(l_CountryList.size());
                 setPlayerId(d_PlayerQueue.remove());
                 getPlayerId1().addCountry(l_CountryList.get(l_Index));
+                l_CountryList.get(l_Index).setCountryOwnerPlayer(this.d_PlayerID);
                 d_PlayerQueue.add(d_PlayerID);
                 l_CountryList.remove(l_Index);
             }

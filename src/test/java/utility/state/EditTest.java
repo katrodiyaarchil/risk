@@ -50,7 +50,7 @@ public class EditTest {
      */
     @Test
     public void testIncorrectLoadMap() {
-        String l_ExpectedMessage = "resource\\incorrectmap (The system cannot find the file specified)";
+        String l_ExpectedMessage = "resource/incorrectmap (No such file or directory)";
         String l_ActualMessage = "";
         l_ActualMessage = d_Ed.loadMap("loadmap incorrectmap");
 
