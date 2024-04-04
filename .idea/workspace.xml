@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44a65139-2b7f-43b3-8fa9-3d51ad1cd012" name="Changes" comment="Implement AggresivePlayerStrategy in StrategyPattern" />
+    <list default="true" id="44a65139-2b7f-43b3-8fa9-3d51ad1cd012" name="Changes" comment="Added javadoc in AggresivePlayerStrategy" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -198,7 +198,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712204429072</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added javadoc in AggresivePlayerStrategy">
+      <option name="closed" value="true" />
+      <created>1712205083494</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1712205083494</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -220,7 +228,8 @@
     <MESSAGE value="Implementing strategy.java file in Strategypattern" />
     <MESSAGE value="added javadoc in StrategyPattern" />
     <MESSAGE value="Implement AggresivePlayerStrategy in StrategyPattern" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement AggresivePlayerStrategy in StrategyPattern" />
+    <MESSAGE value="Added javadoc in AggresivePlayerStrategy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added javadoc in AggresivePlayerStrategy" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
