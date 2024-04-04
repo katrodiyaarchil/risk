@@ -15,17 +15,30 @@ import model.GameModel;
 import model.Order;
 import model.Player;
 import model.orders.Deploy;
-
+/**
+ * This class implements the Strategy for the benevolent type of player.
+ * This type of player always deloys on it's weak country and never attacks.
+ */
 
 public class BenevolentPlayerStrategy extends Strategy implements Serializable {
 
-
+    /**
+     * The Random reference to generate random numbers.
+     */
     private Random d_Random;
-
+    /**
+     * GameModel new object to get the current map.
+     */
     private GameModel d_GameModelNew;
-
+    /**
+     * Player reference of this strategy
+     */
     private Player d_Player;
-
+    /**
+     * Constructor which accepts the Player object and GameModel object to implement strategy.
+     * @param p_Player object of the player whose strategy is benevolent.
+     * @param p_GameModelNew object of the gamemodel class
+     */
 
     public BenevolentPlayerStrategy(Player p_Player,GameModel p_GameModelNew) {
         this.d_GameModelNew = p_GameModelNew;
@@ -34,7 +47,10 @@ public class BenevolentPlayerStrategy extends Strategy implements Serializable {
         d_Leb.setResult("Benevolent Player");
     }
 
-
+    /**
+     * This method returns the weakest country of the player where he wants to deploy armies just to save it.
+     * @return returns the country at which armies are deploy
+     */
     @Override
     public Country toDefend() {
         Country l_TempCountry=null;
@@ -63,13 +79,19 @@ public class BenevolentPlayerStrategy extends Strategy implements Serializable {
         return l_TempCountry;
     }
 
-
+    /**
+     * Benevolent player never attacks so it is returning null.
+     * @return null
+     */
     @Override
     public ArrayList<Country> toAttack()
     {
         return null;
     }
-
+    /**
+     * createOrder method for the benevolent player only returns the deploy order for player's weakest country.
+     * @return Order object created
+     */
 
     @Override
     public Order createOrder() {
@@ -82,7 +104,10 @@ public class BenevolentPlayerStrategy extends Strategy implements Serializable {
         return l_ReturnOrder;
     }
 
-
+    /**
+     * This method returns the name of the player's strategy
+     * @return String which indicates the type of player strategy
+     */
     @Override
     public String strategyName() {
         // TODO Auto-generated method stub
