@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44a65139-2b7f-43b3-8fa9-3d51ad1cd012" name="Changes" comment="added javadoc in StrategyPattern">
-      <change afterPath="$PROJECT_DIR$/src/main/java/strategypattern/AggresivePlayerStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="44a65139-2b7f-43b3-8fa9-3d51ad1cd012" name="Changes" comment="Implement AggresivePlayerStrategy in StrategyPattern" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -193,7 +190,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712201296496</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Implement AggresivePlayerStrategy in StrategyPattern">
+      <option name="closed" value="true" />
+      <created>1712204429072</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1712204429072</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -214,7 +219,8 @@
     <MESSAGE value="Implementing strategypattern" />
     <MESSAGE value="Implementing strategy.java file in Strategypattern" />
     <MESSAGE value="added javadoc in StrategyPattern" />
-    <option name="LAST_COMMIT_MESSAGE" value="added javadoc in StrategyPattern" />
+    <MESSAGE value="Implement AggresivePlayerStrategy in StrategyPattern" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement AggresivePlayerStrategy in StrategyPattern" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

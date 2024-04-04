@@ -17,24 +17,41 @@ import model.Order;
 import model.Player;
 import model.orders.Advance;
 import model.orders.Deploy;
-
-
+/**
+ * This class creates orders for the AggressivePlayer according to its strategy.
+ * It extends the parent Strategy class and implements the necessary methods.
+ */
 public class AggresivePlayerStrategy extends Strategy implements Serializable {
-
+    /**
+     * Reference to generate random numbers.
+     */
     private Random d_Random;
-
+    /**
+     * GameModel object to access the current map.
+     */
     private GameModel d_GameModelNew;
-
+    /**
+     * Reference to the player using this strategy.
+     */
     private Player d_Player;
-
-
+    /**
+     * Constructor accepting the aggressive player and the game model containing game-related data.
+     *
+     * @param p_Player       The aggressive type player
+     * @param p_GameModelNew GameModel object
+     */
     public AggresivePlayerStrategy(Player p_Player, GameModel p_GameModelNew) {
         this.d_Player = p_Player;
         this.d_GameModelNew = p_GameModelNew;
         d_Random = new Random();
         d_Leb.setResult("Aggressive Player");
     }
-
+    /**
+     * This method returns the strongest country for the aggressive player.
+     * It sorts the player's countries based on the number of armies and returns the strongest one.
+     *
+     * @return The strongest country of the player
+     */
     @Override
     public Country toDefend() {
         Country l_TempCountry = null;
@@ -54,7 +71,12 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
         return l_TempCountry;
     }
 
-
+    /**
+     * This method selects a random neighbor of the strongest country to attack.
+     * If the country to be attacked belongs to the same player, only transfer of armies occurs, else an advance order is executed.
+     *
+     * @return The list of source and target countries for the attack
+     */
     @Override
     public ArrayList<Country> toAttack() {
         ArrayList<Country> l_ReturnCountries = new ArrayList<Country>();
@@ -73,7 +95,13 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
         return l_ReturnCountries;
     }
 
-
+    /**
+     * This method centralizes its armies on the strongest country.
+     * It initially deploys on the strongest country and then attacks from it when having enough armies.
+     * Deploy and Advance orders are created randomly.
+     *
+     * @return The order which was created
+     */
     @Override
     public Order createOrder() {
         int l_RandomInt = d_Random.nextInt(2);
@@ -87,7 +115,10 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
                 break;
             case 1:
                 ArrayList<Country> l_Countries = toAttack();
-
+                /*
+                 * If player does not have enough armies, it will not advance. it will still
+                 * deploy
+                 */
                 if (l_Countries.get(0).getNoOfArmies() > 1) {
                     d_Leb.setResult("in aggressive defending country - " + l_Countries.get(0).getCountryName()
                             + " Attacking country - " + l_Countries.get(1).getCountryName() + " with armies- "
@@ -104,8 +135,11 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
         d_Leb.setResult("in aggressive the order is - " + l_OrderToBeReturned);
         return l_OrderToBeReturned;
     }
-
-
+    /**
+     * This method returns the strategy type of the player.
+     *
+     * @return The type of player
+     */
     @Override
     public String strategyName() {
         return "Aggressive";
