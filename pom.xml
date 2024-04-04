@@ -35,7 +35,32 @@
 
     <build>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
-            <plugins>
+            <plugin>
+            <groupId>com.github.zetten</groupId>
+            <artifactId>xvfb-maven-plugin</artifactId>
+            <version>${xvfb-maven-plugin.version}</version>
+            <executions>
+                <execution>
+                    <id>wrap-tests</id>
+                    <goals>
+                        <goal>run</goal>
+                        <goal>stop</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>tycho-surefire-plugin</artifactId>
+            <version>${tycho.version}</version>
+            <configuration>
+                <useUIHarness>true</useUIHarness>
+                <environmentVariables>
+                    <DISPLAY>${xvfb.display}</DISPLAY>
+                </environmentVariables>
+            </configuration>
+        </plugin>
+                 <plugins>
                 <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
