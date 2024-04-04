@@ -1,36 +1,76 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import model.orders.Advance;
-import model.orders.Airlift;
-import model.orders.Bomb;
-import model.orders.Blockade;
-import model.orders.Deploy;
-import model.orders.Negotiate;
+import strategypattern.Strategy;
 
 /**
- * The Player class represents a player in the game. It contains information
- * about the player's name, ID, color, armies, countries, continents, orders,
- * and game model.
+ * The Player class represents the actual player participating in the game.
  */
-
-public class Player {
-
+public class Player implements Serializable {
+    /**
+     * This string represents the name of the player
+     */
     private String d_PlayerName = "";
+    /**
+     * This integer represents the id of the player
+     */
     private int d_PlayerId;
+    /**
+     * This integer represents the number of armies
+     */
     private int d_Armies;
+    /**
+     * this integer represents the temporary armies given to the player
+     */
+    private int d_TempArmies;
+    /**
+     * This Array list consists of all the countries of the player
+     */
     private ArrayList<Country> d_Countries = new ArrayList<Country>();
+    /**
+     * The Queue represents the queue of players order
+     */
     private Queue<Order> d_Order = new LinkedList<Order>();
+    /**
+     * This Array list consists of all the continents
+     */
     private ArrayList<Continent> d_Continents = new ArrayList<Continent>();
+    /**
+     * This string is used to store the result of issue order
+     */
     private String d_Result = "";
+    /**
+     * This string represents the name of order
+     */
     private String d_StringOrder = "";
-    private GameModel d_GameModel;
+    /**
+     * This is the gamemodelnew objects
+     */
+    private GameModel d_GameModelNew;
+    /**
+     * This ArrayList represents all the cards given to players
+     */
     private ArrayList<String> d_Cards = new ArrayList<String>();
+    /**
+     * This list has all the player objects of negotiated players
+     */
     private ArrayList<Player> d_NegotiatedPlayers = new ArrayList<Player>();
+    /**
+     * Boolean to check if a player has won atleast one battle to alot him a card
+     */
     private boolean d_AtleastOneBattleWon = false;
+    /**
+     * It is the object of Strategy Class
+     */
+    private Strategy d_PlayerStrategy;
+    /**
+     * Boolean to check if a game should be saved or not
+     */
+    private boolean d_SaveGame = false;
 
     /**
      * default constructor of Player class
@@ -39,35 +79,34 @@ public class Player {
     }
 
     /**
-     * Constructor for Player class with name and game model.
+     * constructor of Player class with only player name as the parameters
      *
-     * @param p_PlayerName The name of the player.
-     * @param p_GameModel The game model.
+     * @param p_PlayerName   Name of the player
+     * @param p_GameModelNew The GameModelNew reference to access the map
      */
-    public Player(String p_PlayerName, GameModel p_GameModel) {
+    public Player(String p_PlayerName, GameModel p_GameModelNew) {
         this.d_PlayerName = p_PlayerName;
-        this.d_GameModel = p_GameModel;
+        this.d_GameModelNew = p_GameModelNew;
     }
 
     /**
-     * Adds a country to the player's list of countries.
+     * addCountry method adds the given country to the player's country list.
      *
-     * @param p_Country The country to add.
+     * @param p_Country country object
      */
     public void addCountry(Country p_Country) {
         d_Countries.add(p_Country);
     }
 
     /**
-     * Removes a country from the player's list of countries.
+     * removeCountry removes the given country from the player's country list
      *
-     * @param p_Country The country to remove.
+     * @param p_Country Name of the country to be removed
      */
     public void removeCountry(Country p_Country) {
         d_Countries.remove(p_Country);
     }
 
-    // Getters and setters for player attributes...
     /**
      * get method for player name
      *
@@ -102,7 +141,7 @@ public class Player {
      */
     public void setPlayerArmies(int p_Armies) {
         this.d_Armies = p_Armies;
-        //this.d_TempArmies = p_Armies;
+        this.d_TempArmies = p_Armies;
     }
 
     /**
@@ -115,12 +154,12 @@ public class Player {
     }
 
     public GameModel getGameModel() {
-        return this.d_GameModel;
+        return this.d_GameModelNew;
     }
 
     /**
-     * This method sets the flag value to true if the player won a battle and
-     * false otherwise.
+     * This method sets the flag value to true if the player won a battle and false
+     * otherwise.
      *
      * @param p_B a boolean value to determine if player has won a battle or not
      */
@@ -131,11 +170,28 @@ public class Player {
     /**
      * This method returns the battle won boolean
      *
-     * @return the boolean value indicating if the player had won a battle or
-     * not
+     * @return the boolean value indicating if the player had won a battle or not
      */
     public boolean getAtleastOneBattleWon() {
         return this.d_AtleastOneBattleWon;
+    }
+
+    /**
+     * This method returns the boolean which is set when game saved
+     *
+     * @return true if savedgame else false
+     */
+    public boolean getSaveGame() {
+        return this.d_SaveGame;
+    }
+
+    /**
+     * this method sets the flag for savedgame.
+     *
+     * @param p_Value value to be set
+     */
+    public void setSaveGame(boolean p_Value) {
+        this.d_SaveGame = p_Value;
     }
 
     /**
@@ -143,7 +199,7 @@ public class Player {
      * objects whose all countries belong to this player.
      */
     public void setContinentsList() {
-        ArrayList<Continent> l_MapContinents = d_GameModel.getSelectedMap().getContinentList();
+        ArrayList<Continent> l_MapContinents = d_GameModelNew.getMap().getContinentList();
         for (Continent l_MapContinent : l_MapContinents) {
             int l_Flag = 0;
             for (Country l_Country : l_MapContinent.getCountryList()) {
@@ -167,8 +223,8 @@ public class Player {
     }
 
     /**
-     * The getResult return the result whether the order was added to the order
-     * list or not to the Player controller.
+     * The getResult return the result whether the order was added to the order list
+     * or not to the Player controller.
      *
      * @return returns the result of issue order
      */
@@ -280,134 +336,34 @@ public class Player {
      * This method clears the negotiated players list
      */
     public void removeNegotiatedPlayer() {
-        if (d_NegotiatedPlayers.size() > 0) {
+        if (d_NegotiatedPlayers.size() > 0)
             d_NegotiatedPlayers.clear();
-        }
     }
 
     /**
-     * The issue order method checks the order issued by the player. There are 5
-     * types of orders
+     * The issue order method checks the order issued by the player.
+     * There are 5 types of orders
      * <ul>
      * <li>The deploy order - deploys the number of armies asked by the issuing
      * player to the asked country.</li>
-     * <li>The Advance order - The issuing players intends to attack a
-     * targetCountry with a certain number of armies from the
-     * sourceCountry.</li>
+     * <li>The Advance order - The issuing players intends to attack a targetCountry
+     * with a certain number of armies from the sourceCountry.</li>
      * <li>The Bomb order - The issuing player bombs a given country.</li>
-     * <li>The Blockade order - The issuing player makes its own country a
-     * neutral territory by increasing it 3 times.</li>
-     * <li>The AirLift order - The issuing player moves the armies from the
-     * source country to target country which are not neighbors.</li>
+     * <li>The Blockade order - The issuing player makes its own country a neutral
+     * territory by increasing it 3 times.</li>
+     * <li>The AirLift order - The issuing player moves the armies from the source
+     * country to target country which are not neighbors.</li>
      * <li>The Negotiate order - The issuing player strikes a deal with another
      * player. so it won't be able to attack each others countries.</li>
      * </ul>
      */
     public void issue_order() {
-        int l_Flag = 0;
-        String[] l_StringList = d_StringOrder.split(" ");
-        String l_OrderType = l_StringList[0];
-        switch (l_OrderType) {
-
-            case "deploy":
-                if (l_StringList.length != 3) {
-                    System.out.println("Please enter valid number of parameters");
-                    break;
-                }
-                int l_NumArmies = Integer.parseInt(l_StringList[2]);
-                for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
-                    if (l_TempCountry.getCountryName().equals(l_StringList[1])) {
-                        d_Order.add(new Deploy(this, l_TempCountry, l_NumArmies));
-                        break;
-                    }
-                }
-                break;
-            case "advance":
-                if (l_StringList.length != 4) {
-                    System.out.println("Please enter valid number of parameters");
-                    break;
-                }
-                int l_NumArmies1 = Integer.parseInt(l_StringList[3]);
-                Country l_SourceCountry = null,
-                 l_TargetCountry = null;
-                for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
-                    if (l_TempCountry.getCountryName().equals(l_StringList[1])) {
-                        l_SourceCountry = l_TempCountry;
-                        break;
-                    }
-                }
-                for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
-                    if (l_TempCountry.getCountryName().equals(l_StringList[2])) {
-                        l_TargetCountry = l_TempCountry;
-                        break;
-                    }
-                }
-                d_Order.add(new Advance(this, l_SourceCountry, l_TargetCountry, l_NumArmies1));
-                break;
-            case "bomb":
-                if (l_StringList.length != 2) {
-                    System.out.println("Please enter valid number of parameters");
-                    break;
-                }
-                for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
-                    if (l_TempCountry.getCountryName().equals(l_StringList[1])) {
-                        d_Order.add(new Bomb(this, l_TempCountry));
-                        break;
-                    }
-                }
-                break;
-            case "blockade":
-                if (l_StringList.length != 2) {
-                    System.out.println("Please enter valid number of parameters");
-                    break;
-                }
-                for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
-                    if (l_TempCountry.getCountryName().equals(l_StringList[1])) {
-                        d_Order.add(new Blockade(this, l_TempCountry));
-                        break;
-                    }
-                }
-                break;
-            case "airlift":
-                if (l_StringList.length != 4) {
-                    System.out.println("Please enter valid number of parameters");
-                    break;
-                }
-                int l_NumArmies2 = Integer.parseInt(l_StringList[3]);
-                Country l_SourceCountry1 = null,
-                 l_TargetCountry1 = null;
-
-                for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
-                    if (l_TempCountry.getCountryName().equals(l_StringList[1])) {
-                        l_SourceCountry1 = l_TempCountry;
-                        break;
-                    }
-                }
-                for (Country l_TempCountry : d_GameModel.getSelectedMap().getCountryList()) {
-                    if (l_TempCountry.getCountryName().equals(l_StringList[2])) {
-                        l_TargetCountry1 = l_TempCountry;
-                        break;
-                    }
-                }
-                d_Order.add(new Airlift(this, l_SourceCountry1, l_TargetCountry1, l_NumArmies2));
-                break;
-            case "negotiate":
-                if (l_StringList.length != 2) {
-                    System.out.println("Please enter valid number of parameters");
-                    break;
-                }
-                for (Player l_TempPlayer : d_GameModel.getAllPlayers()) {
-                    if (l_TempPlayer.getPlayerName().equals(l_StringList[1])) {
-                        d_Order.add(new Negotiate(this, l_TempPlayer));
-                        break;
-                    }
-                }
-
-                break;
-
-            default:
-                break;
-
+        Order order;
+        System.out.println("in player class");
+        System.out.println(d_PlayerStrategy);
+        order = d_PlayerStrategy.createOrder();
+        if (order != null) {
+            d_Order.add(order);
         }
 
     }
@@ -419,5 +375,23 @@ public class Player {
      */
     public Order next_order() {
         return d_Order.remove();
+    }
+
+    /**
+     * This method sets the strategy for the player when new player is created.
+     *
+     * @param p_PlayerStrategy strategy type of the player.
+     */
+    public void setPlayerStrategy(Strategy p_PlayerStrategy) {
+        this.d_PlayerStrategy = p_PlayerStrategy;
+    }
+
+    /**
+     * This method returns the player strategy type.
+     *
+     * @return type of player strategy
+     */
+    public Strategy getPlayerStrategy() {
+        return this.d_PlayerStrategy;
     }
 }
