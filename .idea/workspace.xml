@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44a65139-2b7f-43b3-8fa9-3d51ad1cd012" name="Changes" comment="Implementing strategypattern">
-      <change afterPath="$PROJECT_DIR$/src/main/java/strategypattern/Strategy.java" afterDir="false" />
+    <list default="true" id="44a65139-2b7f-43b3-8fa9-3d51ad1cd012" name="Changes" comment="Implementing strategy.java file in Strategypattern">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/strategypattern/Strategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/strategypattern/Strategy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +177,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712199020420</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Implementing strategy.java file in Strategypattern">
+      <option name="closed" value="true" />
+      <created>1712199530840</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1712199530840</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -195,7 +204,8 @@
     <MESSAGE value="add function in CommandPrompt.java" />
     <MESSAGE value="Implementing issue order in utility/state" />
     <MESSAGE value="Implementing strategypattern" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementing strategypattern" />
+    <MESSAGE value="Implementing strategy.java file in Strategypattern" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementing strategy.java file in Strategypattern" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
