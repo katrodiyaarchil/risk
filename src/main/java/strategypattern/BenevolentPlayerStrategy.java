@@ -37,11 +37,11 @@ public class BenevolentPlayerStrategy extends Strategy implements Serializable {
     /**
      * Constructor which accepts the Player object and GameModel object to implement strategy.
      * @param p_Player object of the player whose strategy is benevolent.
-     * @param p_GameModelNew object of the gamemodel class
+     * @param p_GameModel object of the gamemodel class
      */
 
-    public BenevolentPlayerStrategy(Player p_Player,GameModel p_GameModelNew) {
-        this.d_GameModelNew = p_GameModelNew;
+    public BenevolentPlayerStrategy(Player p_Player,GameModel p_GameModel) {
+        this.d_GameModelNew = p_GameModel;
         this.d_Player = p_Player;
         d_Random = new Random();
         d_Leb.setResult("Benevolent Player");
