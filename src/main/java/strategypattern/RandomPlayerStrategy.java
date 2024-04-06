@@ -27,7 +27,7 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
     /**
      * GameModel new object to get the current map.
      */
-    private GameModel d_GameModelNew;
+    private GameModel d_GameModel;
     /**
      * Player reference of this strategy
      */
@@ -46,12 +46,12 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
      * as well as the Random object is created.
      *
      * @param p_Player       The Player whose strategy is Random.
-     * @param p_GameModel The Reference of GamemodelNew to get the Map on which
+     * @param p_GameModel The Reference of GameModel to get the Map on which
      *                       the match is to be played.
      */
 
     public RandomPlayerStrategy(Player p_Player, GameModel p_GameModel) {
-        this.d_GameModelNew = p_GameModel;
+        this.d_GameModel = p_GameModel;
         d_Player = p_Player;
         rand = new Random();
         d_Leb.setResult("Random Player");
@@ -71,8 +71,8 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
         ArrayList<Country> l_ReturnCountries = new ArrayList<Country>();
         Country l_ReturnCountry = null;
         Country l_DefendCountry = toDefend();
-        l_ReturnCountry = d_GameModelNew.getMap().getCountryList()
-                .get(rand.nextInt(d_GameModelNew.getMap().getCountryList().size()));
+        l_ReturnCountry = d_GameModel.getMap().getCountryList()
+                .get(rand.nextInt(d_GameModel.getMap().getCountryList().size()));
         l_ReturnCountries.add(0, l_DefendCountry);
         l_ReturnCountries.add(1, l_ReturnCountry);
         return l_ReturnCountries;

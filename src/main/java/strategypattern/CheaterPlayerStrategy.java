@@ -29,7 +29,7 @@ public class CheaterPlayerStrategy extends Strategy implements Serializable {
     /**
      * GameModel new object to get the current map.
      */
-    private GameModel d_GameModelNew;
+    private GameModel d_GameModel;
     /**
      * Player reference of this strategy
      */
@@ -40,11 +40,11 @@ public class CheaterPlayerStrategy extends Strategy implements Serializable {
      * as well as the Random object is created.
      *
      * @param p_Player       The Player whose strategy is Cheater.
-     * @param p_GameModel The Reference of GamemodelNew to get the Map on which
+     * @param p_GameModel The Reference of GameModel to get the Map on which
      *                       the match is to be played.
      */
     public CheaterPlayerStrategy(Player p_Player, GameModel p_GameModel) {
-        this.d_GameModelNew = p_GameModel;
+        this.d_GameModel = p_GameModel;
         d_Player = p_Player;
         rand = new Random();
         d_Leb.setResult("Cheater Player");
@@ -66,7 +66,7 @@ public class CheaterPlayerStrategy extends Strategy implements Serializable {
         Country l_DefendingCountry = toDefend();
         String l_ReturnCountryName = "";
         l_ReturnCountryName = l_DefendingCountry.getBorder().get(rand.nextInt(l_DefendingCountry.getBorder().size()));
-        for (Country l_TempCountry : d_GameModelNew.getMap().getCountryList()) {
+        for (Country l_TempCountry : d_GameModel.getMap().getCountryList()) {
             if (l_TempCountry.getCountryName().equals(l_ReturnCountryName)) {
                 l_AttackCountry = l_TempCountry;
                 break;

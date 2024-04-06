@@ -29,7 +29,7 @@ public class BenevolentPlayerStrategy extends Strategy implements Serializable {
     /**
      * GameModel new object to get the current map.
      */
-    private GameModel d_GameModelNew;
+    private GameModel d_GameModel;
     /**
      * Player reference of this strategy
      */
@@ -41,7 +41,7 @@ public class BenevolentPlayerStrategy extends Strategy implements Serializable {
      */
 
     public BenevolentPlayerStrategy(Player p_Player,GameModel p_GameModel) {
-        this.d_GameModelNew = p_GameModel;
+        this.d_GameModel = p_GameModel;
         this.d_Player = p_Player;
         d_Random = new Random();
         d_Leb.setResult("Benevolent Player");
