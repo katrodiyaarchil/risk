@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 import model.Country;
-import model.GameModelNew;
+import model.GameModel;
 import model.Order;
 import model.Player;
 import model.orders.Advance;
