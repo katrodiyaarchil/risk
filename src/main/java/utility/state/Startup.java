@@ -4,7 +4,6 @@ import controller.GameEngine;
 import observerpattern.LogEntryBuffer;
 import view.CommandPrompt;
 
-
 /**
  * The Startup Phase extends the phase class and implements all the methods
  * suitable for that particular phase.
@@ -12,8 +11,10 @@ import view.CommandPrompt;
  * phase
  */
 public class Startup extends Phase {
+	/**
+	 * object of LogEntryBuffer class to log in the logfile
+	 */
 	LogEntryBuffer d_Leb;
-
 
 	/**
 	 * This is the constructor of Startup which initializes Game engine object and
@@ -132,7 +133,7 @@ public class Startup extends Phase {
 			d_Ge.assignCountries();
 		} catch (Exception p_Exception) {
 			d_Vw.setCommandAcknowledgement(p_Exception.getMessage());
-			d_Leb.setResult(p_Exception.getMessage().toString());
+			d_Leb.setResult(p_Exception.getMessage());
 			d_Ge.setPhase(new Startup(d_Ge, d_Vw));
 			return;
 		}
@@ -157,6 +158,17 @@ public class Startup extends Phase {
 	@Override
 	public String getPhaseName() {
 		return "Startup";
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 */
+	@Override
+	public String tournament(String p_string, String p_CommandStringFromInput) {
+		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName() + "\n");
+		d_Leb.setResult("Invalid command in state ");
+		return null;
 	}
 
 }
