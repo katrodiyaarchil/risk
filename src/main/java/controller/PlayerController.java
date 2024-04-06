@@ -38,7 +38,7 @@ public class PlayerController {
 	 * Constructor of Player controller
 	 * 
 	 * @param p_GameModel object of Game model class
-	 * @param p_Players      list of players
+	 * @param p_GameEngine   object  of Game Engine
 	 * @param p_CpView  object of command prompt for communicating with player
 	 */
 	PlayerController(GameModel p_GameModel, CommandPrompt p_CpView, GameEngine p_GameEngine) {
@@ -116,8 +116,8 @@ public class PlayerController {
 			throw new Exception("Please provide valid Parameters to add player");
 		while (l_Counter < l_CommandArray.length) {
 			if (l_CommandArray[l_Counter].equals("-add")) {
-				d_GameModel.addPlayer(l_CommandArray[l_Counter + 1]);
-				l_Counter += 2;
+				d_GameModel.addPlayer(l_CommandArray[l_Counter + 1],l_CommandArray[l_Counter+2]);
+				l_Counter += 3;
 				l_AddCounter += 1;
 			} else if (l_CommandArray[l_Counter].equals("-remove")) {
 				d_GameModel.removePlayer(l_CommandArray[l_Counter + 1]);
