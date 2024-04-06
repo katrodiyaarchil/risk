@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44a65139-2b7f-43b3-8fa9-3d51ad1cd012" name="Changes" comment="Implementing issue order in utility/state" />
+    <list default="true" id="44a65139-2b7f-43b3-8fa9-3d51ad1cd012" name="Changes" comment="Created HumanPlayerStrategy in StrategyPattern">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/PlayerController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +23,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
@@ -44,7 +53,8 @@
     &quot;last_opened_file_path&quot;: &quot;/Users/archil/IdeaProjects/risk&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -139,8 +149,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-17.0.10-temurin-17.0.10-3183f394aec4-539a993e" />
-        <option value="jdk-19.0.2-corretto-19.0.2-4caba194b151-be841094" />
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
+        <option value="jdk-19.0.2-corretto-19.0.2-4caba194b151-48ba4555" />
       </set>
     </attachedChunks>
   </component>
@@ -162,7 +172,111 @@
       <option name="project" value="LOCAL" />
       <updated>1710708550547</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Implementing strategypattern">
+      <option name="closed" value="true" />
+      <created>1712199020420</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1712199020420</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Implementing strategy.java file in Strategypattern">
+      <option name="closed" value="true" />
+      <created>1712199530840</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1712199530840</updated>
+    </task>
+    <task id="LOCAL-00004" summary="added javadoc in StrategyPattern">
+      <option name="closed" value="true" />
+      <created>1712201296496</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1712201296496</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Implement AggresivePlayerStrategy in StrategyPattern">
+      <option name="closed" value="true" />
+      <created>1712204429072</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1712204429072</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added javadoc in AggresivePlayerStrategy">
+      <option name="closed" value="true" />
+      <created>1712205083494</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1712205083494</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Implement BenevolentPlayerStrategy in StrategyPattern using Serializable">
+      <option name="closed" value="true" />
+      <created>1712205369327</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1712205369327</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Implement BenevolentPlayerStrategy in StrategyPattern using Serializable">
+      <option name="closed" value="true" />
+      <created>1712205407930</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1712205407930</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Implement CheaterPlayerStrategy in StrategyPattern using Serializable">
+      <option name="closed" value="true" />
+      <created>1712205829683</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1712205829683</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Implement BenevolentPlayerStrategy in StrategyPattern using Serializable">
+      <option name="closed" value="true" />
+      <created>1712205941373</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1712205941373</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Implement RandomPlayerStrategy in StrategyPattern">
+      <option name="closed" value="true" />
+      <created>1712207496989</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1712207496989</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Added javadoc in RandomPlayerStrategy">
+      <option name="closed" value="true" />
+      <created>1712207648207</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1712207648207</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Implement saveGame and tournamentstartUpPhase in GameModel">
+      <option name="closed" value="true" />
+      <created>1712208150389</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1712208150389</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Created HumanPlayerStrategy in StrategyPattern">
+      <option name="closed" value="true" />
+      <created>1712208233923</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1712208233923</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -180,7 +294,18 @@
     <MESSAGE value="Fixed" />
     <MESSAGE value="add function in CommandPrompt.java" />
     <MESSAGE value="Implementing issue order in utility/state" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementing issue order in utility/state" />
+    <MESSAGE value="Implementing strategypattern" />
+    <MESSAGE value="Implementing strategy.java file in Strategypattern" />
+    <MESSAGE value="added javadoc in StrategyPattern" />
+    <MESSAGE value="Implement AggresivePlayerStrategy in StrategyPattern" />
+    <MESSAGE value="Added javadoc in AggresivePlayerStrategy" />
+    <MESSAGE value="Implement CheaterPlayerStrategy in StrategyPattern using Serializable" />
+    <MESSAGE value="Implement BenevolentPlayerStrategy in StrategyPattern using Serializable" />
+    <MESSAGE value="Implement RandomPlayerStrategy in StrategyPattern" />
+    <MESSAGE value="Added javadoc in RandomPlayerStrategy" />
+    <MESSAGE value="Implement saveGame and tournamentstartUpPhase in GameModel" />
+    <MESSAGE value="Created HumanPlayerStrategy in StrategyPattern" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created HumanPlayerStrategy in StrategyPattern" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
