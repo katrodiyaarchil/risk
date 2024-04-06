@@ -1,17 +1,40 @@
 package model;
 
-import java.util.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * This is a class for all the countries/territories.
  */
-public class Country {
+public class Country implements Serializable {
+    /**
+     * This static integer represents the id of the country
+     */
     private static int D_Count = 0;
+    /**
+     * This is the normal id of the country
+     */
     int d_ID;
+    /**
+     * This string represents the name of the country
+     */
     String d_Name;
+    /**
+     * This string represents the continent of the country
+     */
     String d_ContinentName;
+    /**
+     * This arraylist of strings contains the names of all the border countries
+     */
     ArrayList<String> d_Neighbors;
+    /**
+     * This integer represents the no of armies on that country
+     */
     int d_NoOfArmies;
+    /**
+     * This player object represents the player that is the owner of this country
+     */
     private Player d_Owner;
 
     /**
@@ -121,7 +144,7 @@ public class Country {
     public void removeBorder(String p_Border) {
         Iterator<String> l_Iterator = this.d_Neighbors.iterator();
         while (l_Iterator.hasNext()) {
-            if (l_Iterator.next().toString().equals(p_Border)) {
+            if (l_Iterator.next().equals(p_Border)) {
                 l_Iterator.remove();
             }
         }

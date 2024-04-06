@@ -1,24 +1,35 @@
 package utility.state;
 
+import java.io.File;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
+import adapterpattern.Adaptee;
+import adapterpattern.Adapter;
+import adapterpattern.Target;
 import controller.GameEngine;
 import observerpattern.LogEntryBuffer;
 import view.CommandPrompt;
 
 /**
- * Represents the Edit Phase, which extends the Phase class and implements
- * methods specific to this phase.
- * The Edit Phase handles map editing commands and returns invalid command
- * messages for commands not applicable to this phase.
+ * The Edit Phase extends the phase class and implements all the methods
+ * suitable for that particular phase.
+ * It returns invalid command for others which are not compatible with this
+ * phase
  */
 public class Edit extends Phase {
+    /**
+     * object of LogEntryBuffer class to log in the logfile
+     */
     LogEntryBuffer d_Leb;
 
     /**
-     * Constructs an Edit object with the specified GameEngine and CommandPrompt
-     * objects, and initializes a LogEntryBuffer.
+     * This is the constructor of Edit class which initializes Game engine object
+     * and command prompt object and assigning log entry buffer
      * 
-     * @param p_Ge The GameEngine object.
-     * @param p_Vw The CommandPrompt object.
+     * @param p_Ge object of game engine
+     * @param p_Vw object of view
      */
     public Edit(GameEngine p_Ge, CommandPrompt p_Vw) {
 
@@ -33,12 +44,34 @@ public class Edit extends Phase {
      */
     @Override
     public String loadMap(String p_S) {
-
+        boolean l_Flag = false;
         String l_AckMsg;
         try {
-            l_AckMsg = d_Ge.getMapController().loadMap(p_S);
+            String l_Path = "resource/";
+            File l_File = new File(l_Path + p_S.split(" ")[1]);
+            Scanner l_Sc = new Scanner(l_File);
+            while (l_Sc.hasNextLine()) {
+
+                String l_Line = l_Sc.nextLine();
+                if (l_Line.contains("Territories")) {
+                    l_Flag = true;
+                    break;
+                }
+            }
+            l_Sc.close();
+            if (l_Flag) {
+                Target l_TargetObject = new Adapter(new Adaptee(), d_Ge);
+                l_AckMsg = l_TargetObject.loadMap(p_S.split(" ")[1]);
+            } else {
+                Target l_TargetObject = new Target(d_Ge);
+                l_AckMsg = l_TargetObject.loadMap(p_S);
+            }
+
         } catch (Exception p_Exception) {
             l_AckMsg = p_Exception.getMessage();
+            d_Leb.setResult(l_AckMsg);
+            d_Ge.setPhase(new Edit(d_Ge, d_Vw));
+            return l_AckMsg;
         }
         d_Leb.setResult(l_AckMsg);
 
@@ -71,7 +104,22 @@ public class Edit extends Phase {
     public String saveMap(String p_S) {
         String l_AckMsg;
         try {
-            l_AckMsg = d_Ge.getMapController().saveMap(p_S);
+            while (true) {
+                String l_StringOrder = JOptionPane
+                        .showInputDialog(" : Please Enter 1 to save as ConquestMap OR 2 for DominationMap");
+
+                if (l_StringOrder.equals("1")) {
+
+                    Target l_TargetObject = new Adapter(new Adaptee(), d_Ge);
+                    l_AckMsg = l_TargetObject.saveMap(p_S.split(" ")[1]);
+                    break;
+                } else if (l_StringOrder.equals("2")) {
+                    Target l_TargetObject = new Target(d_Ge);
+                    l_AckMsg = l_TargetObject.saveMap(p_S);
+                    break;
+                }
+
+            }
         } catch (Exception p_Exception) {
             l_AckMsg = p_Exception.getMessage();
         }
@@ -96,10 +144,29 @@ public class Edit extends Phase {
      */
     @Override
     public String editMap(String p_S) {
-        System.out.println("entering edit map  ");
+
         String l_AckMsg;
+        boolean l_Flag = false;
         try {
-            l_AckMsg = d_Ge.getMapController().loadMap(p_S);
+            String l_Path = "resource/";
+            File l_File = new File(l_Path + p_S.split(" ")[1]);
+            Scanner l_Sc = new Scanner(l_File);
+            while (l_Sc.hasNextLine()) {
+
+                String l_Line = l_Sc.nextLine();
+                if (l_Line.contains("Territories")) {
+                    l_Flag = true;
+                    break;
+                }
+            }
+            l_Sc.close();
+            if (l_Flag) {
+                Target l_TargetObject = new Adapter(new Adaptee(), d_Ge);
+                l_AckMsg = l_TargetObject.loadMap(p_S.split(" ")[1]);
+            } else {
+                Target l_TargetObject = new Target(d_Ge);
+                l_AckMsg = l_TargetObject.loadMap(p_S);
+            }
         } catch (Exception p_Exception) {
             l_AckMsg = p_Exception.getMessage();
         }
@@ -182,6 +249,19 @@ public class Edit extends Phase {
     @Override
     public String getPhaseName() {
         return "EditPhase";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String tournament(String p_string, String p_CommandStringFromInput) {
+        try {
+            d_Ge.tournament(p_CommandStringFromInput);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return " ";
     }
 
 }

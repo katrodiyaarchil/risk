@@ -21,7 +21,7 @@ import strategypattern.HumanPlayerStrategy;
 import strategypattern.RandomPlayerStrategy;
 
 /**
- * This is the GameModelNew class of MVC model.
+ * This is the GameModel class of MVC model.
  * This class has a references of Models.
  * This class acts as an Data info for other controllers.
  */
@@ -57,7 +57,7 @@ public class GameModel implements Serializable {
 
     /**
      * This is parameterized constructor which takes Map parameter
-     *
+     * 
      * @param p_Map parameter of map
      */
     public GameModel(Map p_Map) {
@@ -67,7 +67,7 @@ public class GameModel implements Serializable {
 
     /**
      * get Method for map
-     *
+     * 
      * @return returns map
      */
     public Map getMap() {
@@ -76,7 +76,7 @@ public class GameModel implements Serializable {
 
     /**
      * setting the map
-     *
+     * 
      * @param p_Map
      */
     public void setMap(Map p_Map) {
@@ -85,7 +85,7 @@ public class GameModel implements Serializable {
 
     /**
      * get Method for PlayerID
-     *
+     * 
      * @return returns PlayerID
      */
     public Player getPlayerId1() {
@@ -94,7 +94,7 @@ public class GameModel implements Serializable {
 
     /**
      * set method for player id
-     *
+     * 
      * @param d_PlayerID player id of player
      */
     public void setPlayerId(Player d_PlayerID) {
@@ -103,7 +103,7 @@ public class GameModel implements Serializable {
 
     /**
      * this method will get all the players from the ArrayList
-     *
+     * 
      * @return d_PlayerList, ArrayList of all the available players from player
      *         class
      */
@@ -113,7 +113,7 @@ public class GameModel implements Serializable {
 
     /**
      * This Method Adds the player based on user input from the command prompt.
-     *
+     * 
      * @param p_PlayerName player name of player
      * @param p_Strategy   It is the strategy that a player should adopt
      * @throws Exception if player size is more that country size or if player
@@ -175,7 +175,7 @@ public class GameModel implements Serializable {
 
     /**
      * This Method removes players
-     *
+     * 
      * @param p_PlayerName Name of the player
      * @throws Exception if player is not found
      */
@@ -228,7 +228,7 @@ public class GameModel implements Serializable {
      * <li>Now it will Randomly assign countries to all players and remove the
      * assigned countries from the list
      * </ul>
-     *
+     * 
      * @throws Exception if there are no players in the list
      *
      */
@@ -278,10 +278,10 @@ public class GameModel implements Serializable {
      * <li>Once the respective armies has been assigned to that particular player it
      * will set armies to the player based on armycount
      * </ul>
-     *
+     * 
      * @throws Exception this Method will throw an Exception if player size is less
      *                   than 0
-     *
+     * 
      */
     public void assignReinforcementArmies() throws Exception {
         int l_ContinentValue = 0;
@@ -310,32 +310,33 @@ public class GameModel implements Serializable {
     /**
      * This method takes the filename from the user and saves the game as in saves
      * the game model object in to the file
-     *
+     * 
      * @param p_FileName name of the file to save the game
      */
     public void saveGame(String p_FileName) {
         String l_File = p_FileName;
         System.out.println(p_FileName);
         try (FileOutputStream fileOut = new FileOutputStream("savedgames/" + l_File);
-             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+                ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
             out.writeObject(this);
         } catch (IOException i) {
             i.printStackTrace();
         }
+
     }
 
     /**
      * This methods loads the saved game.
      * It takes the name of the saved game file as input and converts it into the
      * game model object and returns this object
-     *
+     * 
      * @param p_FileName name of the saved game file
      * @return game object of gamemodel
      */
     public static GameModel loadGame(String p_FileName) {
         GameModel game = null;
         try (FileInputStream fileIn = new FileInputStream("savedgames/" + p_FileName);
-             ObjectInputStream in = new ObjectInputStream(fileIn)) {
+                ObjectInputStream in = new ObjectInputStream(fileIn)) {
             game = (GameModel) in.readObject();
         } catch (IOException i) {
             return null;
