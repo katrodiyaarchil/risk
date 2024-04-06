@@ -29,7 +29,7 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
     /**
      * GameModel object to access the current map.
      */
-    private GameModel d_GameModelNew;
+    private GameModel d_GameModel;
     /**
      * Reference to the player using this strategy.
      */
@@ -38,11 +38,11 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
      * Constructor accepting the aggressive player and the game model containing game-related data.
      *
      * @param p_Player       The aggressive type player
-     * @param p_GameModelNew GameModel object
+     * @param p_GameModel GameModel object
      */
-    public AggresivePlayerStrategy(Player p_Player, GameModel p_GameModelNew) {
+    public AggresivePlayerStrategy(Player p_Player, GameModel p_GameModel) {
         this.d_Player = p_Player;
-        this.d_GameModelNew = p_GameModelNew;
+        this.d_GameModel = p_GameModel;
         d_Random = new Random();
         d_Leb.setResult("Aggressive Player");
     }
@@ -83,7 +83,7 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
         Country l_Country = toDefend();
         Country l_ReturnCountry = null;
         ArrayList<Country> l_BorderCountriesList = new ArrayList<>();
-        for (Country l_C : this.d_GameModelNew.getMap().getCountryList()) {
+        for (Country l_C : this.d_GameModel.getMap().getCountryList()) {
             if (l_Country.getBorder().contains(l_C.getCountryName())) {
                 l_BorderCountriesList.add(l_C);
             }

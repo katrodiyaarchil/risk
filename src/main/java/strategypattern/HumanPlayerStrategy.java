@@ -46,7 +46,7 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
      * The constructor initializes the human player and the game model new object.
      *
      * @param p_Player       The Player whose strategy is Human.
-     * @param p_GameModel The Reference of GamemodelNew to get the Map on which
+     * @param p_GameModel The Reference of GameModel to get the Map on which
      *                       the match is to be played.
      */
     public HumanPlayerStrategy(Player p_Player, GameModel p_GameModel) {
