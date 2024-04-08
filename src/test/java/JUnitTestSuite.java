@@ -6,10 +6,10 @@ import model.orders.JUnitTestSuiteOrders;
 import utility.state.JunitTestSuiteState;
 
 /**
- * JUnit Test Suite Class to run all the test suite.
+ * JUnit Test Suite Class to run all the test suits in each test folder.
  */
 @RunWith(Suite.class)
-@SuiteClasses({JUnitTestSuiteModel.class,JUnitTestSuiteOrders.class,JunitTestSuiteState.class})
+@SuiteClasses({ JUnitTestSuiteModel.class, JUnitTestSuiteOrders.class, JunitTestSuiteState.class })
 public class JUnitTestSuite {
 
 }
