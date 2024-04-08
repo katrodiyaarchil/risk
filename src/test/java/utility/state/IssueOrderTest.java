@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import controller.GameEngine;
-import model.GameModel;
+import model.GameModelNew;
 import view.CommandPrompt;
 
 /**
@@ -14,7 +14,7 @@ import view.CommandPrompt;
 public class IssueOrderTest {
 
     CommandPrompt d_CpView;
-    GameModel d_GameModel;
+    GameModelNew d_GameModel;
     GameEngine d_Ge;
     IssueOrder d_Io;
     Phase d_P;
@@ -28,13 +28,13 @@ public class IssueOrderTest {
     public void setTestContext() throws Exception {
 
         d_CpView = new CommandPrompt();
-        d_GameModel = new GameModel();
+        d_GameModel = new GameModelNew();
         d_Ge = new GameEngine(d_CpView, d_GameModel);
         d_Io = new IssueOrder(d_Ge, d_CpView);
     }
 
     /**
-     * This method tests that editmap is invalid in issue order phase.
+     * Tests that editmap is invalid for issue order phase.
      */
     @Test
     public void testEditMap() {
@@ -47,7 +47,7 @@ public class IssueOrderTest {
     }
 
     /**
-     * This method tests that editCountry is invalid in issue order phase.
+     * Tests that editCountry is invalid for issue order phase.
      */
     @Test
     public void testEditCountry() {
@@ -60,7 +60,7 @@ public class IssueOrderTest {
     }
 
     /**
-     * This method tests that editContinent is invalid in issue order phase.
+     * Tests that editContinent is invalid for issue order phase.
      */
     @Test
     public void testEditContinent() {
@@ -73,7 +73,7 @@ public class IssueOrderTest {
     }
 
     /**
-     * This method tests that editNeighbor() is invalid in issue order phase.
+     * Tests that editNeighbor method is invalid for issue order phase.
      */
     @Test
     public void testEditNeighbor() {
@@ -86,7 +86,7 @@ public class IssueOrderTest {
     }
 
     /**
-     * This method tests that savemap() is invalid in issue order phase.
+     * Tests that savemap method is invalid for issue order phase.
      */
     @Test
     public void testSaveMap() {
@@ -99,7 +99,7 @@ public class IssueOrderTest {
     }
 
     /**
-     * This method tests that loadmap() is invalid in issue order phase.
+     * Tests that loadmap method is invalid for issue order phase.
      */
     @Test
     public void testLoadMap() {
@@ -112,7 +112,7 @@ public class IssueOrderTest {
     }
 
     /**
-     * This method tests that addplayer() is invalid in issue order phase.
+     * Tests that addplayer method is invalid for issue order phase.
      */
     @Test
     public void testAddPlayers() {
@@ -125,7 +125,7 @@ public class IssueOrderTest {
     }
 
     /**
-     * This method tests that assigncountries() is invalid in issue order phase.
+     * Tests that assigncountries method is invalid for issue order phase.
      */
     @Test
     public void testAssignCountries() {
@@ -139,7 +139,7 @@ public class IssueOrderTest {
     }
 
     /**
-     * This method tests that validatemap() is invalid in issue order phase.
+     * Tests that validatemap method is invalid for issue order phase.
      */
     @Test
     public void testValidateMap() {

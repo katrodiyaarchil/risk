@@ -7,23 +7,46 @@ import org.junit.Test;
 import controller.GameEngine;
 import model.Continent;
 import model.Country;
-import model.GameModel;
+import model.GameModelNew;
 import model.Map;
 import model.Player;
 import view.CommandPrompt;
 
 /**
- * This class tests the methods in Blockade order class.
+ * This class tests the methods written in Blockade order class.
  */
 public class BlockadeTest {
+    /**
+     * Object of CommandPrompt
+     */
     CommandPrompt d_CpView;
-    GameModel d_GameModel;
+    /**
+     * Object of GameModel
+     */
+    GameModelNew d_GameModel;
+    /**
+     * Object of GameEngine
+     */
     GameEngine d_Ge;
+    /**
+     * Objects of Continent
+     */
     Continent d_C0, d_C1;
+    /**
+     * Objects of country
+     */
     Country d_Country1, d_Country2, d_Country3, d_Country4, d_Country5;
-
+    /**
+     * Objects of Players
+     */
     Player d_P1, d_P2;
+    /**
+     * Objects of Map
+     */
     Map d_Map;
+    /**
+     * object of Blockade
+     */
     Blockade d_Block;
 
     /**
@@ -63,10 +86,10 @@ public class BlockadeTest {
         d_Map.addBorder("india", "japan");
         d_Map.addBorder("kenya", "india");
         d_Map.addBorder("japan", "india");
-        d_GameModel = new GameModel(d_Map);
+        d_GameModel = new GameModelNew(d_Map);
         d_Ge = new GameEngine(d_CpView, d_GameModel);
-        d_GameModel.addPlayer("raj");
-        d_GameModel.addPlayer("kumar");
+        d_GameModel.addPlayer("raj", "human");
+        d_GameModel.addPlayer("kumar", "human");
         d_P1 = new Player("raj", d_GameModel);
         d_P2 = new Player("kumar", d_GameModel);
 
@@ -92,45 +115,48 @@ public class BlockadeTest {
     }
 
     /**
-     * This method tests the situation when a player does not have a blockade card
-     * and still issuing the order of it.
+     * This method tests the scenario of player not having a blockade card and still
+     * issuing the order of it.
      */
     @Test
     public void testCardCheck() {
-        String l_Actual="", l_Expected="Player doesn't have a blockade card";
-        d_Block = new Blockade(d_P1,  d_Country1);
+        String l_Actual = "", l_Expected = "Player does not have a blockade card";
+        d_Block = new Blockade(d_P1, d_Country1);
         d_Block.execute();
         l_Actual = d_Block.getPlayer().getResult();
-        assertEquals(l_Expected,l_Actual);
+        assertEquals(l_Expected, l_Actual);
 
     }
+
     /**
-     * This method tests if the country is owned by the same player who issued the blockade order.
+     * This method tests if the country belongs to the same player who issued the
+     * blockade order.
      */
     @Test
     public void testCountryCheck() {
         d_P1.setCard("Blockade");
-        String l_Actual="", l_Expected="\n" +
-                "This country egypt doesn't belongs to raj";
-        d_Block = new Blockade(d_P1,  d_Country5);
+        String l_Actual = "", l_Expected = "\nThis country egypt doesnot belongs to raj";
+        d_Block = new Blockade(d_P1, d_Country5);
         d_Block.execute();
         l_Actual = d_Block.getPlayer().getResult();
-        assertEquals(l_Expected,l_Actual);
+        assertEquals(l_Expected, l_Actual);
 
     }
+
     /**
-     * This method tests that after using the blockade card,
-     * it is removed and not available for using again.
+     * This method tests that after using the blockade card, it is removed from the
+     * player's list and not able to use again.
      */
     @Test
     public void testBlockadeAgain() {
         d_P1.setCard("Blockade");
-        String l_Actual="", l_Expected="Player doesn't have a blockade card";
-        d_Block = new Blockade(d_P1,  d_Country1);
+        String l_Actual = "", l_Expected = "Player does not have a blockade card";
+        d_Block = new Blockade(d_P1, d_Country1);
         d_Block.execute();
         d_Block.execute();
         l_Actual = d_Block.getPlayer().getResult();
-        assertEquals(l_Expected,l_Actual);
+        assertEquals(l_Expected, l_Actual);
 
     }
+
 }

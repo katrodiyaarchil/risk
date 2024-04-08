@@ -5,16 +5,16 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import controller.GameEngine;
-import model.GameModel;
+import model.GameModelNew;
 import view.CommandPrompt;
 
 /**
- * This class tests the methods in ExecuteOrder phase class.
+ * This class tests the methods written inside ExecuteOrder phase class.
  */
 public class ExecuteOrderTest {
 
     CommandPrompt d_CpView;
-    GameModel d_GameModel;
+    GameModelNew d_GameModel;
     GameEngine d_Ge;
     ExecuteOrder d_Eo;
     Phase d_P;
@@ -28,13 +28,13 @@ public class ExecuteOrderTest {
     public void setTestContext() throws Exception {
 
         d_CpView = new CommandPrompt();
-        d_GameModel = new GameModel();
+        d_GameModel = new GameModelNew();
         d_Ge = new GameEngine(d_CpView, d_GameModel);
         d_Eo = new ExecuteOrder(d_Ge, d_CpView);
     }
 
     /**
-     * This method tests that editmap() is invalid in the Execute Order phase.
+     * This method tests that editmap method is invalid for the Execute Order phase.
      */
     @Test
     public void testEditMap() {
@@ -51,7 +51,7 @@ public class ExecuteOrderTest {
     }
 
     /**
-     * This method tests that editCountry() is invalid in the execute phase.
+     * This method tests that editCountry method is invalid for the execute phase.
      */
     @Test
     public void testEditCountry() {
@@ -66,7 +66,7 @@ public class ExecuteOrderTest {
     }
 
     /**
-     * This method tests that editContinent() is invalid in the execute phase.
+     * This method tests that editContinent method is invalid for the execute phase.
      */
     @Test
     public void testEditContinent() {
@@ -81,7 +81,7 @@ public class ExecuteOrderTest {
     }
 
     /**
-     * This method tests that editNeighbor() is invalid in the execute phase.
+     * This method tests that editNeighbor method is invalid for the execute phase.
      */
     @Test
     public void testEditNeighbor() {
@@ -96,7 +96,7 @@ public class ExecuteOrderTest {
     }
 
     /**
-     * This method tests that savemap() is invalid in the execute phase.
+     * This method tests that savemap method is invalid for the execute phase.
      */
     @Test
     public void testSaveMap() {
@@ -111,7 +111,7 @@ public class ExecuteOrderTest {
     }
 
     /**
-     * This method tests that loadmap is invalid in the execute phase.
+     * This method tests that loadmap is invalid for the execute phase.
      */
     @Test
     public void testLoadMap() {
@@ -126,7 +126,8 @@ public class ExecuteOrderTest {
     }
 
     /**
-     * This method tests that addPlayer() is invalid in the execute order phase.
+     * This method tests that addPlayer method is invalid for the execute order
+     * phase.
      */
     @Test
     public void testAddPlayers() {
@@ -141,7 +142,8 @@ public class ExecuteOrderTest {
     }
 
     /**
-     * This method tests that assigncountris() is invalid in the execute order phase.
+     * This method tests that assigncountris method is invalid for the execute order
+     * phase.
      */
     @Test
     public void testAssignCountries() {
@@ -156,7 +158,7 @@ public class ExecuteOrderTest {
     }
 
     /**
-     * This method tests that validatemap() is invalid in the execute phase.
+     * This method tests that validatemap method is invalid for the execute phase.
      */
     @Test
     public void testValidateMap() {

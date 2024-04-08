@@ -6,22 +6,46 @@ import org.junit.Test;
 import controller.GameEngine;
 import model.Continent;
 import model.Country;
-import model.GameModel;
+import model.GameModelNew;
 import model.Map;
 import model.Player;
 import view.CommandPrompt;
 
 /**
- * This class is to test the methods in Advance order class.
+ * This class tests the methods written in Advance order class.
  */
 public class AdvanceTest {
+    /**
+     * Object of CommandPrompt
+     */
     CommandPrompt d_CpView;
-    GameModel d_GameModel;
+    /**
+     * Object of GameModel
+     */
+    GameModelNew d_GameModel;
+    /**
+     * Object of GameEngine
+     */
     GameEngine d_Ge;
+    /**
+     * Objects of Continent
+     */
     Continent d_C0, d_C1;
+    /**
+     * Objects of country
+     */
     Country d_Country1, d_Country2, d_Country3, d_Country4, d_Country5;
+    /**
+     * Objects of Player
+     */
     Player d_P1, d_P2;
+    /**
+     * Objects of Map
+     */
     Map d_Map;
+    /**
+     * Objects of advance
+     */
     Advance d_Adv;
 
     /**
@@ -61,10 +85,10 @@ public class AdvanceTest {
         d_Map.addBorder("india", "japan");
         d_Map.addBorder("kenya", "india");
         d_Map.addBorder("japan", "india");
-        d_GameModel = new GameModel(d_Map);
+        d_GameModel = new GameModelNew(d_Map);
         d_Ge = new GameEngine(d_CpView, d_GameModel);
-        d_GameModel.addPlayer("raj");
-        d_GameModel.addPlayer("kumar");
+        d_GameModel.addPlayer("raj", "human");
+        d_GameModel.addPlayer("kumar", "human");
         d_P1 = new Player("raj", d_GameModel);
         d_P2 = new Player("kumar", d_GameModel);
 
@@ -90,7 +114,7 @@ public class AdvanceTest {
     }
 
     /**
-     * This method tests validatemap().
+     * This method tests the validatemap method.
      *
      * @throws Exception any exception thrown during validateMap method check.
      */
@@ -116,7 +140,8 @@ public class AdvanceTest {
     }
 
     /**
-     * This method tests if the source and target countries are the same in the advance order.
+     * This method tests if the source and target countries are same during the
+     * advance order.
      */
     @Test
     public void testSourceTargetTerritory() {
@@ -129,7 +154,8 @@ public class AdvanceTest {
     }
 
     /**
-     * This method tests if source and target countries are not neighbors in the advance order.
+     * This method test if source and target countries are not neighbors during
+     * advance order.
      */
     @Test
     public void testSourceTargetNeighbours() {
