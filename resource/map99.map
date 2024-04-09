@@ -1,0 +1,15 @@
+
+continents
+asia 3
+europe 4
+africa 5
+
+countries
+1 india 1
+2 kenya 3
+3 paris 2
+
+borders
+1 2 
+2 3 
+3 1 

@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import model.Continent;
 import model.Country;
-import model.GameModelNew;
+import model.GameModel;
 import model.Map;
 import model.Player;
 
@@ -25,9 +25,9 @@ public class RandomPlayerStrategyTest {
      */
     Map d_Map;
     /**
-     * GameModelNew Object
+     * GameModel Object
      */
-    GameModelNew d_GameModelNew;
+    GameModel d_GameModel;
     /**
      * Strategy Object
      */
@@ -44,8 +44,8 @@ public class RandomPlayerStrategyTest {
     @Before
     public void setTestContext() throws Exception {
         d_Map = new Map();
-        d_GameModelNew = new GameModelNew(d_Map);
-        d_Player1 = new Player("raj", d_GameModelNew);
+        d_GameModel = new GameModel(d_Map);
+        d_Player1 = new Player("raj", d_GameModel);
         d_Continent = new Continent("asia", 3);
         d_Map.addContinent(d_Continent.getContinentName(), "3");
         d_Map.addCountry("india", "asia");
@@ -64,7 +64,7 @@ public class RandomPlayerStrategyTest {
     public void testDefendCheck() {
         String l_Actual = "";
         String l_Expected = "The Random player is defending from india";
-        RandomPlayerStrategy l_random = new RandomPlayerStrategy(d_Player1, d_GameModelNew);
+        RandomPlayerStrategy l_random = new RandomPlayerStrategy(d_Player1, d_GameModel);
         l_random.toDefend();
         l_Actual = d_Player1.getResult();
         assertEquals(l_Expected, l_Actual);

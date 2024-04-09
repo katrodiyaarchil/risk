@@ -1,0 +1,16 @@
+
+continents
+asia 3
+aus 2
+
+countries
+1 india 1
+2 pakistan 1
+3 sydney 2
+4 mel 2
+
+borders
+1 2  
+2 1 
+3 4 
+4 3 1 

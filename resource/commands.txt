@@ -1,0 +1,26 @@
+editmap World.map
+editcontinent -add 4 NorthAmerica
+editcountry -add USA NorthAmerica -add Canada NorthAmerica
+editneighbor -add Canada USA -add USA Canada -add UK Canada -add Canada UK
+showmap
+validatemap
+savemap World.map
+
+
+-----------
+loadmap World.map
+gameplayer -add Abhishek human -add Karnik cheater
+assigncountries 
+
+deploy India 7
+advance India Kenya 6
+quit
+
+tournament -M map99.map,World.map -P cheater,benevolent -G 3 -D 49
+
+tournament -M map99.map,World.map,canada.map -P cheater,aggressive,benevolent -G 5 -D 49
+
+tournament -M map99.map,World.map,canada.map -P aggressive,benevolent -G 5 -D 49
+
+savegame abc.txt
+loadgame abc.txt
