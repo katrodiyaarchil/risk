@@ -44,7 +44,7 @@ public class PlayerController {
 	/**
 	 * object of the GameModel 
 	 */
-	private GameModelNew d_GameModel;
+	private GameModel d_GameModel;
 	/**
 	 * LogEntryBuffer object to log in log file
 	 */
@@ -71,12 +71,12 @@ public class PlayerController {
 	private boolean d_SaveGame=false;
 	/**
 	 * Constructor of Player controller
-	 * @param p_GameModelNew This is the reference of the the game model which is used to access the map.
+	 * @param p_GameModel This is the reference of the the game model which is used to access the map.
 	 * @param p_CpView object of command prompt for communicating with player
 	 * @param p_GameEngine object of Game Engine
 	 */
-	PlayerController(GameModelNew p_GameModelNew,CommandPrompt p_CpView, GameEngine p_GameEngine) {
-		d_GameModel = p_GameModelNew;
+	PlayerController(GameModel p_GameModel,CommandPrompt p_CpView, GameEngine p_GameEngine) {
+		d_GameModel = p_GameModel;
 		d_Players = d_GameModel.getAllPlayers();
 		d_CpView=p_CpView;
 		d_LEB=new LogEntryBuffer();
