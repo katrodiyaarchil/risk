@@ -303,14 +303,15 @@ public class GameEngine {
         for (Player l_Player : d_PlayerList) {
             d_LEB.setResult("\n" + l_Player.getPlayerName() + "-->" + "armies assigned:" + l_Player.getPlayerArmies());
             d_CpView.setCommandAcknowledgement(
-                    "\n" + l_Player.getPlayerName() + "-->" + "armies assigned:" + l_Player.getPlayerArmies());
+                    "\n" + l_Player.getPlayerName() + "-->" + "armies assigned:" + l_Player.getPlayerArmies() + "\n");
             d_LEB.setResult("\n" + "Countries Assigned: ");
-            d_CpView.setCommandAcknowledgement("\n" + "Countries Assigned: ");
+            d_CpView.setCommandAcknowledgement("\n" + "Countries Assigned: \n");
 
             for (Country l_Country : l_Player.getCountryList()) {
                 d_LEB.setResult(l_Country.getCountryName() + ",");
                 d_CpView.setCommandAcknowledgement(l_Country.getCountryName() + ",");
             }
+            d_CpView.setCommandAcknowledgement("\n");
             if (l_Player.getCardList().size() > 0) {
                 d_LEB.setResult("\n" + "Cards Assigned: ");
                 d_CpView.setCommandAcknowledgement("\n" + "Cards Assigned: ");
@@ -320,6 +321,7 @@ public class GameEngine {
                     d_CpView.setCommandAcknowledgement(l_Str + ",");
                 }
             }
+            d_CpView.setCommandAcknowledgement("\n");
         }
         d_LEB.setResult(
                 ":::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::");

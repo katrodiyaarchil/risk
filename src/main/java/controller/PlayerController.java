@@ -309,7 +309,7 @@ public class PlayerController {
 				l_TempPlayer.setAtleastOneBattleWon(false);
 			}
 		}
-		d_CpView.setCommandAcknowledgement("\nOrders are Succesfully Executed!!");
+		d_CpView.setCommandAcknowledgement("\nOrders are Succesfully Executed!! \n");
 		d_LEB.setResult("\nOrders are Succesfully Executed!!");
 		clearNegotiatedPlayerList();
 		removePlayerWithNoCountry();
@@ -363,7 +363,7 @@ public class PlayerController {
 		{
 			setWinner(l_CheckPlayer);
 			d_GameEngine.setPhase(new GameOver(d_GameEngine,d_CpView));
-			d_CpView.setCommandAcknowledgement("\n"+l_CheckPlayer.getPlayerName()+" is the winner of the game!");
+			d_CpView.setCommandAcknowledgement("\n"+l_CheckPlayer.getPlayerName()+" is the winner of the game! \n");
 		}
 
 	}

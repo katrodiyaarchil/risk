@@ -21,9 +21,9 @@ public class GameOver extends Phase {
     public GameOver(GameEngine p_Ge, CommandPrompt p_Vw) {
         super(p_Ge, p_Vw);
         d_Vw.clearTextArea();
-        d_Vw.setCommandAcknowledgement("Game Over");
+        d_Vw.setCommandAcknowledgement("Game Over \n");
         d_Leb = new LogEntryBuffer();
-        d_Leb.setResult("This is Game over phase");
+        d_Leb.setResult("This is Game over phase \n");
     }
 
     /**
@@ -32,7 +32,7 @@ public class GameOver extends Phase {
     @Override
     public String editMap(String p_S) {
         d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName() + "\n");
-        d_Leb.setResult("Invalid command in state ");
+        d_Leb.setResult("Invalid command in state \n");
         return null;
     }
     /**
