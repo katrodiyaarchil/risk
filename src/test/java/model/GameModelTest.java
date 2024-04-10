@@ -18,7 +18,7 @@ public class GameModelTest {
     /**
      * Object of GameModel
      */
-    GameModelNew d_Game = new GameModelNew();
+    GameModel d_Game = new GameModel();
 
     /**
      * Object of GameEngine
@@ -75,7 +75,7 @@ public class GameModelTest {
         d_Map.addCountry("india", "asia");
         d_Map.addCountry("china", "asia");
         d_Map.addCountry("japan", "asia");
-        d_Game = new GameModelNew(d_Map);
+        d_Game = new GameModel(d_Map);
         d_Game.addPlayer("raj", "human");
         d_Game.addPlayer("kumar", "human");
         d_C1 = new Player("raj", d_Game);
@@ -188,7 +188,7 @@ public class GameModelTest {
      */
     @Test
     public void testSaveLoadGamePLayercheck() throws Exception {
-        GameModelNew l_Actual = null;
+        GameModel l_Actual = null;
         int l_Expected = 3;
         int l_ActualValue = 0;
         d_Game.startUpPhase();
@@ -207,7 +207,7 @@ public class GameModelTest {
      */
     @Test
     public void testSaveLoadGameCountrycheck() throws Exception {
-        GameModelNew l_Actual = null;
+        GameModel l_Actual = null;
         int l_Expected = 3;
         int l_ActualValue = 0;
         d_Game.startUpPhase();
@@ -226,7 +226,7 @@ public class GameModelTest {
      */
     @Test
     public void testSaveLoadGameContinentcheck() throws Exception {
-        GameModelNew l_Actual = null;
+        GameModel l_Actual = null;
         int l_Expected = 1;
         int l_ActualValue = 0;
         d_Game.startUpPhase();

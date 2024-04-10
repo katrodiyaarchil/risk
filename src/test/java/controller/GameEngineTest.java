@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import model.GameModelNew;
+import model.GameModel;
 import view.CommandPrompt;
 
 /**
@@ -21,7 +21,7 @@ public class GameEngineTest {
     /**
      * Object of GameModel
      */
-    GameModelNew d_GameModel;
+    GameModel d_GameModel;
     /**
      * Object of GameEngine
      */
@@ -39,7 +39,7 @@ public class GameEngineTest {
     @Before
     public void setTestContext() throws Exception {
         d_CpView = new CommandPrompt();
-        d_GameModel = new GameModelNew();
+        d_GameModel = new GameModel();
         d_GameEngine = new GameEngine(d_CpView, d_GameModel);
     }
 

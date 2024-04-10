@@ -5,30 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="44a65139-2b7f-43b3-8fa9-3d51ad1cd012" name="Changes" comment="Created HumanPlayerStrategy in StrategyPattern">
-      <change afterPath="$PROJECT_DIR$/src/test/java/controller/GameEngineTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/controller/JUnitTestSuiteController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/strategypattern/AggresivePlayerStrategyTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/strategypattern/BenevolentPlayerStrategyTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/strategypattern/CheaterPlayerStrategyTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/strategypattern/JUnitTestSuiteStrategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/strategypattern/RandomPlayerStrategyTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/JUnitTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/JUnitTestSuite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/World.map" beforeDir="false" afterPath="$PROJECT_DIR$/resource/World.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/canada.map" beforeDir="false" afterPath="$PROJECT_DIR$/resource/canada.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/logFile" beforeDir="false" afterPath="$PROJECT_DIR$/resource/logFile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/map1" beforeDir="false" afterPath="$PROJECT_DIR$/resource/map1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/map2" beforeDir="false" afterPath="$PROJECT_DIR$/resource/map2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/observerpattern/LogEntryBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/observerpattern/LogEntryBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/observerpattern/Observable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/observerpattern/Observable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/observerpattern/Observer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/observerpattern/Observer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/controller/GameEngineTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/controller/GameEngineTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/GameModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/GameModelTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/model/JUnitTestSuiteModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/JUnitTestSuiteModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/MapTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/MapTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/orders/AdvanceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/orders/AdvanceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/orders/AirliftTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/orders/AirliftTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/orders/BlockadeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/orders/BlockadeTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/orders/BombTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/orders/BombTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/orders/DeployTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/orders/DeployTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/model/orders/JUnitTestSuiteOrders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/orders/JUnitTestSuiteOrders.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/orders/NegotiateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/orders/NegotiateTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/strategypattern/AggresivePlayerStrategyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/strategypattern/AggresivePlayerStrategyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/strategypattern/BenevolentPlayerStrategyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/strategypattern/BenevolentPlayerStrategyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/strategypattern/CheaterPlayerStrategyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/strategypattern/CheaterPlayerStrategyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/strategypattern/RandomPlayerStrategyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/strategypattern/RandomPlayerStrategyTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/utility/state/EditTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/utility/state/EditTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/utility/state/ExecuteOrderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/utility/state/ExecuteOrderTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/utility/state/IssueOrderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/utility/state/IssueOrderTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/utility/state/JunitTestSuiteState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/utility/state/JunitTestSuiteState.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +54,9 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
   <component name="ProjectId" id="2cQfHU1LilBnOP8LAWzV87UCtR8" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -59,30 +65,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.2" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.JUnitTestSuite.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/FALL 23/Winter 24/APP/build3/risk",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/PPT" />
       <recent name="$PROJECT_DIR$/UML" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.StartGame">
-    <configuration name="StartGame" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="17" />
-      <option name="MAIN_CLASS_NAME" value="view.StartGame" />
-      <module name="risk" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.JUnitTestSuite">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -96,21 +102,43 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="StartGame" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="MAIN_CLASS_NAME" value="view.StartGame" />
+      <module name="risk" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JUnitTestSuite" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="warzone-game" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="JUnitTestSuite" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
         <option name="myRunnerSettings" />
         <option name="myRunnerParameters">
           <MavenRunnerParameters>
+            <option name="cmdOptions" />
             <option name="profiles">
               <set />
             </option>
             <option name="goals">
               <list />
             </option>
+            <option name="multimoduleDir" />
             <option name="pomFileName" />
             <option name="profilesMap">
               <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
             </option>
             <option name="resolveToWorkspace" value="false" />
             <option name="workingDirPath" value="$PROJECT_DIR$" />
@@ -125,6 +153,7 @@
         <option name="myRunnerSettings" />
         <option name="myRunnerParameters">
           <MavenRunnerParameters>
+            <option name="cmdOptions" />
             <option name="profiles">
               <set />
             </option>
@@ -133,9 +162,13 @@
                 <option value="test" />
               </list>
             </option>
+            <option name="multimoduleDir" />
             <option name="pomFileName" />
             <option name="profilesMap">
               <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
             </option>
             <option name="resolveToWorkspace" value="false" />
             <option name="workingDirPath" value="$PROJECT_DIR$" />
@@ -146,14 +179,20 @@
     </configuration>
     <list>
       <item itemvalue="Application.StartGame" />
+      <item itemvalue="JUnit.JUnitTestSuite" />
       <item itemvalue="Maven.risk [test]" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.JUnitTestSuite" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
-        <option value="jdk-19.0.2-corretto-19.0.2-4caba194b151-48ba4555" />
+        <option value="jdk-17.0.10-temurin-17.0.10-4caba194b151-b3785831" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
       </set>
     </attachedChunks>
   </component>
@@ -167,6 +206,7 @@
       <updated>1708048639227</updated>
       <workItem from="1708305073582" duration="2267000" />
       <workItem from="1712533399214" duration="581000" />
+      <workItem from="1712696373950" duration="1411000" />
     </task>
     <task id="LOCAL-00001" summary="Implementing issue order in utility/state">
       <option name="closed" value="true" />
@@ -296,7 +336,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fixed" />

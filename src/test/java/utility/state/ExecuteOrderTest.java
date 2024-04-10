@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import controller.GameEngine;
-import model.GameModelNew;
+import model.GameModel;
 import view.CommandPrompt;
 
 /**
@@ -14,7 +14,7 @@ import view.CommandPrompt;
 public class ExecuteOrderTest {
 
     CommandPrompt d_CpView;
-    GameModelNew d_GameModel;
+    GameModel d_GameModel;
     GameEngine d_Ge;
     ExecuteOrder d_Eo;
     Phase d_P;
@@ -28,7 +28,7 @@ public class ExecuteOrderTest {
     public void setTestContext() throws Exception {
 
         d_CpView = new CommandPrompt();
-        d_GameModel = new GameModelNew();
+        d_GameModel = new GameModel();
         d_Ge = new GameEngine(d_CpView, d_GameModel);
         d_Eo = new ExecuteOrder(d_Ge, d_CpView);
     }

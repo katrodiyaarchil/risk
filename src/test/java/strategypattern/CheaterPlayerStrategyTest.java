@@ -2,7 +2,7 @@ package strategypattern;
 
 import model.Continent;
 import model.Country;
-import model.GameModelNew;
+import model.GameModel;
 import model.Map;
 import model.Player;
 /**
@@ -20,9 +20,9 @@ public class CheaterPlayerStrategyTest {
      */
     Map d_Map;
     /**
-     * Gamemodelnew object
+     * GameModel object
      */
-    GameModelNew d_GameModelNew;
+    GameModel d_GameModel;
     /**
      * Strategy Object
      */

@@ -7,7 +7,7 @@ import org.junit.Test;
 import controller.GameEngine;
 import model.Continent;
 import model.Country;
-import model.GameModelNew;
+import model.GameModel;
 import model.Map;
 import model.Player;
 import view.CommandPrompt;
@@ -23,7 +23,7 @@ public class BombTest {
     /**
      * Object of GameModel
      */
-    GameModelNew d_GameModel;
+    GameModel d_GameModel;
     /**
      * Object of GameEngine
      */
@@ -86,7 +86,7 @@ public class BombTest {
         d_Map.addBorder("india", "japan");
         d_Map.addBorder("kenya", "india");
         d_Map.addBorder("japan", "india");
-        d_GameModel = new GameModelNew(d_Map);
+        d_GameModel = new GameModel(d_Map);
         d_Ge = new GameEngine(d_CpView, d_GameModel);
         d_GameModel.addPlayer("raj", "human");
         d_GameModel.addPlayer("kumar", "human");

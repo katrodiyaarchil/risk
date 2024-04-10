@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import model.Continent;
 import model.Country;
-import model.GameModelNew;
+import model.GameModel;
 import model.Map;
 import model.Player;
 
@@ -27,9 +27,9 @@ public class AggresivePlayerStrategyTest {
      */
     Map d_Map;
     /**
-     * GamemodelNew Object
+     * GameModel Object
      */
-    GameModelNew d_GameModelNew;
+    GameModel d_GameModel;
     /**
      * Strategy Objects
      */
@@ -46,9 +46,9 @@ public class AggresivePlayerStrategyTest {
     @Before
     public void setTestContext() throws Exception {
         d_Map = new Map();
-        d_GameModelNew = new GameModelNew(d_Map);
-        d_Player1 = new Player("raj", d_GameModelNew);
-        d_Player2 = new Player("zeal", d_GameModelNew);
+        d_GameModel = new GameModel(d_Map);
+        d_Player1 = new Player("raj", d_GameModel);
+        d_Player2 = new Player("zeal", d_GameModel);
         d_Continent = new Continent("asia", 3);
         d_Map.addContinent(d_Continent.getContinentName(), "3");
         d_Map.addCountry("india", "asia");
@@ -85,7 +85,7 @@ public class AggresivePlayerStrategyTest {
     public void testDefendCheck() {
         String l_Actual = "";
         String l_Expected = "The aggressive player is defending from china";
-        AggresivePlayerStrategy l_Agress = new AggresivePlayerStrategy(d_Player1, d_GameModelNew);
+        AggresivePlayerStrategy l_Agress = new AggresivePlayerStrategy(d_Player1, d_GameModel);
         l_Agress.toDefend();
         l_Actual = d_Player1.getResult();
         assertEquals(l_Expected, l_Actual);
@@ -99,7 +99,7 @@ public class AggresivePlayerStrategyTest {
     public void testAttackFromCheck() {
         String l_Actual = "";
         String l_Expected = "The aggressive player is attacking on japan";
-        AggresivePlayerStrategy l_Agress = new AggresivePlayerStrategy(d_Player1, d_GameModelNew);
+        AggresivePlayerStrategy l_Agress = new AggresivePlayerStrategy(d_Player1, d_GameModel);
         l_Agress.toAttack();
         l_Actual = d_Player1.getResult();
         assertEquals(l_Expected, l_Actual);

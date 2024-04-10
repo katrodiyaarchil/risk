@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import model.Continent;
 import model.Country;
-import model.GameModelNew;
+import model.GameModel;
 import model.Map;
 import model.Player;
 
@@ -26,9 +26,9 @@ public class BenevolentPlayerStrategyTest {
      */
     Map d_Map;
     /**
-     * GamemodelNew object
+     * GameModel object
      */
-    GameModelNew d_GameModelNew;
+    GameModel d_GameModel;
     /**
      * Strategy Objects
      */
@@ -44,12 +44,12 @@ public class BenevolentPlayerStrategyTest {
 
     @Before
     public void setTestContext() throws Exception {
-        d_GameModelNew = new GameModelNew();
+        d_GameModel = new GameModel();
         d_Map = new Map();
-        d_Player1 = new Player("raj", d_GameModelNew);
-        d_Player2 = new Player("zeal", d_GameModelNew);
-        d_Strategy1 = new BenevolentPlayerStrategy(d_Player1, d_GameModelNew);
-        d_Strategy2 = new AggresivePlayerStrategy(d_Player2, d_GameModelNew);
+        d_Player1 = new Player("raj", d_GameModel);
+        d_Player2 = new Player("zeal", d_GameModel);
+        d_Strategy1 = new BenevolentPlayerStrategy(d_Player1, d_GameModel);
+        d_Strategy2 = new AggresivePlayerStrategy(d_Player2, d_GameModel);
         d_Player1.setPlayerStrategy(d_Strategy1);
         d_Player2.setPlayerStrategy(d_Strategy2);
         d_Continent = new Continent("asia", 3);
@@ -83,7 +83,7 @@ public class BenevolentPlayerStrategyTest {
     public void testDefendCheck() {
         String l_Actual = "";
         String l_Expected = "the Benevolent Player is defefnding country india";
-        BenevolentPlayerStrategy l_Benv = new BenevolentPlayerStrategy(d_Player1, d_GameModelNew);
+        BenevolentPlayerStrategy l_Benv = new BenevolentPlayerStrategy(d_Player1, d_GameModel);
         l_Benv.toDefend();
         l_Actual = d_Player1.getResult();
         assertEquals(l_Expected, l_Actual);
