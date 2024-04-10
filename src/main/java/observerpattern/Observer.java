@@ -8,7 +8,7 @@ public interface Observer {
 	/**
 	 * This method updates the file on each log entry in LogEntryBuffer.
 	 * 
-	 * @param p_Observable Oject of observable who notifies the Observer.
+	 * @param p_observable Oject of observable who notifies the Observer.
 	 */
     public void update(Observable p_observable);
 }

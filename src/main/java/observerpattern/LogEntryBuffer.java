@@ -20,7 +20,7 @@ public class LogEntryBuffer extends Observable{
     /**
      * This method is called when we want to log anything in the file.
      * 
-     * @param p_Result String to be logged.
+     * @param p_result String to be logged.
      */
     public void setResult(String p_result){
         this.d_result = p_result;

@@ -37,7 +37,7 @@ public class MapController {
     public String saveMap(String p_Str) throws Exception {
         String[] l_CommandArray = p_Str.split(" ");
         if (l_CommandArray.length < 2) {
-            throw new Exception("\nPlease Enter valid Filename to save the map");
+            throw new Exception("\nPlease Enter valid Filename to save the map \n");
         }
         return d_MapModel.saveMap(l_CommandArray[1]);
     }
@@ -88,7 +88,7 @@ public class MapController {
         if (!d_MapModel.getContinentList().isEmpty()) {
             return d_MapModel.validateMap();
         } else {
-            throw new Exception("\nNo map to Validate");
+            throw new Exception("\nNo map to Validate \n");
         }
     }
 

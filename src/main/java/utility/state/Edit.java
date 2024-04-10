@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-import adapterpattern.Adaptee;
-import adapterpattern.Adapter;
-import adapterpattern.Target;
+import file.ConquestLoader;
+import file.Adapter;
+import file.MapLoader;
 import controller.GameEngine;
 import observerpattern.LogEntryBuffer;
 import view.CommandPrompt;
@@ -60,11 +60,11 @@ public class Edit extends Phase {
             }
             l_Sc.close();
             if (l_Flag) {
-                Target l_TargetObject = new Adapter(new Adaptee(), d_Ge);
-                l_AckMsg = l_TargetObject.loadMap(p_S.split(" ")[1]);
+                MapLoader l_MapLoaderObject = new Adapter(new ConquestLoader(), d_Ge);
+                l_AckMsg = l_MapLoaderObject.loadMap(p_S.split(" ")[1]);
             } else {
-                Target l_TargetObject = new Target(d_Ge);
-                l_AckMsg = l_TargetObject.loadMap(p_S);
+                MapLoader l_MapLoaderObject = new MapLoader(d_Ge);
+                l_AckMsg = l_MapLoaderObject.loadMap(p_S);
             }
 
         } catch (Exception p_Exception) {
@@ -110,12 +110,12 @@ public class Edit extends Phase {
 
                 if (l_StringOrder.equals("1")) {
 
-                    Target l_TargetObject = new Adapter(new Adaptee(), d_Ge);
-                    l_AckMsg = l_TargetObject.saveMap(p_S.split(" ")[1]);
+                    MapLoader l_MapLoaderObject = new Adapter(new ConquestLoader(), d_Ge);
+                    l_AckMsg = l_MapLoaderObject.saveMap(p_S.split(" ")[1]);
                     break;
                 } else if (l_StringOrder.equals("2")) {
-                    Target l_TargetObject = new Target(d_Ge);
-                    l_AckMsg = l_TargetObject.saveMap(p_S);
+                    MapLoader l_MapLoaderObject = new MapLoader(d_Ge);
+                    l_AckMsg = l_MapLoaderObject.saveMap(p_S);
                     break;
                 }
 
@@ -161,11 +161,11 @@ public class Edit extends Phase {
             }
             l_Sc.close();
             if (l_Flag) {
-                Target l_TargetObject = new Adapter(new Adaptee(), d_Ge);
-                l_AckMsg = l_TargetObject.loadMap(p_S.split(" ")[1]);
+                MapLoader l_MapLoaderObject = new Adapter(new ConquestLoader(), d_Ge);
+                l_AckMsg = l_MapLoaderObject.loadMap(p_S.split(" ")[1]);
             } else {
-                Target l_TargetObject = new Target(d_Ge);
-                l_AckMsg = l_TargetObject.loadMap(p_S);
+                MapLoader l_MapLoaderObject = new MapLoader(d_Ge);
+                l_AckMsg = l_MapLoaderObject.loadMap(p_S);
             }
         } catch (Exception p_Exception) {
             l_AckMsg = p_Exception.getMessage();
