@@ -258,54 +258,35 @@ public class PlayerController {
 				Player l_Player = (Player)l_It.next(); 
 				if(l_Player.getOrderSize()!=0) {
 					Order l_Order = l_Player.next_order();
-					if("model.orders.Deploy".equals(l_Order.getClass().getName())) {
-						Deploy l_DeployOrder = (Deploy) l_Order;
-						l_DeployOrder.execute();
-						String l_Result = l_Player.getResult();
-						d_OrderAcknowledgment=l_Result;
-						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-						d_LEB.setResult(d_OrderAcknowledgment);
-					}
-					else if("model.orders.Advance".equals(l_Order.getClass().getName())) {
-						Advance l_AdvanceOrder = (Advance) l_Order;
-						l_AdvanceOrder.execute();
-						String l_Result = l_Player.getResult();
-						d_OrderAcknowledgment=l_Result;
-						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-						d_LEB.setResult(d_OrderAcknowledgment);
-					}
-					else if("model.orders.Blockade".equals(l_Order.getClass().getName())) {
-						Blockade l_BlockadeOrder = (Blockade) l_Order;
-						l_BlockadeOrder.execute();
-						String l_Result = l_Player.getResult();
-						d_OrderAcknowledgment=l_Result;
-						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-						d_LEB.setResult(d_OrderAcknowledgment);
-					}
-					else if("model.orders.Bomb".equals(l_Order.getClass().getName())) {
-						Bomb l_BombOrder = (Bomb) l_Order;
-						l_BombOrder.execute();
-						String l_Result = l_Player.getResult();
-						d_OrderAcknowledgment=l_Result;
-						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-						d_LEB.setResult(d_OrderAcknowledgment);
-					}
-					else if("model.orders.Airlift".equals(l_Order.getClass().getName())) {
-						Airlift l_AirliftOrder = (Airlift) l_Order;
-						l_AirliftOrder.execute();
-						String l_Result = l_Player.getResult();
-						d_OrderAcknowledgment=l_Result;
-						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-						d_LEB.setResult(d_OrderAcknowledgment);
-					}
-					else if("model.orders.Negotiate".equals(l_Order.getClass().getName())) {
-						Negotiate l_NegotiateOrder = (Negotiate) l_Order;
-						l_NegotiateOrder.execute();
-						String l_Result = l_Player.getResult();
-						d_OrderAcknowledgment=l_Result;
-						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-						d_LEB.setResult(d_OrderAcknowledgment);
-					}
+                    switch (l_Order.getClass().getName()) {
+                        case "model.orders.Deploy" -> {
+                            Deploy l_DeployOrder = (Deploy) l_Order;
+                            l_DeployOrder.execute();
+                        }
+                        case "model.orders.Advance" -> {
+                            Advance l_AdvanceOrder = (Advance) l_Order;
+                            l_AdvanceOrder.execute();
+                        }
+                        case "model.orders.Blockade" -> {
+                            Blockade l_BlockadeOrder = (Blockade) l_Order;
+                            l_BlockadeOrder.execute();
+                        }
+                        case "model.orders.Bomb" -> {
+                            Bomb l_BombOrder = (Bomb) l_Order;
+                            l_BombOrder.execute();
+                        }
+                        case "model.orders.Airlift" -> {
+                            Airlift l_AirliftOrder = (Airlift) l_Order;
+                            l_AirliftOrder.execute();
+                        }
+                        case "model.orders.Negotiate" -> {
+                            Negotiate l_NegotiateOrder = (Negotiate) l_Order;
+                            l_NegotiateOrder.execute();
+                        }
+                    }
+					d_OrderAcknowledgment = l_Player.getResult();
+					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+					d_LEB.setResult(d_OrderAcknowledgment);
 
 				} else {
 					l_Flag = 1; l_RemovePlayerList.add(l_Player);
