@@ -1,0 +1,541 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class Adapter {
+  + Adapter(GameEngine): 
+  + Adapter(ConquestLoader, GameEngine): 
+  + saveMap(String): String
+  + loadMap(String): String
+}
+class Advance {
+  + Advance(Player, Country, Country, int): 
+  + Advance(): 
+  + isValid(): int
+  + execute(): void
+  ~ ArmiestoFight(int, int, TreeMap<Integer, Integer>, TreeMap<Integer, Integer>): TreeMap<Integer, Integer>
+}
+class AggresivePlayerStrategy {
+  + AggresivePlayerStrategy(Player, GameModel): 
+  + strategyName(): String
+  + toDefend(): Country
+  + createOrder(): Order
+  + toAttack(): ArrayList<Country>
+}
+class Airlift {
+  + Airlift(Player, Country, Country, int): 
+  + execute(): void
+   valid: boolean
+   player: Player
+}
+class BenevolentPlayerStrategy {
+  + BenevolentPlayerStrategy(Player, GameModel): 
+  + strategyName(): String
+  + toDefend(): Country
+  + toAttack(): ArrayList<Country>
+  + createOrder(): Order
+}
+class Blockade {
+  + Blockade(Player, Country): 
+  + execute(): void
+   valid: boolean
+   player: Player
+}
+class Bomb {
+  + Bomb(Player, Country): 
+  - setBombedPlayer(): void
+  + execute(): void
+   valid: boolean
+   player: Player
+}
+class CheaterPlayerStrategy {
+  + CheaterPlayerStrategy(Player, GameModel): 
+  + toAttack(): ArrayList<Country>
+  + createOrder(): Order
+  + toDefend(): Country
+  + strategyName(): String
+}
+class CommandListener {
+  + CommandListener(): 
+  + actionPerformed(ActionEvent): void
+}
+class CommandPrompt {
+  + CommandPrompt(): 
+  + drawWindow(): void
+  + clearTextArea(): void
+  + commandSendButtonListener(ActionListener): void
+   commandAcknowledgement: String
+   commandInput: String
+}
+class ConquestLoader {
+  + ConquestLoader(): 
+  + loadConquestMap(String, GameEngine): String
+  + saveConquestMap(String, GameEngine): String
+}
+class Continent {
+  + Continent(String, int): 
+  + equals(Object): boolean
+  + addCountry(Country): void
+   continentControlValue: int
+   continentID: int
+   continentName: String
+   count: int
+   countryList: ArrayList<Country>
+}
+class Country {
+  + Country(String, String): 
+  + removeBorder(String): void
+  + equals(Object): boolean
+   countryID: int
+   countryName: String
+   continentName: String
+   border: ArrayList<String>
+   count: int
+   countryOwnerPlayer: Player
+   noOfArmies: int
+}
+class Deploy {
+  + Deploy(Player, Country, int): 
+  + execute(): void
+   valid: boolean
+   player: Player
+}
+class Edit {
+  + Edit(GameEngine, CommandPrompt): 
+  + editMap(String): String
+  + addPlayers(String, String): String
+  + validateMap(): String
+  + editContinent(String, String): String
+  + showMap(): void
+  + loadMap(String): String
+  + editNeighbor(String, String): String
+  + saveMap(String): String
+  + tournament(String, String): String
+  + assignCountries(): void
+  + editCountry(String, String): String
+   phaseName: String
+}
+class ExecuteOrder {
+  + ExecuteOrder(GameEngine, CommandPrompt): 
+  + loadMap(String): String
+  + editContinent(String, String): String
+  + saveMap(String): String
+  + tournament(String, String): String
+  + showMap(): void
+  + editNeighbor(String, String): String
+  + addPlayers(String, String): String
+  + editMap(String): String
+  + assignCountries(): void
+  + editCountry(String, String): String
+  + validateMap(): String
+   phaseName: String
+}
+class GameEngine {
+  + GameEngine(CommandPrompt, GameModel): 
+  + tournament(String): void
+  - printTournamentResult(int, int, int, HashMap<String, ArrayList<String>>, String[]): void
+  - getFormattedString(String): String
+  + showAllPlayerWithArmies(): void
+  + assignCountries(): void
+  + saveGame(String): void
+  + showMap(Phase): void
+  + loadGame(String): void
+   tournamentResult: HashMap<String, ArrayList<String>>
+   playerController: PlayerController
+   mapController: MapController
+   phase: Phase
+   viewObject: CommandPrompt
+   gameModel: GameModel
+}
+class GameModel {
+  + GameModel(Map): 
+  + GameModel(): 
+  + removePlayer(String): void
+  + tournamentstartUpPhase(): void
+  + existDuplicatePlayer(String): boolean
+  + assignReinforcementArmies(): void
+  + addPlayer(String, String): void
+  + setplayerQueue(Queue<Player>): void
+  + startUpPhase(): void
+  + saveGame(String): void
+  + loadGame(String): GameModel?
+   playerArmies: int
+   playerId: Player
+   map: Map
+   playerId1: Player
+   allPlayers: ArrayList<Player>
+}
+class GameOver {
+  + GameOver(GameEngine, CommandPrompt): 
+  + validateMap(): String
+  + tournament(String, String): String
+  + editNeighbor(String, String): String
+  + editContinent(String, String): String
+  + editCountry(String, String): String
+  + saveMap(String): String
+  + addPlayers(String, String): String
+  + assignCountries(): void
+  + editMap(String): String
+  + loadMap(String): String
+  + showMap(): void
+   phaseName: String
+}
+class GameSaved {
+  + GameSaved(GameEngine, CommandPrompt): 
+  + editNeighbor(String, String): String
+  + editContinent(String, String): String
+  + validateMap(): String
+  + showMap(): void
+  + saveMap(String): String
+  + addPlayers(String, String): String
+  + tournament(String, String): String
+  + editCountry(String, String): String
+  + loadMap(String): String
+  + editMap(String): String
+  + assignCountries(): void
+   phaseName: String
+}
+class HumanPlayerStrategy {
+  + HumanPlayerStrategy(Player, GameModel): 
+  + strategyName(): String
+  + toAttack(): ArrayList<Country>
+  + createOrder(): Order
+  + toDefend(): Country
+   decreasePlayerListSize: boolean
+   checkArmies: HashMap<Player, Boolean>
+}
+class IssueOrder {
+  + IssueOrder(GameEngine, CommandPrompt): 
+  + showMap(): void
+  + saveMap(String): String
+  + editContinent(String, String): String
+  + editMap(String): String
+  + validateMap(): String
+  + editNeighbor(String, String): String
+  + tournament(String, String): String
+  + loadMap(String): String
+  + addPlayers(String, String): String
+  + editCountry(String, String): String
+  + assignCountries(): void
+   phaseName: String
+}
+class LogEntryBuffer {
+  + LogEntryBuffer(): 
+   result: String
+}
+class Logger {
+  + Logger(): 
+  + update(Observable): void
+}
+class Map {
+  + Map(): 
+  + addCountry(String, String): void
+  + addContinent(String, String): void
+  + saveMap(String): String
+  + loadMap(String): String
+  + removeContinent(String): void
+  + getCountries(): void
+  + removeAllCountryInContinent(Continent): void
+  + addBorder(String, String): void
+  + removeCountry(String, boolean): void
+  + validateMap(): String
+  + getContinents(): void
+  + removeBorder(String, String): void
+  + reset(): void
+  + removeCountryFromContinent(String, ArrayList<Country>): void
+   continentList: ArrayList<Continent>
+   countryList: ArrayList<Country>
+}
+class MapController {
+  + MapController(Map): 
+  + reset(): void
+  + saveMap(String): String
+  + loadMap(String): String
+  + validateMap(): String
+  + editMap(String, String): String
+}
+class MapLoader {
+  + MapLoader(GameEngine): 
+  + MapLoader(): 
+  + saveMap(String): String
+  + loadMap(String): String
+}
+class Negotiate {
+  + Negotiate(Player, Player): 
+  + execute(): void
+   sourcePlayer: Player
+}
+class Observable {
+  + Observable(): 
+  + attach(Observer): void
+  + detach(Observer): void
+  + notify(Observable): void
+}
+interface Observer << interface >> {
+  + update(Observable): void
+}
+interface Order << interface >> {
+  + execute(): void
+}
+class Phase {
+  + Phase(GameEngine, CommandPrompt): 
+  + showMap(): void
+  + loadMap(String): String
+  + editCountry(String, String): String
+  + addPlayers(String, String): String
+  + assignCountries(): void
+  + editNeighbor(String, String): String
+  + tournament(String, String): String
+  + saveMap(String): String
+  + validateMap(): String
+  + editMap(String): String
+  + editContinent(String, String): String
+   phaseName: String
+}
+class Player {
+  + Player(String, GameModel): 
+  + Player(): 
+  + next_order(): Order
+  + getCard(String): boolean
+  + removeCard(String): void
+  + setContinentsList(): void
+  + addNegotiatedPlayer(Player): void
+  + addCountry(Country): void
+  + removeNegotiatedPlayer(): void
+  + issue_order(): void
+  + removeCountry(Country): void
+   playerStrategy: Strategy
+   orderSize: int
+   negotiatedPlayerList: ArrayList<Player>
+   playerArmies: int
+   continentList: ArrayList<Continent>
+   result: String
+   playerName: String
+   atleastOneBattleWon: boolean
+   countriesSize: int
+   card: String
+   order: String
+   saveGame: boolean
+   countryList: ArrayList<Country>
+   cardList: ArrayList<String>
+   gameModel: GameModel
+   playerId: int
+}
+class PlayerController {
+  ~ PlayerController(GameModel, CommandPrompt, GameEngine): 
+  + checkTheWinner(): void
+  + playerIssueOrder(): void
+  + removePlayerWithNoCountry(): void
+  + editPlayer(String, String): String
+  + playerNextOrder(): void
+  + clearNegotiatedPlayerList(): void
+   numberOfRounds: int
+   winner: Player
+   saved: boolean
+}
+class RandomPlayerStrategy {
+  + RandomPlayerStrategy(Player, GameModel): 
+  + toAttack(): ArrayList<Country>
+  + strategyName(): String
+  + createOrder(): Order
+  + toDefend(): Country
+   decreasePlayerListSize: boolean
+   checkArmies: HashMap<Player, Boolean>
+}
+class Reinforcement {
+  + Reinforcement(GameEngine, CommandPrompt): 
+  + editMap(String): String
+  + showMap(): void
+  + editCountry(String, String): String
+  + editContinent(String, String): String
+  + validateMap(): String
+  + loadMap(String): String
+  + saveMap(String): String
+  + editNeighbor(String, String): String
+  + tournament(String, String): String
+  + assignCountries(): void
+  + addPlayers(String, String): String
+   phaseName: String
+}
+class StartGame {
+  + StartGame(): 
+  + main(String[]): void
+}
+class Startup {
+  + Startup(GameEngine, CommandPrompt): 
+  + loadMap(String): String
+  + editContinent(String, String): String
+  + saveMap(String): String
+  + validateMap(): String
+  + editMap(String): String
+  + assignCountries(): void
+  + addPlayers(String, String): String
+  + editNeighbor(String, String): String
+  + showMap(): void
+  + editCountry(String, String): String
+  + tournament(String, String): String
+   phaseName: String
+}
+class Strategy {
+  + Strategy(): 
+  + strategyName(): String
+  + toAttack(): ArrayList<Country>
+  + createOrder(): Order
+  + toDefend(): Country
+}
+class ValidateMap {
+  + ValidateMap(int): 
+  + ValidateMap(ArrayList<Country>, ArrayList<Continent>): 
+  - markVisited(int, boolean[]): void
+  + checkCountryAndContinent(ArrayList<Country>, ArrayList<Continent>): boolean
+  + addBorder(int, int): void
+  + getTranspose(ArrayList<ArrayList<Integer>>): ValidateMap
+  + checkContinentIsConnectedSubgraph(ArrayList<Continent>): void
+  + updateCount(ArrayList<Country>): HashMap<Integer, ArrayList<Integer>>
+  + isValid(): String
+  + assignBorders(HashMap<Integer, ArrayList<Integer>>): void
+  + runDFS(int): boolean
+}
+
+Adapter                  "1" *-[#595959,plain]-> "d_ConquestLoader\n1" ConquestLoader           
+Adapter                  "1" *-[#595959,plain]-> "d_GameEngine\n1" GameEngine               
+Adapter                   -[#000082,plain]-^  MapLoader                
+Advance                  "1" *-[#595959,plain]-> "d_SourceCountry\n1" Country                  
+Advance                   -[#595959,dashed]->  LogEntryBuffer           : "«create»"
+Advance                  "1" *-[#595959,plain]-> "d_Leb\n1" LogEntryBuffer           
+Advance                   -[#008200,dashed]-^  Order                    
+Advance                  "1" *-[#595959,plain]-> "d_Player\n1" Player                   
+AggresivePlayerStrategy   -[#595959,dashed]->  Advance                  : "«create»"
+AggresivePlayerStrategy   -[#595959,dashed]->  Deploy                   : "«create»"
+AggresivePlayerStrategy  "1" *-[#595959,plain]-> "d_GameModel\n1" GameModel                
+AggresivePlayerStrategy  "1" *-[#595959,plain]-> "d_Player\n1" Player                   
+AggresivePlayerStrategy   -[#000082,plain]-^  Strategy                 
+Airlift                  "1" *-[#595959,plain]-> "d_SourceCountry\n1" Country                  
+Airlift                   -[#008200,dashed]-^  Order                    
+Airlift                  "1" *-[#595959,plain]-> "d_Player\n1" Player                   
+BenevolentPlayerStrategy  -[#595959,dashed]->  Deploy                   : "«create»"
+BenevolentPlayerStrategy "1" *-[#595959,plain]-> "d_GameModel\n1" GameModel                
+BenevolentPlayerStrategy "1" *-[#595959,plain]-> "d_Player\n1" Player                   
+BenevolentPlayerStrategy  -[#000082,plain]-^  Strategy                 
+Blockade                 "1" *-[#595959,plain]-> "d_Country\n1" Country                  
+Blockade                 "1" *-[#595959,plain]-> "d_GameObj\n1" GameModel                
+Blockade                  -[#008200,dashed]-^  Order                    
+Blockade                 "1" *-[#595959,plain]-> "d_Player\n1" Player                   
+Bomb                     "1" *-[#595959,plain]-> "d_Country\n1" Country                  
+Bomb                      -[#008200,dashed]-^  Order                    
+Bomb                     "1" *-[#595959,plain]-> "d_Player\n1" Player                   
+CheaterPlayerStrategy     -[#595959,dashed]->  Advance                  : "«create»"
+CheaterPlayerStrategy     -[#595959,dashed]->  Deploy                   : "«create»"
+CheaterPlayerStrategy    "1" *-[#595959,plain]-> "d_GameModel\n1" GameModel                
+CheaterPlayerStrategy    "1" *-[#595959,plain]-> "d_Player\n1" Player                   
+CheaterPlayerStrategy     -[#000082,plain]-^  Strategy                 
+CommandListener           +-[#820000,plain]-  GameEngine               
+Continent                "1" *-[#595959,plain]-> "d_CountryList\n*" Country                  
+Country                  "1" *-[#595959,plain]-> "d_Owner\n1" Player                   
+Deploy                   "1" *-[#595959,plain]-> "d_Country\n1" Country                  
+Deploy                    -[#008200,dashed]-^  Order                    
+Deploy                   "1" *-[#595959,plain]-> "d_Player\n1" Player                   
+Edit                      -[#595959,dashed]->  Adapter                  : "«create»"
+Edit                      -[#595959,dashed]->  ConquestLoader           : "«create»"
+Edit                      -[#595959,dashed]->  LogEntryBuffer           : "«create»"
+Edit                     "1" *-[#595959,plain]-> "d_Leb\n1" LogEntryBuffer           
+Edit                      -[#595959,dashed]->  MapLoader                : "«create»"
+Edit                      -[#000082,plain]-^  Phase                    
+Edit                      -[#595959,dashed]->  Startup                  : "«create»"
+ExecuteOrder              -[#595959,dashed]->  GameOver                 : "«create»"
+ExecuteOrder              -[#595959,dashed]->  LogEntryBuffer           : "«create»"
+ExecuteOrder             "1" *-[#595959,plain]-> "d_Leb\n1" LogEntryBuffer           
+ExecuteOrder              -[#000082,plain]-^  Phase                    
+ExecuteOrder              -[#595959,dashed]->  Reinforcement            : "«create»"
+GameEngine                -[#595959,dashed]->  CommandListener          : "«create»"
+GameEngine               "1" *-[#595959,plain]-> "d_CpView\n1" CommandPrompt            
+GameEngine                -[#595959,dashed]->  Edit                     : "«create»"
+GameEngine               "1" *-[#595959,plain]-> "d_GameModel\n1" GameModel                
+GameEngine                -[#595959,dashed]->  GameSaved                : "«create»"
+GameEngine                -[#595959,dashed]->  IssueOrder               : "«create»"
+GameEngine                -[#595959,dashed]->  LogEntryBuffer           : "«create»"
+GameEngine               "1" *-[#595959,plain]-> "d_LEB\n1" LogEntryBuffer           
+GameEngine               "1" *-[#595959,plain]-> "d_MapController\n1" MapController            
+GameEngine                -[#595959,dashed]->  MapController            : "«create»"
+GameEngine               "1" *-[#595959,plain]-> "d_GamePhase\n1" Phase                    
+GameEngine               "1" *-[#595959,plain]-> "d_PlayerList\n*" Player                   
+GameEngine                -[#595959,dashed]->  PlayerController         : "«create»"
+GameEngine               "1" *-[#595959,plain]-> "d_PlayerController\n1" PlayerController         
+GameEngine                -[#595959,dashed]->  Startup                  : "«create»"
+GameModel                 -[#595959,dashed]->  AggresivePlayerStrategy  : "«create»"
+GameModel                 -[#595959,dashed]->  BenevolentPlayerStrategy : "«create»"
+GameModel                 -[#595959,dashed]->  CheaterPlayerStrategy    : "«create»"
+GameModel                 -[#595959,dashed]->  HumanPlayerStrategy      : "«create»"
+GameModel                 -[#595959,dashed]->  Map                      : "«create»"
+GameModel                "1" *-[#595959,plain]-> "d_Map\n1" Map                      
+GameModel                "1" *-[#595959,plain]-> "d_PlayerList\n*" Player                   
+GameModel                 -[#595959,dashed]->  Player                   : "«create»"
+GameModel                 -[#595959,dashed]->  RandomPlayerStrategy     : "«create»"
+GameOver                  -[#595959,dashed]->  LogEntryBuffer           : "«create»"
+GameOver                 "1" *-[#595959,plain]-> "d_Leb\n1" LogEntryBuffer           
+GameOver                  -[#000082,plain]-^  Phase                    
+GameSaved                "1" *-[#595959,plain]-> "d_Leb\n1" LogEntryBuffer           
+GameSaved                 -[#595959,dashed]->  LogEntryBuffer           : "«create»"
+GameSaved                 -[#000082,plain]-^  Phase                    
+HumanPlayerStrategy       -[#595959,dashed]->  Advance                  : "«create»"
+HumanPlayerStrategy       -[#595959,dashed]->  Airlift                  : "«create»"
+HumanPlayerStrategy       -[#595959,dashed]->  Blockade                 : "«create»"
+HumanPlayerStrategy       -[#595959,dashed]->  Bomb                     : "«create»"
+HumanPlayerStrategy       -[#595959,dashed]->  Deploy                   : "«create»"
+HumanPlayerStrategy      "1" *-[#595959,plain]-> "d_GameModel\n1" GameModel                
+HumanPlayerStrategy       -[#595959,dashed]->  Negotiate                : "«create»"
+HumanPlayerStrategy      "1" *-[#595959,plain]-> "d_CheckArmies\n*" Player                   
+HumanPlayerStrategy       -[#000082,plain]-^  Strategy                 
+IssueOrder                -[#595959,dashed]->  ExecuteOrder             : "«create»"
+IssueOrder                -[#595959,dashed]->  LogEntryBuffer           : "«create»"
+IssueOrder               "1" *-[#595959,plain]-> "d_Leb\n1" LogEntryBuffer           
+IssueOrder                -[#000082,plain]-^  Phase                    
+LogEntryBuffer           "1" *-[#595959,plain]-> "d_logger\n1" Logger                   
+LogEntryBuffer            -[#595959,dashed]->  Logger                   : "«create»"
+LogEntryBuffer            -[#000082,plain]-^  Observable               
+Logger                    -[#008200,dashed]-^  Observer                 
+Map                       -[#595959,dashed]->  Continent                : "«create»"
+Map                      "1" *-[#595959,plain]-> "d_ContinentObjects\n*" Continent                
+Map                       -[#595959,dashed]->  Country                  : "«create»"
+Map                      "1" *-[#595959,plain]-> "d_CountryObjects\n*" Country                  
+Map                       -[#595959,dashed]->  ValidateMap              : "«create»"
+MapController            "1" *-[#595959,plain]-> "d_MapModel\n1" Map                      
+MapLoader                "1" *-[#595959,plain]-> "d_GameEngine\n1" GameEngine               
+Negotiate                 -[#008200,dashed]-^  Order                    
+Negotiate                "1" *-[#595959,plain]-> "d_SourcePlayer\n1" Player                   
+Observable               "1" *-[#595959,plain]-> "d_observers\n*" Observer                 
+Phase                    "1" *-[#595959,plain]-> "d_Vw\n1" CommandPrompt            
+Phase                    "1" *-[#595959,plain]-> "d_Ge\n1" GameEngine               
+Player                   "1" *-[#595959,plain]-> "d_Continents\n*" Continent                
+Player                   "1" *-[#595959,plain]-> "d_Countries\n*" Country                  
+Player                   "1" *-[#595959,plain]-> "d_GameModelNew\n1" GameModel                
+Player                   "1" *-[#595959,plain]-> "d_Order\n*" Order                    
+Player                   "1" *-[#595959,plain]-> "d_PlayerStrategy\n1" Strategy                 
+PlayerController         "1" *-[#595959,plain]-> "d_CpView\n1" CommandPrompt            
+PlayerController         "1" *-[#595959,plain]-> "d_GameEngine\n1" GameEngine               
+PlayerController         "1" *-[#595959,plain]-> "d_GameModel\n1" GameModel                
+PlayerController          -[#595959,dashed]->  GameOver                 : "«create»"
+PlayerController         "1" *-[#595959,plain]-> "d_LEB\n1" LogEntryBuffer           
+PlayerController          -[#595959,dashed]->  LogEntryBuffer           : "«create»"
+PlayerController         "1" *-[#595959,plain]-> "d_Players\n*" Player                   
+RandomPlayerStrategy      -[#595959,dashed]->  Advance                  : "«create»"
+RandomPlayerStrategy      -[#595959,dashed]->  Deploy                   : "«create»"
+RandomPlayerStrategy     "1" *-[#595959,plain]-> "d_GameModel\n1" GameModel                
+RandomPlayerStrategy     "1" *-[#595959,plain]-> "d_CheckArmies\n*" Player                   
+RandomPlayerStrategy      -[#000082,plain]-^  Strategy                 
+Reinforcement             -[#595959,dashed]->  IssueOrder               : "«create»"
+Reinforcement             -[#595959,dashed]->  LogEntryBuffer           : "«create»"
+Reinforcement            "1" *-[#595959,plain]-> "d_Leb\n1" LogEntryBuffer           
+Reinforcement             -[#000082,plain]-^  Phase                    
+StartGame                 -[#595959,dashed]->  CommandPrompt            : "«create»"
+StartGame                 -[#595959,dashed]->  GameEngine               : "«create»"
+StartGame                 -[#595959,dashed]->  GameModel                : "«create»"
+Startup                   -[#595959,dashed]->  LogEntryBuffer           : "«create»"
+Startup                  "1" *-[#595959,plain]-> "d_Leb\n1" LogEntryBuffer           
+Startup                   -[#000082,plain]-^  Phase                    
+Startup                   -[#595959,dashed]->  Reinforcement            : "«create»"
+Strategy                 "1" *-[#595959,plain]-> "d_Leb\n1" LogEntryBuffer           
+Strategy                  -[#595959,dashed]->  LogEntryBuffer           : "«create»"
+@enduml
