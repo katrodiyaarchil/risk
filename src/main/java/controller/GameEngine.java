@@ -2,7 +2,10 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +21,7 @@ import utility.state.IssueOrder;
 import utility.state.Phase;
 import utility.state.Startup;
 import view.CommandPrompt;
+import dnl.utils.text.table.TextTable;
 
 /**
  * This is the main controller class of MVC model.
@@ -499,9 +503,9 @@ public class GameEngine {
         }
         if ("-M".equals(l_CommandArray[1])) {
             l_MapList = l_CommandArray[2].split(",");
-            if (l_MapList.length > 5 || l_MapList.length < 1) {
-                d_LEB.setResult("Number of Maps should be in between 1 to 5 both inclusive");
-                throw new Exception("Number of Maps should be in between 1 to 5 both inclusive");// throw exception
+            if (l_MapList.length < 1) {
+                d_LEB.setResult("Atleast 1 map file required");
+                throw new Exception("Atleast 1 map file required");// throw exception
 
             } else
                 l_M = l_MapList.length;
@@ -530,18 +534,18 @@ public class GameEngine {
         }
         if ("-G".equals(l_CommandArray[5])) {
             int l_NumGames = Integer.parseInt(l_CommandArray[6]);
-            if (l_NumGames > 5 || l_NumGames < 1) {
-                d_LEB.setResult("Number of Games should be in between 1 to 5 both inclusive");
-                throw new Exception("Number of Games should be in between 1 to 5 both inclusive");// throw exception
+            if (l_NumGames < 1) {
+                d_LEB.setResult("Number of Games should be more than 1");
+                throw new Exception("Number of Games should be more than 1");// throw exception
 
             } else
                 l_G = l_NumGames;
         }
         if ("-D".equals(l_CommandArray[7])) {
             int l_MaxTurns = Integer.parseInt(l_CommandArray[8]);
-            if (l_MaxTurns > 50 || l_MaxTurns < 10) {
-                d_LEB.setResult("Number of turns should be in between 10 to 50 both inclusive");
-                throw new Exception("Number of turns should be in between 10 to 50 both inclusive");// throw exception
+            if (l_MaxTurns < 15) {
+                d_LEB.setResult("Number of turns should be at least 15");
+                throw new Exception("Number of turns should be at least 15");// throw exception
 
             } else
                 l_D = l_MaxTurns;
@@ -612,84 +616,50 @@ public class GameEngine {
     private void printTournamentResult(int p_M, int p_G, int p_D, HashMap<String, ArrayList<String>> p_tournamentResult,
             String[] p_PlayerStrategyList) {
 
-        String[] l_MapStrings = p_tournamentResult.keySet().toArray(new String[p_tournamentResult.keySet().size()]);
-        d_CpView.setCommandAcknowledgement("\n");
-        d_CpView.setCommandAcknowledgement("\n");
-        d_LEB.setResult("\n=============================================\n");
-        d_CpView.setCommandAcknowledgement("=============================================\n");
-        d_CpView.setCommandAcknowledgement("==============TOURNAMENT RESULT===============\n");
-        d_LEB.setResult("==============TOURNAMENT RESULT===============\n");
-        d_CpView.setCommandAcknowledgement("=============================================\n");
-        d_LEB.setResult("\n=============================================\n");
-        d_CpView.setCommandAcknowledgement("\n");
-        StringBuffer l_MapNameString = new StringBuffer();
-        for (String l_MapString : l_MapStrings) {
-            l_MapNameString.append(l_MapString + ",");
-        }
-        d_CpView.setCommandAcknowledgement("\n");
-        d_LEB.setResult("\n=============================================\n");
-        d_CpView.setCommandAcknowledgement("M:" + l_MapNameString);
-        d_LEB.setResult("M:" + l_MapNameString);
-        StringBuffer stratergiesNameString = new StringBuffer();
-        for (String aP_PlayerStrategyList : p_PlayerStrategyList) {
-            stratergiesNameString.append(aP_PlayerStrategyList + ",");
-        }
-        d_CpView.setCommandAcknowledgement("P:" + stratergiesNameString);
-        d_LEB.setResult("P:" + stratergiesNameString);
-        d_CpView.setCommandAcknowledgement("G:" + p_G);
-        d_LEB.setResult("G:" + p_G);
-        d_CpView.setCommandAcknowledgement("D:" + p_D);
-        d_LEB.setResult("D:" + p_D);
-        d_CpView.setCommandAcknowledgement("\n");
-        d_LEB.setResult("\n");
-        d_CpView.setCommandAcknowledgement("\n");
-        d_LEB.setResult("\n");
-        StringBuilder l_StringBuilder = new StringBuilder();
-        l_StringBuilder.append("|");
-        l_StringBuilder.append(getFormattedString(" "));
+        // Define table data
+        int numMaps = p_tournamentResult.size();
+        String[] headers = new String[p_G + 1];
+        headers[0] = "";
         for (int i = 0; i < p_G; i++) {
-            l_StringBuilder.append("|");
-            l_StringBuilder.append(getFormattedString("Game " + (i + 1)));
+            headers[i + 1] = "Game " + (i + 1);
         }
-        l_StringBuilder.append("|");
-        d_CpView.setCommandAcknowledgement("\n");
-        d_LEB.setResult("\n");
-        d_CpView.setCommandAcknowledgement(l_StringBuilder.toString());
-        d_LEB.setResult(l_StringBuilder.toString());
-        d_CpView.setCommandAcknowledgement("\n");
-        d_LEB.setResult("\n");
-        for (String l_MapString : l_MapStrings) {
-
-            StringBuilder l_SbMap = new StringBuilder();
-            l_SbMap.append("|");
-            l_SbMap.append(getFormattedString(l_MapString));
-
-            ArrayList<String> l_GameResults = p_tournamentResult.get(l_MapString);
-            for (int j = 0; j < p_G; j++) {
-                l_SbMap.append("|");
-                l_SbMap.append(getFormattedString(l_GameResults.get(j)));
+        String[][] data = new String[numMaps][p_G + 1];
+        int mapIndex = 0;
+        for (String map : p_tournamentResult.keySet()) {
+            ArrayList<String> gameResults = p_tournamentResult.get(map);
+            data[mapIndex][0] = map;
+            for (int i = 0; i < p_G; i++) {
+                data[mapIndex][i + 1] = gameResults.get(i);
             }
-            d_CpView.setCommandAcknowledgement("\n");
-            l_SbMap.append("|");
-            d_CpView.setCommandAcknowledgement(l_SbMap.toString());
-            d_LEB.setResult(l_SbMap.toString());
-
+            mapIndex++;
         }
-    }
 
-    /**
-     * This is a generic method to receive String in a specific format.
-     * 
-     * @param p_Input input string which need to be modified in specific format
-     * @return modified string
-     */
-    private String getFormattedString(String p_Input) {
-        int l_Length = 4;
+        // Create text table
+        TextTable tt = new TextTable(headers, data);
+        tt.setAddRowNumbering(true);
+        tt.setSort(0);
+        tt.printTable();
 
-        StringBuilder l_Str = new StringBuilder(" " + p_Input);
-        for (int l_I = p_Input.length(); l_I <= l_Length; l_I++)
-            l_Str.append(" ");
-        return l_Str.toString();
+        // Create a custom PrintStream using the custom OutputStream
+        String table = "";
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final String utf8 = StandardCharsets.UTF_8.name();
+        try (PrintStream ps = new PrintStream(baos, true, utf8)) {
+            tt.printTable(ps, 0);
+            table = baos.toString(utf8);
+        } catch (Exception e) {}
+
+        String result = "\n=============================================\n";
+        result += "============== TOURNAMENT RESULT ==============\n";
+        result += "=============================================\n";
+        result += "M: " + String.join(", ", p_tournamentResult.keySet()) + "\n";
+        result += "P: " + String.join(", ", p_PlayerStrategyList) + "\n";
+        result += "G: " + p_G + "\n";
+        result += "D: " + p_D + "\n";
+        result += table;
+
+        d_LEB.setResult(result);
+        d_CpView.setCommandAcknowledgement(result);
     }
 
     public HashMap<String, ArrayList<String>> getTournamentResult() {
