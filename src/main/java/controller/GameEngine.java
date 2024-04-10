@@ -505,9 +505,9 @@ public class GameEngine {
         }
         if ("-M".equals(l_CommandArray[1])) {
             l_MapList = l_CommandArray[2].split(",");
-            if (l_MapList.length < 1) {
-                d_LEB.setResult("Atleast 1 map file required");
-                throw new Exception("Atleast 1 map file required");// throw exception
+            if (l_MapList.length > 5) {
+                d_LEB.setResult("Utmost 5 maps are allowed");
+                throw new Exception("Utmost 5 maps are allowed");// throw exception
 
             } else
                 l_M = l_MapList.length;
@@ -536,7 +536,7 @@ public class GameEngine {
         }
         if ("-G".equals(l_CommandArray[5])) {
             int l_NumGames = Integer.parseInt(l_CommandArray[6]);
-            if (l_NumGames < 1) {
+            if (l_NumGames < 2) {
                 d_LEB.setResult("Number of Games should be more than 1");
                 throw new Exception("Number of Games should be more than 1");// throw exception
 

@@ -67,9 +67,9 @@ public class GameEngineTest {
     @Test
     public void testTournamentMapRange() {
         String l_ActualMessage = "";
-        String l_ExpectedMessage = "Number of Maps should be in between 1 to 5 both inclusive";
+        String l_ExpectedMessage = "Utmost 5 maps are allowed";
 
-        d_InputString = "tournament -M map9,map99,map1,map2,map5,map8 -P benevolent,aggressive -G 2 -D 10";
+        d_InputString = "tournament -M canada.map,map99.map,map1,map2,map3,World.map -P benevolent,aggressive -G 2 -D 20";
         try {
             d_GameEngine.tournament(d_InputString);
         } catch (Exception e) {
@@ -86,7 +86,7 @@ public class GameEngineTest {
         String l_ActualMessage = "";
         String l_ExpectedMessage = "Number of Player strategies should be in between 2 to 4 both inclusive";
 
-        d_InputString = "tournament -M map99,map5 -P benevolent -G 2 -D 10";
+        d_InputString = "tournament -M map99.map,map3 -P benevolent -G 2 -D 20";
         try {
             d_GameEngine.tournament(d_InputString);
         } catch (Exception e) {
@@ -101,9 +101,9 @@ public class GameEngineTest {
     @Test
     public void testTournamentGamesRange() {
         String l_ActualMessage = "";
-        String l_ExpectedMessage = "Number of Games should be in between 1 to 5 both inclusive";
+        String l_ExpectedMessage = "Number of Games should be more than 1";
 
-        d_InputString = "tournament -M map99,map5 -P benevolent,aggressive -G 7 -D 10";
+        d_InputString = "tournament -M map99.map,map3 -P benevolent,aggressive -G 1 -D 20";
         try {
             d_GameEngine.tournament(d_InputString);
         } catch (Exception e) {
@@ -115,11 +115,12 @@ public class GameEngineTest {
     /**
      * Test if the number of turns mentioned are in range or not
      */
+    @Test
     public void testTournamentTurnsRange() {
         String l_ActualMessage = "";
-        String l_ExpectedMessage = "Number of Games are not in range";
+        String l_ExpectedMessage = "Number of turns should be at least 15";
 
-        d_InputString = "tournament -M map99,map5 -P benevolent,aggressive -G 5 -D 9";
+        d_InputString = "tournament -M map99.map,map3 -P benevolent,aggressive -G 5 -D 9";
         try {
             d_GameEngine.tournament(d_InputString);
         } catch (Exception e) {
@@ -134,8 +135,9 @@ public class GameEngineTest {
      * @throws Exception for file not found, add player, and ranges for different
      *                   input parameter
      */
+    @Test
     public void testTournamentMode() throws Exception {
-        d_InputString = "tournament -M map99,map5 -P benevolent,aggressive -G 5 -D 9";
+        d_InputString = "tournament -M map99.map,map3 -P benevolent,aggressive -G 5 -D 20";
         d_GameEngine.tournament(d_InputString);
         Assert.assertNotNull(d_GameEngine.getTournamentResult());
     }
